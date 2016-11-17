@@ -1,0 +1,30 @@
+.ng-invalid ~ .error {
+    display: block;
+    color: #ff0000;
+}
+.ng-untouched ~ .error, .ng-valid ~ .error, .error-length, .error-luhn, .error-expiration-date, .error-regexp, .error-required {
+    display: none;
+}
+.doValidate .ng-invalid-length ~ .error-length {
+    display: block;
+    color: #ff0000;
+}
+.doValidate .ng-invalid-luhn ~ .error-luhn {
+    display: block;
+    color: #ff0000;
+}
+.doValidate .ng-invalid-expiration-date ~ .error-expiration-date {
+    display: block;
+    color: #ff0000;
+}
+.doValidate .ng-invalid-regexp ~ .error-regexp {
+    display: block;
+    color: #ff0000;
+}
+.doValidate .ng-invalid-required ~ .error-required {
+    display: block;
+    color: #ff0000;
+}
+.doValidate .error-cc {
+    color: #ff0000;
+}

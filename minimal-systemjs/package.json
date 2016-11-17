@@ -1,0 +1,20 @@
+{
+  "name": "connect-sdk-client-js-example-systemjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "start": "npm run lite",
+    "lite": "lite-server"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "connect-sdk-client-js": "^3.0.0",
+    "systemjs": "^0.19.36",
+    "node-forge": "^0.6.42"
+  },
+  "devDependencies": {
+    "lite-server": "^2.2.2"
+  }
+}

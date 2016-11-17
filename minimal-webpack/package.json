@@ -1,0 +1,20 @@
+{
+  "name": "connect-sdk-client-js-example-requirejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "start": "npm run lite",
+    "lite": "lite-server"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "connect-sdk-client-js": "^3.0.0",
+    "node-forge": "^0.6.42",
+    "webpack": "^1.13.2"
+  },
+  "devDependencies": {
+    "lite-server": "^2.2.2"
+  }
+}

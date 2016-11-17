@@ -1,0 +1,16 @@
+<input
+        name="{{paymentItemfield.id}}"
+        id="{{paymentItemfield.id}}"
+        placeholder="{{paymentItemfield.displayHints.placeholderLabel}}"
+        class="form-control"
+        ng-model="item[paymentItemfield.id]['baseCurrencyUnit']"
+>.
+<input
+        name="{{paymentItemfield.id}}"
+        id="{{paymentItemfield.id}}"
+        placeholder="{{paymentItemfield.displayHints.placeholderLabel}}"
+        class="form-control"
+        ng-model="item[paymentItemfield.id]['centecimalCurrencyUnit']"
+        min="0"
+        max="99"
+>

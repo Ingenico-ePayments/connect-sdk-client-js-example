@@ -1,0 +1,47 @@
+// ISAAC Responsive Mixins
+// based on implementation from Gumby CSS and Bootstrap
+
+@mixin isaac-respond-min-width($media) {
+  @if $media == xs {
+    //select xs devices and up
+    @media only screen and (min-width: $screen-xs-min) { @content; }
+  }
+
+  @if $media == sm {
+    //select sm devices and up
+    @media only screen and (min-width: $screen-sm-min) { @content; }
+  }
+  
+  @if $media == md {
+    //select md devices and up
+    @media only screen and (min-width: $screen-md-min) { @content; }
+  }
+
+  @if $media == lg {
+    //select lg devices and up
+    @media only screen and (min-width: $screen-lg-min) { @content; }
+  }  
+}
+
+
+@mixin isaac-respond-max-width($media) {
+  @if $media == xs {
+    //select xs devices and up
+    @media only screen and (max-width: $screen-xs-max) { @content; }
+  }
+
+  @if $media == sm {
+    //select sm devices and up
+    @media only screen and (max-width: $screen-sm-max) { @content; }
+  }
+  
+  @if $media == md {
+    //select md devices and up
+    @media only screen and (max-width: $screen-md-max) { @content; }
+  }
+
+  @if $media == lg {
+    //select lg devices and up
+    @media only screen and (max-width: $screen-lg-max) { @content; }
+  }  
+}

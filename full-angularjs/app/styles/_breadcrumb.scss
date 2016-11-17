@@ -1,0 +1,16 @@
+/*use an icon as breadcrumb seperator*/
+.breadcrumb {
+  position:absolute;
+  margin-top:-45px;
+  padding-left:0;
+  > li {
+    font-size:12px;
+    + li:before {
+      @include caret(4px, $gray, 'right');
+      display:inline-block;
+      position:relative;
+      padding:0;
+      margin:0 8px 0 5px;
+    }
+  }
+}

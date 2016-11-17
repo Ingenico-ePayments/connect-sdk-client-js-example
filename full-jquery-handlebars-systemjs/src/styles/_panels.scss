@@ -1,0 +1,64 @@
+.panel {
+  box-shadow : none;
+  
+  .panel-body {
+    h2:first-child,
+    h3:first-child,
+    h4:first-child,
+    h5:first-child,
+    h6:first-child {
+      margin-top:4px;  
+    }
+    
+    @include isaac-respond-min-width(md) {
+      padding:20px;
+    }
+    
+  }
+}
+
+article .panel {
+  margin-left:-10px;
+  margin-right:-10px;
+  
+  @include isaac-respond-min-width(md) {
+    margin-left:-20px;
+    margin-right:-20px;
+  }
+  
+}
+
+
+.panel-title {
+  font-size: 24px;
+  color: $gray-darker;
+
+  > a {
+    color: $gray-darker;
+  }
+}
+
+.panel-info {
+  .panel-body { 
+    background-color:$brand-secondary;
+  }
+  
+  .panel-title {
+    color: #fff;
+    > a {
+      color: #fff;
+    }  
+  }  
+  
+  //panel in menu dropdown
+  .dropdown-menu-portal & {
+    margin-bottom:0;
+    .panel-body {
+      padding:10px;
+      p {
+        font-style:italic;
+      }
+    }
+  }
+  
+}

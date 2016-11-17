@@ -1,0 +1,98 @@
+<div class="form-group" ng-if="paymentitem && paymentitem.paymentProductFieldById['cardholderName']"  ng-init="paymentItemFieldId= 'cardholderName'">
+    <label for="cardholderName" class="hidden-xs hidden-sm">{{paymentitem.paymentProductFieldById['cardholderName'].displayHints.label}}</label>
+    <div class="hasIcon">
+        <input name="cardholderName" id="cardholderName" placeholder="{{paymentitem.paymentProductFieldById['cardholderName'].displayHints.placeholderLabel}}"
+            class="form-control" ng-model="item['cardholderName']" ng-attr-ui-mask="{{paymentitem.paymentProductFieldById['cardholderName'].displayHints.uimask}}"
+            ng-attr-connect-validation="paymentitem" ui-options="maskoptions" ng-attr-required="paymentitem.paymentProductFieldById['cardholderName'].dataRestrictions.isRequired"
+            ui-mask-placeholder-char="space" ui-mask-placeholder ng-model-options="{ allowInvalid: true }" ng-if="!paymentitem.paymentProductFieldById['cardholderName'].aofField">
+        <input name="cardholderName" id="cardholderName" class="form-control" ng-if="paymentitem.paymentProductFieldById['cardholderName'].aofField"
+            ng-model="item['cardholderName']" disabled>
+        <i class="icon-user"></i>
+    </div>
+    <div class="error-length">Enter a valid length please</div>
+    <div class="error-expiration-date">Please enter a valid expiration data</div>
+    <div class="error-regexp">Please enter valid data</div>
+</div>
+
+<div class="form-group" ng-if="paymentitem && paymentitem.paymentProductFieldById['cardNumber']" ng-init="paymentItemFieldId= 'cardNumber'">
+    <label for="cardNumber" class="hidden-xs hidden-sm">{{paymentitem.paymentProductFieldById['cardNumber'].displayHints.label}}</label>
+    <div class="hasIcon">
+        <input name="cardNumber" id="cardNumber" placeholder="{{paymentitem.paymentProductFieldById['cardNumber'].displayHints.placeholderLabel}}"
+            class="form-control" ng-model="item['cardNumber']" ng-attr-ui-mask="{{paymentitem.paymentProductFieldById['cardNumber'].displayHints.uimask}}"
+            ng-attr-connect-card-number="cardNumber" ng-attr-connect-validation="paymentitem" ui-options="maskoptions"
+            ng-attr-required="paymentitem.paymentProductFieldById['cardNumber'].dataRestrictions.isRequired" ui-mask-placeholder-char="space" ui-mask-placeholder
+            ng-model-options="{ allowInvalid: true }" ng-if="!paymentitem.paymentProductFieldById['cardNumber'].aofField">
+        <input name="cardNumber" id="cardNumber" class="form-control" ng-if="paymentitem.paymentProductFieldById['cardNumber'].aofField"
+            ng-model="item['cardNumber']" disabled>
+        <span class="cc-image" ng-if="(!ccstate || ccstate === 'SUPPORTED') && paymentitem.id !== 'cards'">
+            <img ng-src="{{paymentitem.displayHints.logo}}">
+        </span>
+        <i class="icon-card"></i>
+
+        <div class="error-length">Enter a valid length please</div>
+        <div class="error-luhn">This is not a valid creditcardnumber</div>
+        <div class="error-expiration-date">Please enter a valid expiration data</div>
+        <div class="error-regexp">Please enter valid data</div>
+        <div ng-if="paymentItemfield.id === 'cardNumber' && ccstate !== 'SUPPORTED'">
+            <div class="error-cc" ng-if="ccstate && ccstate === 'EXISTING_BUT_NOT_ALLOWED'">This creditcard is not supported</div>
+            <div class="error-cc" ng-if="ccstate && (ccstate !== 'EXISTING_BUT_NOT_ALLOWED' && ccstate !== 'SUPPORTED')">This is not a valid creditcard</div>
+        </div>
+    </div>
+
+    <div id="cobrand" ng-if="hasCobrand">
+        <a class="toggle-cobrand" ng-click="toggleCobrands()" ng-if="!showCobrands">Multiple brands detected</a>
+        <div class="cobrand-wrapper" ng-if="showCobrands">
+            <div class="row">
+                <div class="col-xs-20">
+                    <h3>Multiple brands detected</h3>
+                    <p>Please select your derired brand</p>
+                </div>
+                <div class="col-xs-4">
+                    <a class="cobrand-close pull-right" ng-click="toggleCobrands()"></a>
+                </div>
+            </div>
+            <ul id="paymentoptionslist">
+                <li ng-repeat="cobrand in iinDetails.coBrands">
+                    <a class="btn-tertiary" ng-click="setCobrand(cobrand.paymentProductId)" ng-class="{'active-cobrand': cobrand.paymentProductId === paymentitem.id}">
+                        <div><img ng-src="{{cobrand.displayHints.logo}}?size=25x17">{{cobrand.displayHints.label}}</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="form-group expiration" ng-if="paymentitem && paymentitem.paymentProductFieldById['expiryDate']" ng-init="paymentItemFieldId= 'expiryDate'">
+    <label for="expiryDate" class="hidden-xs hidden-sm">{{paymentitem.paymentProductFieldById['expiryDate'].displayHints.label}}</label>
+    <div class="hasIcon">
+        <input name="expiryDate" id="expiryDate" placeholder="{{paymentitem.paymentProductFieldById['expiryDate'].displayHints.placeholderLabel}}"
+            class="form-control" ng-model="item['expiryDate']" ng-attr-ui-mask="{{paymentitem.paymentProductFieldById['expiryDate'].displayHints.uimask}}"
+            ng-attr-connect-validation="paymentitem" ui-options="maskoptions" ng-attr-required="paymentitem.paymentProductFieldById['expiryDate'].dataRestrictions.isRequired"
+            ui-mask-placeholder-char="space" ui-mask-placeholder ng-model-options="{ allowInvalid: true }" ng-if="!paymentitem.paymentProductFieldById['expiryDate'].aofField">
+        <input name="expiryDate" id="expiryDate" class="form-control" ng-if="paymentitem.paymentProductFieldById['expiryDate'].aofField"
+            ng-model="item['expiryDate']" disabled>
+        <i class="icon-date"></i>
+
+        <div class="error-length">Enter a valid length please</div>
+        <div class="error-expiration-date">Please enter a valid expiration data</div>
+        <div class="error-regexp">Please enter valid data</div>
+    </div>
+</div>
+
+<div class="form-group cvv" ng-if="paymentitem && paymentitem.paymentProductFieldById['cvv']" ng-init="paymentItemFieldId= 'cvv'">
+    <label for="cvv" class="hidden-xs hidden-sm">{{paymentitem.paymentProductFieldById['cvv'].displayHints.label}}</label>
+    <div class="hasIcon">
+        <input name="cvv" id="cvv" placeholder="{{paymentitem.paymentProductFieldById['cvv'].displayHints.placeholderLabel}}"
+            class="form-control" ng-model="item['cvv']" ng-attr-ui-mask="{{paymentitem.paymentProductFieldById['cvv'].displayHints.uimask}}"
+            ng-attr-connect-validation="paymentitem" ui-options="maskoptions" ng-attr-required="paymentitem.paymentProductFieldById['cvv'].dataRestrictions.isRequired"
+            ui-mask-placeholder-char="space" ui-mask-placeholder ng-model-options="{ allowInvalid: true }" ng-if="!paymentitem.paymentProductFieldById['cvv'].aofField">
+        <input name="cvv" id="cvv" class="form-control" ng-if="paymentitem.paymentProductFieldById['cvv'].aofField"
+            ng-model="item['cvv']" disabled>
+        <span ng-include="'/app/paymentitem-detail/templates/tooltip.html'"></span>
+        <i class="icon-lock"></i>
+
+        <div class="error-length">Enter a valid length please</div>
+        <div class="error-expiration-date">Please enter a valid expiration data</div>
+        <div class="error-regexp">Please enter valid data</div>
+    </div>
+</div>

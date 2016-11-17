@@ -1,0 +1,37 @@
+<form ng-controller="paymentitem.controller" class="page" method="POST" ng-submit="doPayment()" name="paymentform" ng-class="{'doValidate': doValidate}">
+    <div class="alert alert-danger" ng-if="hasError">
+        There was a problem while getting the payment items; please check your credentials and payment context <a href="#/start">here</a>
+    </div>
+    <div ng-if="!hasError">
+        <div class="paymentoption par">
+            <div ng-include="'/app/paymentitem-detail/templates/cards.html'" ng-if="(type === 'group' && id === 'cards') || paymentitem.paymentMethod === 'card'"></div>
+
+            <div class="form-group" ng-repeat="paymentItemfield in paymentitem.paymentProductFields" ng-if="!((type === 'group' && id === 'cards') || paymentitem.paymentMethod === 'card')"  ng-init="paymentItemFieldId=paymentItemfield.id">
+                <label for="{{paymentItemfield.id}}" class="hidden-xs hidden-sm">{{paymentItemfield.displayHints.label}}</label>
+                <div ng-switch on="paymentItemfield.displayHints.formElement.type" class="paymentitem-input">
+                    <div ng-switch-when="list">
+                        <div ng-include="'/app/paymentitem-detail/templates/input-select.html'"></div>
+                    </div>
+                    <div ng-switch-default>
+                        <div ng-switch on="paymentItemfield.displayHints.formElement.isCurrency">
+                            <div ng-switch-when="true">
+                                <div ng-include="'/app/paymentitem-detail/templates/input-currency.html'"></div>
+                            </div>
+                            <div ng-switch-default>
+                                <div ng-include="'/app/paymentitem-detail/templates/input-default.html'"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <span ng-include="'/app/paymentitem-detail/templates/tooltip.html'" ng-if="paymentItemfield.displayHints.tooltip"></span>
+                </div>
+            </div>
+            <div class="checkbox" ng-if="shouldShowRememberMe()">
+                <div ng-include="'/app/paymentitem-detail/templates/remember-me.html'"></div>
+            </div>
+            <div class="paymentbuttons" id="paymentButtons">
+                <button class="btn btn-success btn-block btn-primary" type="submit" id="primaryButton"><span>Pay now</span></button>
+                <a href="#/paymentitem-selection/" class="cancel btn-secondary"> <span>Cancel</span> </a>
+            </div>
+        </div>
+    </div>
+</form>

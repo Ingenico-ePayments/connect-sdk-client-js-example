@@ -1,0 +1,7 @@
+@mixin isaac-ie8-bg-contain($img) {
+
+	.ie8 & {
+		background: url(#); //bugfix for IE8: transparent parts in the image are not clickable if the bg is set in a link, see http://haslayout.net/css/No-Transparency-Click-Bug
+        filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='#{$img}',sizingMethod='scale');
+	}
+}

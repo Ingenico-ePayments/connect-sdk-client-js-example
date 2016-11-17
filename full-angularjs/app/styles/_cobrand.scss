@@ -1,0 +1,80 @@
+#cobrand {
+    overflow: hidden;
+  .toggle-cobrand {
+    float: right;
+    text-decoration: underline;
+    margin-top: 6px;
+    margin-bottom: 9px;
+    cursor: pointer;
+  }
+  .caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 4px solid;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+  }
+  .cobrand-close {
+    text-decoration: none;
+    background: url(img/icons/icon-close.png) no-repeat 0 0;
+    width: 18px;
+    height: 18px;
+    border: 1px solid transparent;
+    float: right;
+    cursor: pointer;
+    &:hover {
+      text-decoration: none;
+      border: 1px solid #cccccc;
+    }
+  }
+  .cobrand-intro {
+    float: left;
+  }
+  .cobrand-wrapper {
+    margin-top: 4px;
+    margin-bottom: 9px;
+    padding: 10px;
+    background-color: #f2f2f2;
+    border: 1px solid #cccccc;
+    h2 {
+      margin: 0 0 8px;
+    }
+    h3 {
+      margin: 0 0 5px;
+    }
+    p {
+      margin: 0 0 5px 0;
+    }
+    ul {
+      margin: 0;
+    }
+  }
+  #paymentoptionslist {
+    li .btn-tertiary > div:after {
+      background: none;
+      width: 12px;
+      height: 10px;
+    }
+    li .btn-tertiary.active-cobrand > div:after {
+      background: url(img/icons/icon-check.png) no-repeat 0 0;
+      background-size: 100%;
+    }
+  }
+}
+
+body[dir=rtl] {
+  #cobrand {
+    .cobrand-close {
+      float: left;
+    }
+    .cobrand-close-wrapper {
+      float: left;
+    }
+    .cobrand-intro-wrapper {
+      float: right;
+    }
+  }
+}

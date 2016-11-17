@@ -1,0 +1,32 @@
+.popover {
+  border-radius: 4px;
+  max-width: 266px;
+}
+
+.info-popover {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  border: 1px solid #666666;
+  border-radius: 10px;
+  font-family: $font-family-sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  background-color: $gray-lighter;
+  color: #666666;
+  text-align: center;
+  margin-left: 1px;
+  line-height: 1;
+  padding-top: 2px;
+  cursor: pointer;
+
+  svg {
+    border: 0 none !important;
+    height: auto !important;
+    left: 3px;
+    margin-left: 0 !important;
+    padding-right: 0 !important;
+    top: 1px !important;
+    width: 15px !important;
+  }
+}

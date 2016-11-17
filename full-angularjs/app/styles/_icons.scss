@@ -1,0 +1,58 @@
+@font-face {
+  font-family: 'icomoon';
+  src:url('../fonts/icons/icons.eot?mn9aw3');
+  src:url('../fonts/icons/icons.eot?#iefixmn9aw3') format('embedded-opentype'),
+    url('../fonts/icons/icons.woff?mn9aw3') format('woff'),
+    url('../fonts/icons/icons.ttf?mn9aw3') format('truetype'),
+    url('../fonts/icons/icons.svg?mn9aw3#icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  font-family: 'icomoon';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-qmark:before {
+  content: "\e606";
+}
+.icon-spinner-2:before {
+  content: "\e601";
+}
+.icon-spinner-1:before {
+  content: "\e602";
+}
+.icon-user:before {
+  content: "\e600";
+}
+.icon-lock:before {
+  content: "\e603";
+}
+.icon-date:before {
+  content: "\e604";
+}
+.icon-card:before {
+  content: "\e605";
+}
+
+.icon-spinner-1, .icon-spinner-2 {
+  -ms-animation: 1s linear 0s normal none infinite spin;
+  -moz-animation: 1s linear 0s normal none infinite spin;
+  -webkit-animation: 1s linear 0s normal none infinite spin;
+  animation: 1s linear 0s normal none infinite spin;
+  position: absolute;
+}
+
+@-ms-keyframes spin { from { -ms-transform: rotate(0deg); } to { -ms-transform: rotate(360deg); }}
+@-moz-keyframes spin { from { -moz-transform: rotate(0deg); } to { -moz-transform: rotate(360deg); }}
+@-webkit-keyframes spin { from { -webkit-transform: rotate(0deg); } to { -webkit-transform: rotate(360deg); }}
+@keyframes spin { from { transform:rotate(0deg); } to { transform:rotate(360deg); }}

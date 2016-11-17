@@ -1,0 +1,7 @@
+.jumbotron {
+  margin:22px -10px 22px -10px;
+  @include isaac-respond-min-width(md) {
+    margin-left:-20px;
+    margin-right:-20px;
+  }
+}

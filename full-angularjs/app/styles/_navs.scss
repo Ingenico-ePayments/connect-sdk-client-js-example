@@ -1,0 +1,296 @@
+//generic nav styles
+.nav {
+  // Active state
+  > li.active > a {
+    &,
+    &:hover,
+    &:focus {
+      color: $brand-primary;
+      background-color: $brand-secondary;
+      border:1px solid #79c2e1;
+    }
+  }
+}
+
+.nav-pills {
+  > li > a {
+    color:#000;
+    padding: 4px 15px 4px 11px;
+    &:before {
+      @include caret(4px, $brand-primary, right);
+      position:absolute;
+      display:block;
+      left:2px;
+      top:11px;
+    }
+    &:hover,
+    &:focus {
+      background-color:transparent;
+      color:$brand-primary;
+    }
+  }
+  
+  > li.active > a {
+    padding-left:8px;
+    &:before {
+      display:none;
+    }
+  }
+  
+}
+
+//tabs
+.nav-tabs {
+  margin-top: 4px;
+  margin-bottom: 35px;
+  border-bottom: 1px solid $gray;
+  > li {
+    > a {
+      text-transform: uppercase;
+      color: #000000;
+      font-family: $font-family-webfont-normal;
+      padding: 7px 19px 11px;
+      font-size: 16px;
+      &:hover {
+        background: none;
+        border: 1px solid transparent;
+        color: $brand-primary;
+      }
+    }
+
+    // Active state, and its :hover to override normal :hover
+    &.active > a {
+      &,
+      &:hover,
+      &:focus {
+        color: #000000;
+        background-color: #ffffff;
+        border-color: $gray $gray $gray;
+        border-bottom-color: #ffffff;
+        cursor: default;
+        outline: none;
+      }
+    }
+  }
+}
+
+//metamenu
+.nav-metamenu {
+  
+  margin-top:2px;
+  
+  .caret {
+    border-top-color:$gray-darker;  
+  }
+  
+  
+  //lock icon is shown at different font-size then the text, so we need to position it
+  .lock {
+    position:relative;
+    display:inline-block;
+    width:15px;
+    
+    .icon-lock {
+      color:$gray;
+      font-size:18px;
+      position:absolute;
+      left:0;
+      top:-15px;
+    }
+    
+  }
+  
+  
+  > li > a {
+    color:$brand-primary;
+    font-size:13px;
+    padding: 6px 12px 6px 12px;
+    &:before {
+      display:none;
+    }
+    &:hover,
+    &:focus {
+      color:$link-hover-color;
+    }
+  }
+
+
+  > li.active > a {
+    padding-left:12px;
+  }
+
+  
+  > li {
+
+    + li {
+      margin-left: 3px;
+    }
+
+  }
+   
+}
+
+
+
+
+//left menu on desktop browsers
+.nav-aside {
+  margin:7px 0 20px 0;
+  
+  .nav-header {
+    font-family:$font-family-webfont-normal;
+    font-size:18px;
+    margin-top:17px;
+    margin-bottom:5px;
+    &:first-child {
+      margin-top:0;  
+    }
+  }
+  
+  
+  
+  
+}
+
+//offcanvas tabs
+.nav-tabs-offcanvas {
+  border-bottom: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  > li {
+    margin-bottom: 0;
+    > a {
+     margin-right: 0;
+     padding:16px 0 10px 7px;
+     background-color: $gray-darker;
+     border-radius:0;
+     border-width:0;
+     text-transform: none;
+     font-family:$font-family-webfont-normal;
+     font-size:15px;
+     line-height:1;
+     height:48px;
+     overflow:hidden;
+     color:#fff;
+     &:hover {
+      background-color: $gray-darker;
+      border: 0px solid transparent;
+      color: #fff;
+     }
+     
+     &[href="#tab-about"] {
+       width:75px;
+     }
+     
+     &[href="#tab-developers"] {
+       width:95px;
+     } 
+     
+     &[href="#tab-merchant"] {
+       width:95px;
+       padding-left:16px;
+       @include box-shadow($offcanvas-shadow);
+       .icon-lock {
+         color:$gray;
+         height:100%;
+         display:block;
+         position:absolute;
+         top:15px;
+         left:5px;
+       } 
+     }
+     
+     > small {
+       display:block;
+       font-size:9px;
+       color:$gray;
+       line-height:1;
+     }
+      
+      
+    }
+    
+    // Active state, and its :hover to override normal :hover
+    &.active > a {
+      &,
+      &:hover,
+      &:focus {
+        color: #fff;
+        background-color: $brand-primary;
+        border-width:0;
+        cursor: default;
+      }
+    }
+  }
+}
+
+
+//offcanvas menu
+.nav-offcanvas {
+  background:transparent;
+  border-bottom:1px solid $brand-tertiary;
+  padding-bottom:7px;
+  margin-top:5px;
+  > li > a {
+    color:#fff;
+    padding: 9px 15px 9px 22px;
+    border-radius:0;
+    &:before {
+      @include caret(4px, #fff, right);
+      display:block;
+      position:absolute;
+      left:13px;
+      top:16px;
+    }
+    &:hover,
+    &:focus {
+      color: #fff;
+      background-color: transparent;
+      border:none;
+    }    
+  }
+
+  > li.active > a {
+    &,
+    &:hover,
+    &:focus {
+      color:#fff;
+      border:none;
+      background-color:darken($brand-primary,5%);
+      @include box-shadow($offcanvas-shadow);
+    }
+  }
+  
+ .nav-header {
+    font-family:$font-family-webfont;
+    font-size:15px;
+    color:$brand-tertiary;
+    border-top:1px solid $brand-tertiary;
+    background:transparent;
+    padding:12px 0 2px 12px;
+    margin-top:7px;
+    &:first-child {
+      margin-top:0;  
+    }
+  }
+
+  .nav-header:first-child {
+    border-top:none;
+  }
+
+  > li + li {
+    margin-top:0;
+  }
+}
+
+//menu used in pages, with links to additional info for this page
+.nav-contentmenu {
+  > li > a {
+    color: $brand-primary;
+    font-weight:bold;
+    &:hover,
+    &:focus {
+      color:$link-hover-color;
+    }
+  }
+}

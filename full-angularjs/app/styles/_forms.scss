@@ -1,0 +1,47 @@
+//form
+body input {
+  font-size: 16px; //prevent iPhone from zooming in when clicking an input that has a font-szie smaller then 16px
+  border-width:1px;
+  padding: 6px 10px;
+  border-color: #aaaaaa;
+  border-radius: 3px;
+  box-shadow: inset 2px 3px 5px 0px rgba(0, 0, 0, 0.15);
+  @include placeholder($gray-dark);
+}
+
+.has-error {    //Bootstrap makes all these element red if the form-group is in error state
+  .help-block,
+  .control-label,
+  .radio,
+  .checkbox,
+  .radio-inline,
+  .checkbox-inline  {
+    color: inherit;
+  }
+  //errors, triggered by javascript validation
+  label.error {
+  	@extend .help-block; //inherit margin from help-block
+  	font-weight:normal;
+  	color:$state-danger-text;
+  }
+}
+
+fieldset {
+  border-bottom:1px solid $gray-light;
+  margin:0 0 11px 0;
+}
+.modal-body form > fieldset:last-child {
+  border-bottom:none;
+}
+
+legend {
+  font-size:18px;
+  margin-bottom:12px;
+}
+
+.form-horizontal .control-label {
+    text-align: left;
+}
+.help-block {
+    font-size:13px;
+}

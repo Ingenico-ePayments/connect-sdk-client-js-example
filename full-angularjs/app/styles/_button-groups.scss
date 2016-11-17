@@ -1,0 +1,3 @@
+.btn-group > .btn.btn-primary + .dropdown-toggle {
+  border-left:1px solid darken($brand-primary,12%);
+} 

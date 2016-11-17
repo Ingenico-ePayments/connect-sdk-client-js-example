@@ -1,0 +1,10 @@
+body {
+  background-color: #ffffff;
+}
+
+main {
+  padding:12px 0 44px 0;
+  @include isaac-respond-min-width(md) {
+    padding-top: 30px;
+  }
+}

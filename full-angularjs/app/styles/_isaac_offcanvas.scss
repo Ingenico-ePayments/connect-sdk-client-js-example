@@ -1,0 +1,109 @@
+@-webkit-keyframes offcanvasSlideInMenu {
+    0% {display:block;@include translate3d(-($offcanvas-width - 1px),0,0)}
+    1% {@include translate3d(-($offcanvas-width - 1px),0,0)}
+    100% {@include translate3d(0,0,0)}
+}
+
+@keyframes offcanvasSlideInMenu {
+    0% {display:block;@include translate3d(-($offcanvas-width - 1px),0,0)}
+    1% {@include translate3d(-($offcanvas-width - 1px),0,0)}
+    100% {@include translate3d(0,0,0)}
+}
+
+@-webkit-keyframes offcanvasSlideInContent {
+    0% {@include translate3d(1px,0,0)}
+    1% {@include translate3d(1px,0,0)}
+    100% {@include translate3d($offcanvas-width,0,0)}
+}
+
+@keyframes offcanvasSlideInContent {
+    0% {@include translate3d(1px,0,0)}
+    1% {@include translate3d(1px,0,0)}
+    100% {@include translate3d($offcanvas-width,0,0)}
+}
+
+@-webkit-keyframes offcanvasSlideOutMenu {
+    0% {@include translate3d(0,0,0)}
+    1% {@include translate3d(0,0,0)}
+    100% {@include translate3d(-$offcanvas-width,0,0);}
+}
+
+@keyframes offcanvasSlideOutMenu {
+    0% {@include translate3d(0,0,0)}
+    1% {@include translate3d(0,0,0)}
+    100% {@include translate3d(-$offcanvas-width,0,0);}
+}
+
+
+@-webkit-keyframes offcanvasSlideOutContent {
+    0% {@include translate3d($offcanvas-width - 1px,0,0)}
+    1% {@include translate3d($offcanvas-width - 1px,0,0)}
+    100% {@include translate3d(0,0,0)}
+}
+
+@keyframes offcanvasSlideOutContent {
+    0% {@include translate3d($offcanvas-width - 1px,0,0)}
+    1% {@include translate3d($offcanvas-width - 1px,0,0)}
+    100% {@include translate3d(0,0,0)}
+}
+
+
+.offcanvas-menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: $offcanvas-width;
+  height: auto;
+  display:none;
+  background-color:$offcanvas-bg;
+  -webkit-backface-visibility: hidden;
+  @include translate3d(-$offcanvas-width,0,0);
+  @include box-shadow($offcanvas-shadow);
+}
+
+.offcanvas-content {
+  -webkit-backface-visibility: hidden;
+}
+
+//hide offcanvas menu on md devices and up
+@include isaac-respond-min-width(md) {
+  .offcanvas-menu {
+    display:none!important;
+  }
+}
+
+//
+@include isaac-respond-max-width(sm) {
+  //class offcanvas-open will be set on body while the offcanvas menu is shown 
+  body.offcanvas-open {
+    overflow-x:hidden;
+    
+    .offcanvas-content {
+      //Note: the animation timing used here must also be specified in the javascript file 
+      @include animation(offcanvasSlideInContent 200ms);
+      @include translate3d($offcanvas-width,0,0);
+    }
+    
+    .offcanvas-menu {
+      display:block;
+      @include animation(offcanvasSlideInMenu 200ms);
+      @include translate3d(0,0,0);  
+    }
+  }
+    
+  //class offcanvas-closing will be removed after the animation has completed
+  body.offcanvas-closing {
+    overflow-x:hidden;
+    
+    .offcanvas-content {
+      @include animation(offcanvasSlideOutContent 200ms);
+      @include translate3d(0,0,0);
+    }
+    
+    .offcanvas-menu {
+      display:block;
+      @include animation(offcanvasSlideOutMenu 200ms);
+      @include translate3d(-$offcanvas-width,0,0);  
+    }
+  }
+}

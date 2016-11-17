@@ -1,0 +1,15 @@
+<html>
+
+<body>
+    <div class="output">Processing ... </div>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+    <script src="js/create-payload.js"></script>
+    <script src="systemjs.config.js"></script>
+    <script>        
+        System.import('./js/app.js').catch(function(err) {
+            console.error(err);
+        });
+    </script>
+</body>
+
+</html>

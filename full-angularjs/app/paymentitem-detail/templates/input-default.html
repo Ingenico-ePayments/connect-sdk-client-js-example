@@ -1,0 +1,26 @@
+<input
+        name="{{paymentItemfield.id}}"
+        id="{{paymentItemfield.id}}"
+        placeholder="{{paymentItemfield.displayHints.placeholderLabel}}"
+        class="form-control"
+        ng-model="item[paymentItemfield.id]"
+        ng-attr-ui-mask="{{paymentItemfield.displayHints.uimask}}"
+        ng-attr-connect-validation="paymentItemfield.id"
+        ng-attr-required="paymentItemfield.dataRestrictions.isRequired"
+        ui-options="maskoptions"
+        ui-mask-placeholder-char="space"
+        ui-mask-placeholder
+        ng-model-options="{ allowInvalid: true }"
+        ng-if="!paymentItemfield.aofField"
+        >
+<input
+        name="{{paymentItemfield.id}}"
+        id="{{paymentItemfield.id}}"
+        class="form-control"
+        ng-if="paymentItemfield.aofField"
+        ng-model="item[paymentItemfield.id]"
+        disabled
+>
+<div class="error-length">Enter a valid length please</div>
+<div class="error-regexp">Please enter valid data</div>
+<div class="error-required">This field is required</div>
