@@ -9,7 +9,7 @@ requirejs(["connectsdk.Session", "config"], function (sdksession, config) {
     var paymentDetails = {
         totalAmount: 10000,
         countryCode: "NL",
-        locale: "NL_nl",
+        locale: "nl_NL",
         currency: "EUR",
         isRecurring: false
     };
