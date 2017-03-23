@@ -171,6 +171,27 @@ $(function () {
 
         connect.updateFieldMask(paymentItem);
 
+        // D) Enable boleto specific code; expect a consumer; and switch to a company if the fiscalNumber is 14 digits.
+
+        $("div[data-wrapper='firstName']").show();
+        $("div[data-wrapper='surname']").show();
+        $("div[data-wrapper='companyName']").hide();
+
+        $("#fiscalNumber").on('keyup', function () {
+            var fiscalNumber = $(this).val();
+            if (fiscalNumber.length >= 14) {
+                $("div[data-wrapper='firstName']").hide();
+                $("div[data-wrapper='surname']").hide();
+
+                $("div[data-wrapper='companyName']").show();
+            } else {
+                $("div[data-wrapper='firstName']").show();
+                $("div[data-wrapper='surname']").show();
+
+                $("div[data-wrapper='companyName']").hide();
+            }
+        });
+
         function encrypt() {
 
             $("#loading").show();
@@ -214,17 +235,5 @@ $(function () {
     var session = new connectSDK(sessionDetails);
     var paymentRequest = session.getPaymentRequest();
 
-    var search = document.location.search;
-    if (search) {
-        search = search.substring(1);
-        search = search.split("&");
-        $.each(search, function (i, part) {
-            part = part.split("=");
-            if (part[0] === "paymentitemId") {
-                _showPaymentItem(part[1]);
-            }
-        })
-    } else {
-        $("#error").fadeIn();
-    }
+    _showPaymentItem(1503);
 });

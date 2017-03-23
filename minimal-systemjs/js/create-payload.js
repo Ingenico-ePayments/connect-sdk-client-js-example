@@ -10,7 +10,7 @@ var createPayload = function (session, cardNumber, paymentDetails) {
             paymentRequest.setPaymentProduct(paymentProduct);
             paymentRequest.setValue("cardNumber", cardNumber);
             paymentRequest.setValue("cvv", "123");
-            paymentRequest.setValue("expiryDate", "01/17");
+            paymentRequest.setValue("expiryDate", "04/17");
 
             if (!paymentRequest.isValid()) {
                 for (var error in paymentRequest.getErrorMessageIds()) {

@@ -2,7 +2,14 @@
     display: block;
     color: #ff0000;
 }
-.ng-untouched ~ .error, .ng-valid ~ .error, .error-length, .error-luhn, .error-expiration-date, .error-regexp, .error-required {
+.ng-untouched ~ .error, 
+.ng-valid ~ .error, 
+.error-length, 
+.error-luhn, 
+.error-expiration-date, 
+.error-regexp, 
+.error-required,
+.error-boleto-bancario-requiredness {
     display: none;
 }
 .doValidate .ng-invalid-length ~ .error-length {
@@ -22,6 +29,10 @@
     color: #ff0000;
 }
 .doValidate .ng-invalid-required ~ .error-required {
+    display: block;
+    color: #ff0000;
+}
+.doValidate .ng-invalid-boleto-bancario-requiredness ~ .error-boleto-bancario-requiredness {
     display: block;
     color: #ff0000;
 }

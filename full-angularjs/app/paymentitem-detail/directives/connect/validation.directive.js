@@ -10,10 +10,14 @@ angular.module('connect.validation', []).directive('connectValidation', function
                     /* Add validators based on the dataRestrictions */
                     angular.forEach(field.dataRestrictions.validationRules, function (validationRule) {
                         controller.$validators[validationRule.type] = function (modelValue, viewValue) {
-                            if (modelValue) {
-                                return validationRule.validate(modelValue);
+                            if (validationRule.type !== 'boletoBancarioRequiredness') {
+                                if (modelValue) {
+                                    return validationRule.validate(modelValue);
+                                } else {
+                                    return true;
+                                }
                             } else {
-                                return true;
+                                return validationRule.validate(modelValue || '', scope.item['fiscalNumber'] || '');
                             }
                         };
                     });
@@ -27,6 +31,17 @@ angular.module('connect.validation', []).directive('connectValidation', function
                     }
                 });
                 addValidations(field);
+
+                scope.$watch(function () {
+                    return scope.item && scope.item['fiscalNumber']
+                }, function (n, o) {
+                    // recheck requiredness of the other fields
+                    if (n) {
+                        scope.paymentform.firstName.$validate();
+                        scope.paymentform.surname.$validate();
+                        scope.paymentform.companyName.$validate();
+                    }
+                });
             }
         }
     }

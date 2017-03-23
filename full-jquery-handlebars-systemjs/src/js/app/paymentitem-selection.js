@@ -70,9 +70,11 @@ $(function () {
                     if ((id === 'cards' && type === 'group') || method === "card") {
                         // redirect to a specific page for card payments
                         document.location.href = 'paymentitem-cards.html?paymentitemId='+ id;
+                    } else if (id === 1503) {
+                        document.location.href = 'paymentitem-boleto.html' + search;
                     } else {
                         // otherwise redirect o the details page
-                        document.location.href = 'paymentitem-detail.html' + search;
+                        document.location.href = 'paymentitem-non-cards.html' + search;
                     }
                 });
         }, function () {

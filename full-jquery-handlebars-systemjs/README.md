@@ -93,4 +93,4 @@ This application uses the following key frameworks and libraries which are manag
 ### Dev-
 
 Files prefixed with `dev-` are only used for demo purposes; they include an interface to enter the sessionDetails and pages to display the encrypted blob.
-Full implementations hve the S2S SDK provide the sessionDetails and use the S2S sdk to send the encrypted blob to the Ingenico servers.
+Full implementations hve the S2S SDK provide the sessionDetails and use the S2S SDK to send the encrypted blob to the Ingenico servers.

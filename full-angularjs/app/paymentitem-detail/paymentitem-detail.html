@@ -1,12 +1,13 @@
-<form ng-controller="paymentitem.controller" class="page" method="POST" ng-submit="doPayment()" name="paymentform" ng-class="{'doValidate': doValidate}">
+<form ng-controller="paymentitem.controller" class="page" method="POST" ng-submit="doPayment()" name="paymentform" ng-class="{'doValidate': doValidate}" novalidate>
     <div class="alert alert-danger" ng-if="hasError">
         There was a problem while getting the payment items; please check your credentials and payment context <a href="#/start">here</a>
     </div>
     <div ng-if="!hasError">
         <div class="paymentoption par">
             <div ng-include="'/app/paymentitem-detail/templates/cards.html'" ng-if="(type === 'group' && id === 'cards') || paymentitem.paymentMethod === 'card'"></div>
+            <div ng-include="'/app/paymentitem-detail/templates/boleto.html'" ng-if="(id === '1503')"></div>
 
-            <div class="form-group" ng-repeat="paymentItemfield in paymentitem.paymentProductFields" ng-if="!((type === 'group' && id === 'cards') || paymentitem.paymentMethod === 'card')"  ng-init="paymentItemFieldId=paymentItemfield.id">
+            <div class="form-group" ng-repeat="paymentItemfield in paymentitem.paymentProductFields" ng-if="!((type === 'group' && id === 'cards') || paymentitem.paymentMethod === 'card') && !id === '1503'"  ng-init="paymentItemFieldId=paymentItemfield.id">
                 <label for="{{paymentItemfield.id}}" class="hidden-xs hidden-sm">{{paymentItemfield.displayHints.label}}</label>
                 <div ng-switch on="paymentItemfield.displayHints.formElement.type" class="paymentitem-input">
                     <div ng-switch-when="list">

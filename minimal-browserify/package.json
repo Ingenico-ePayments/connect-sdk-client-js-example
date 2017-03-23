@@ -1,6 +1,6 @@
 {
   "name": "connect-sdk-client-js-example-browserify",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "",
   "main": "index.html",
   "scripts": {
@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "browserify": "^13.1.0",
-    "connect-sdk-client-js": "^3.0.0"
+    "connect-sdk-client-js": ">=3.1.0 <4.0.0"
   },
   "devDependencies": {
     "lite-server": "^2.2.2"

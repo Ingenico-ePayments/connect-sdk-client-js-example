@@ -73,6 +73,25 @@ $(function () {
 		}, function () {
 			return jQuery.validator.format("Please enter a valid range between {0} and {1}", rParams[0], rParams[1]);
 		});
+
+		var fiscalNumber;
+		jQuery.validator.addMethod('boletobancariorequiredness', function (value, element, params) {
+			var id = element.id;
+			var paymentProductField = paymentItem.paymentProductFieldById[id];
+			if (paymentProductField) {
+				var dataRestrictions = paymentProductField.dataRestrictions;
+				var validation = dataRestrictions.validationRuleByType["boletoBancarioRequiredness"];
+				var unmaskedValue = paymentProductField.removeMask(value);
+				fiscalNumber = validation.fiscalNumberLength;
+				// this validator needs the fiscalNumber value so get it from the live domElement
+				var fiscalNumberValue = paymentItem.paymentProductFieldById["fiscalNumber"].removeMask($("#fiscalNumber").val());
+				return validation.validate(unmaskedValue, fiscalNumberValue);
+			} else {
+				return true;
+			}
+		}, function () {
+			return jQuery.validator.format("This field is required if fiscalNumber is {0}", fiscalNumber);
+		});
 	};
 
 	/**

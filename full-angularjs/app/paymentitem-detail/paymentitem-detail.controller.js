@@ -67,6 +67,10 @@ app.controller('paymentitem.controller', ['$rootScope', '$scope', '$location', '
                         $scope.handleAccountOnFile();
                     }
 
+                    if (id === '1503') {
+                        $scope.boletoHelper(paymentProduct);
+                    }
+
                 });
             }, function () {
                 $scope.$apply(function () {
@@ -107,6 +111,17 @@ app.controller('paymentitem.controller', ['$rootScope', '$scope', '$location', '
         });
     }
 
+    $scope.boletoHelper = function (paymentProduct) {
+        $scope.$watch(function () {
+            return $scope.item && $scope.item['fiscalNumber']
+        }, function (n, o) {
+            if (n && n.length >= 14) {
+                $scope.isBuissiness = true;
+            } else {
+                $scope.isBuissiness = false;
+            }
+        });
+    }
 
     $scope.createHtmlTooltips = function () {
         angular.forEach($scope.paymentitem.paymentProductFields, function (field) {

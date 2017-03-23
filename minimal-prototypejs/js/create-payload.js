@@ -13,7 +13,7 @@ var createPayload = function (session, cardNumber, paymentDetails) {
             paymentRequest.setValue("expiryDate", "04/17");
 
             if (!paymentRequest.isValid()) {
-                for (var error in paymentRequest.getErrorMessageIds()) {
+                for (var error of paymentRequest.getErrorMessageIds()) {
                     console.error('error', error);
                 }
             }

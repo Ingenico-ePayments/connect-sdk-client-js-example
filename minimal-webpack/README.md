@@ -4,7 +4,7 @@
 
 This example shows you how to load the [Ingenico Connect JavaScript Client SDK](https://github.com/Ingenico-ePayments/connect-sdk-client-js) with the webpack module loader.
 
-The connect sdk is used for all communication to the Connect API and crypto. See the [Ingenico ePayments Developer Hub](https://developer.globalcollect.com/documentation/sdk/mobile/javascript/) for more information on how to use the Ingenico Connect API.
+The Connect SDK is used for all communication to the Connect API and crypto. See the [Ingenico ePayments Developer Hub](https://developer.globalcollect.com/documentation/sdk/mobile/javascript/) for more information on how to use the Ingenico Connect API.
 A complete copy of forge is included. which is used to do the actual crypto.
 
 ## How to install
@@ -13,7 +13,7 @@ Make sure you have installed [Node.js](https://nodejs.org/en/); the LTS version 
 
     npm install
 
-Get a copy of [forge](https://github.com/digitalbazaar/forge/) and build it following the guide on github. You have to use this build since forge is incompatible with module loaders at the moment.
+Get a copy of [forge](https://github.com/digitalbazaar/forge/) and build it following the guide on GitHub. You have to use this build since forge is incompatible with module loaders at the moment.
 Place the minified version in `dist/js`. A forge package is included in this example but you should update it to the latest version.
 
 ## How to start the payment process
