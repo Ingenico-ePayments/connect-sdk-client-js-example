@@ -11,14 +11,14 @@ $(function () {
             $("#customerId").val(currentContext.customerId);
             $("#region").val(currentContext.region);
             $("#environment").val(currentContext.environment);
-            $("#amountInCents").val(currentContext.amountInCents);
+            $("#totalAmount").val(currentContext.totalAmount);
             $("#countryCode").val(currentContext.countryCode);
-            $("#currency").val(currentContext.currencyCode);
+            $("#currency").val(currentContext.currency);
             $("#locale").val(currentContext.locale);
             $("#isRecurring").val(currentContext.isRecurring);
             $("#grouping").prop('checked', currentContext.grouping);
         } else {
-            $("#amountInCents").val('16195');
+            $("#totalAmount").val('16195');
             $("#grouping").prop('checked', true);
         }
     };
@@ -32,9 +32,9 @@ $(function () {
                 customerId: $("#customerId").val(),
                 region: $("#region").val(),
                 environment: $("#environment").val(),
-                amountInCents: $("#amountInCents").val(),
+                totalAmount: $("#totalAmount").val(),
                 countryCode: $("#countryCode").val(),
-                currencyCode: $("#currency").val(),
+                currency: $("#currency").val(),
                 locale: $("#locale").val(),
                 isRecurring: $("#isRecurring").is(":checked"),
                 grouping: $("#grouping").is(":checked")

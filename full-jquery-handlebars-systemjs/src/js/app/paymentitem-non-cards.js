@@ -1,5 +1,5 @@
 var $ = require('jQuery');
-window.forge = require('node-forge')();
+window.forge = require('node-forge');
 var connectSDK = require('connectsdk.session');
 var Handlebars = require('handlebars');
 require('jquery-validation');
@@ -171,26 +171,27 @@ $(function () {
 
         connect.updateFieldMask(paymentItem);
 
-        function encrypt() {
-
-            $("#loading").show();
-
-            // Create an SDK encryptor object
-            var encryptor = session.getEncryptor(forge);
-
-            // Encrypting is an async task that we provide you as a promise.
-            encryptor.encrypt(paymentRequest).then(function (encryptedString) {
-                // The promise has fulfilled.
-                sessionStorage.setItem('encryptedString', encryptedString);
-                document.location.href = 'dev-success.html';
-            }, function (errors) {
-                // The promise failed, inform the user what happened.
-
-                $("#loading").hide();
-                console.error("Failed to encrypt due to", errors);
-            });
-        }
     };
+    
+    function encrypt() {
+
+        $("#loading").show();
+
+        // Create an SDK encryptor object
+        var encryptor = session.getEncryptor(forge);
+
+        // Encrypting is an async task that we provide you as a promise.
+        encryptor.encrypt(paymentRequest).then(function (encryptedString) {
+            // The promise has fulfilled.
+            sessionStorage.setItem('encryptedString', encryptedString);
+            document.location.href = 'dev-success.html';
+        }, function (errors) {
+            // The promise failed, inform the user what happened.
+
+            $("#loading").hide();
+            console.error("Failed to encrypt due to", errors);
+        });
+    }
 
     var context = sessionStorage.getItem('context');
     if (!context) {
@@ -204,11 +205,11 @@ $(function () {
         environment: context.environment
     };
     var paymentDetails = {
-        totalAmount: context.amountInCents,
+        totalAmount: context.totalAmount,
         countryCode: context.countryCode,
         locale: context.locale,
         isRecurring: context.isRecurring,
-        currency: context.currencyCode
+        currency: context.currency
     }
     var grouping = context.grouping;
     var session = new connectSDK(sessionDetails);

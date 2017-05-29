@@ -23,7 +23,7 @@
         'jquery-validation': { main: 'dist/jquery.validate.js', defaultExtension: 'js' },
         'handlebars': { main: 'dist/handlebars.js', defaultExtension: 'js' },
         'bootstrap': { main: 'assets/javascripts/bootstrap.js', defaultExtension: 'js' },
-        'node-forge': { main: 'js/forge.js', defaultExtension: 'js' }
+        'node-forge': { main: 'dist/forge.min.js', defaultExtension: 'js' }
     };
 
     // map connect-sdk for usage with systemjs   
@@ -45,7 +45,9 @@
     packages['connectsdk.JOSEEncryptor'] = { main: '../../../node_modules/connect-sdk-client-js/src/JOSEEncryptor.js', defaultExtension: 'js' };
     packages['connectsdk.net'] = { main: '../../../node_modules/connect-sdk-client-js/src/net.js', defaultExtension: 'js' };
     packages['connectsdk.Util'] = { main: '../../../node_modules/connect-sdk-client-js/src/Util.js', defaultExtension: 'js' };
+    packages['connectsdk.AndroidPay'] = { main: '../../../node_modules/connect-sdk-client-js/src/AndroidPay.js', defaultExtension: 'js' };
     packages['connectsdk.PublicKeyResponse'] = { main: '../../../node_modules/connect-sdk-client-js/src/PublicKeyResponse.js', defaultExtension: 'js' };
+    packages['connectsdk.PaymentProductPublicKeyResponse'] = { main: '../../../node_modules/connect-sdk-client-js/src/PaymentProductPublicKeyResponse.js', defaultExtension: 'js' };
     packages['connectsdk.BasicPaymentProductGroup'] = { main: '../../../node_modules/connect-sdk-client-js/src/BasicPaymentProductGroup.js', defaultExtension: 'js' };
     packages['connectsdk.PaymentProductField'] = { main: '../../../node_modules/connect-sdk-client-js/src/PaymentProductField.js', defaultExtension: 'js' };
     packages['connectsdk.AccountOnFile'] = { main: '../../../node_modules/connect-sdk-client-js/src/AccountOnFile.js', defaultExtension: 'js' };

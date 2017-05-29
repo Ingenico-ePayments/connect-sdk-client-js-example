@@ -1,5 +1,5 @@
 var $ = require('jQuery');
-window.forge = require('node-forge')();
+window.forge = require('node-forge');
 var connectSDK = require('connectsdk.session');
 var Handlebars = require('handlebars');
 require('jquery-validation');
@@ -203,7 +203,7 @@ $(function () {
 
                     } else if (response.status === "EXISTING_BUT_NOT_ALLOWED") {
                         // The creditcard number that the user provided did map on a supported (for this merchant) issuer.
-                        // But the payment is not allowed with the current payment context. (countryCode, isRecurring, amount, currencyCode)
+                        // But the payment is not allowed with the current payment context. (countryCode, isRecurring, amount, currency)
                         // We handle this by adding a method to the jquery validator who checks for the class 'notAllowedInContext'
                         setCardStatus(false, false, false);
                     } else {
@@ -285,11 +285,11 @@ $(function () {
         environment: context.environment
     };
     var paymentDetails = {
-        totalAmount: context.amountInCents,
+        totalAmount: context.totalAmount,
         countryCode: context.countryCode,
         locale: context.locale,
         isRecurring: context.isRecurring,
-        currency: context.currencyCode
+        currency: context.currency
     }
     var grouping = context.grouping;
     var session = new connectSDK(sessionDetails);

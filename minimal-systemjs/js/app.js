@@ -1,4 +1,4 @@
-window.forge = require('node-forge')();
+window.forge = require('node-forge');
 var connect = require('connectsdk.session');
 
 var sessionDetails = {

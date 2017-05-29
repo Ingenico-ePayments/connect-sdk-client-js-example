@@ -1,5 +1,5 @@
 var $ = require('jQuery');
-window.forge = require('node-forge')();
+window.forge = require('node-forge');
 var connectSDK = require('connectsdk.session');
 var Handlebars = require('handlebars');
 require('jquery-validation');
@@ -225,11 +225,11 @@ $(function () {
         environment: context.environment
     };
     var paymentDetails = {
-        totalAmount: context.amountInCents,
+        totalAmount: context.totalAmount,
         countryCode: context.countryCode,
         locale: context.locale,
         isRecurring: context.isRecurring,
-        currency: context.currencyCode
+        currency: context.currency
     }
     var grouping = context.grouping;
     var session = new connectSDK(sessionDetails);

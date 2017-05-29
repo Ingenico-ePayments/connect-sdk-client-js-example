@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngRoute', 'ui.bootstrap', 'ui.mask', 'connect.validation', 'connect.cardnumber']);
+var app = angular.module('app', ['ngRoute', 'ui.bootstrap', 'ui.mask', 'connect.validation', 'connect.cardnumber', 'connect.androidPay']);
 
 app.config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/paymentitem-selection', {

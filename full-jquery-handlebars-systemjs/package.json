@@ -1,6 +1,6 @@
 {
   "name": "connect-sdk-client-js-example-jquery",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "",
   "main": "index.html",
   "scripts": {
@@ -15,11 +15,11 @@
   "license": "ISC",
   "dependencies": {
     "bootstrap-sass": "^3.3.6",
-    "connect-sdk-client-js": ">=3.1.0 <4.0.0",
+    "connect-sdk-client-js": ">=3.2.0 <4.0.0",
     "handlebars": "^4.0.5",
     "jquery": "^2.2.4",
     "jquery-validation": "^1.15.1",
-    "node-forge": "github:digitalbazaar/forge",
+    "node-forge": "^0.7.1",
     "systemjs": "^0.19.36"
   },
   "devDependencies": {

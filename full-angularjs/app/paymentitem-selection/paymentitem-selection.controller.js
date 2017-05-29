@@ -1,12 +1,14 @@
-app.controller('paymentitem-selection.controller', ['$scope', '$location', '$log', function ($scope, $location, $log) {
+app.controller('paymentitem-selection.controller', ['$scope', '$rootScope', '$location', '$log', 'connectAndroidPay', function ($scope, $rootScope, $location, $log, connectAndroidPay) {
     "use strict";
-
     $scope.hasError = false;
+
+    var context = JSON.parse(sessionStorage.getItem('context'));
 
     $scope.getPaymentItems = function () {
         $scope.hasError = false;
         $scope.loading = true;
-        $scope.connect.session.getBasicPaymentItems($scope.connect.paymentDetails, $scope.grouping).then(function (basicPaymentItems) {
+        // Third parameter paymentProductSpecificInputs is optional
+        $scope.connect.session.getBasicPaymentItems($scope.connect.paymentDetails, $scope.grouping, $scope.connect.paymentProductSpecificInputs).then(function (basicPaymentItems) {
             $scope.loading = false;
 
             // since the connect sdk has async calls outside of angular we need to tell Angular to dirty-check the state after the async call is complete.
@@ -37,9 +39,51 @@ app.controller('paymentitem-selection.controller', ['$scope', '$location', '$log
         })
     };
 
-    $scope.choosePaymentItem = function (paymentItem) {
-        $location.path('/paymentitem-detail/' + paymentItem.json.type + '/' + paymentItem.id);
+    var encryptPayment = function (paymentResponse) {
+        var encryptor = $scope.connect.session.getEncryptor();
+        var paymentRequest = $scope.connect.session.getPaymentRequest();
+        $rootScope.encryptedString = null;
+        if (paymentRequest.isValid()) {
+            $rootScope.loading = true;
+            encryptor.encrypt(paymentRequest).then(function (encryptedString) {
+                $rootScope.loading = false;
+                $scope.$apply(function () {
+                    $rootScope.encryptedString = encryptedString;
+                    // makes sure the android pay native ui is closed
+                    paymentResponse.complete();
+                    $location.path('/dev-success');
+                });
+            }, function error(e) {
+                $rootScope.loading = false;
+                console.error('encryption failed', e);
+                $scope.$apply(function () {
+                    $rootScope.encryptedString = encryptedString;
+                    $location.path('/dev-failure');
+                });
+            });
+        } else {
+            // something is wrong according to the paymentRequest;
+            console.error(paymentRequest.getErrorMessageIds(), paymentRequest.getValues(), paymentRequest.getPaymentProduct());
+            $scope.$apply(function () {
+                $rootScope.encryptedString = encryptedString;
+                $location.path('/dev-failure');
+            });
+        }
     };
+
+    $scope.choosePaymentItem = function (paymentItem) {
+        if (paymentItem.id === 320) {
+            var promise = connectAndroidPay.setupAndroidPay($scope);
+            promise.then(function (paymentResponse) {
+                encryptPayment(paymentResponse);
+            }, function (reason) {
+                console.error('Failed: ' + reason);
+            });
+        } else {
+            $location.path('/paymentitem-detail/' + paymentItem.json.type + '/' + paymentItem.id);
+        }
+    };
+
     $scope.chooseAccountOnFile = function (aof) {
         $location.path('/paymentitem-detail/product/' + aof.paymentProductId + '/' + aof.id);
     };
@@ -67,7 +111,6 @@ app.controller('paymentitem-selection.controller', ['$scope', '$location', '$log
         });
     };
 
-    var context = JSON.parse(sessionStorage.getItem('context'));
     if (context) {
         $scope.connect = {}; // store all connectSDK variables in this namespace
 
@@ -84,6 +127,13 @@ app.controller('paymentitem-selection.controller', ['$scope', '$location', '$log
             locale: context.locale,
             isRecurring: context.isRecurring,
             currency: context.currencyCode
+        }
+        // If you want to use Android Pay in your application, a merchantId is required to set it up. 
+        // getBasicPaymentItems will use it to perform an extra check(canMakePayment) to see if the user can pay with Android Pay.
+        $scope.connect.paymentProductSpecificInputs = {
+            androidPay: {
+                merchantId: "02510116604241796260"
+            }
         }
         $scope.grouping = context.grouping;
 

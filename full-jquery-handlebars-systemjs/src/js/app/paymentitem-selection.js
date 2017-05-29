@@ -1,12 +1,14 @@
 var $ = require('jQuery');
-window.forge = require('node-forge')();
+window.forge = require('node-forge');
 var connect = require('connectsdk.session');
-var Handlebars = require('handlebars');
+var handlebars = require('handlebars');
+var setupAndroidPayAndExecute = require('./paymentitem-androidpay');
+var androidPayId = 320;
 
 $(function () {
     function _getPaymentItems() {
         $("#loading").show();
-        session.getBasicPaymentItems(paymentDetails, grouping).then(function (basicPaymentItems) {
+        session.getBasicPaymentItems(paymentDetails, grouping, paymentProductSpecificInputs).then(function (basicPaymentItems) {
             $("#loading").hide();
             // let's build up the page :)
             // Create view to show both account on file as well as all payment items.
@@ -32,7 +34,7 @@ $(function () {
 
             // build the handlebars template
             var source = $("#list-template").html();
-            var template = Handlebars.compile(source);
+            var template = handlebars.compile(source);
 
             // and show it on the screen
             $("#handlebarsDrop").html(template(view));
@@ -63,15 +65,17 @@ $(function () {
                     var search = '?paymentitemId=' + id;
                     if (aofid) {
                         search += '&accountOnFileId=' + aofid;
-                    }                    
+                    }
                     search += '&type=' + type;
 
                     // now redirect based on type
                     if ((id === 'cards' && type === 'group') || method === "card") {
                         // redirect to a specific page for card payments
-                        document.location.href = 'paymentitem-cards.html?paymentitemId='+ id;
+                        document.location.href = 'paymentitem-cards.html?paymentitemId=' + id;
                     } else if (id === 1503) {
                         document.location.href = 'paymentitem-boleto.html' + search;
+                    } else if (id === androidPayId) {
+                        setupAndroidPayAndExecute(session, context, paymentDetails, paymentRequest, paymentProductSpecificInputs);
                     } else {
                         // otherwise redirect o the details page
                         document.location.href = 'paymentitem-non-cards.html' + search;
@@ -82,7 +86,6 @@ $(function () {
             $("#error").fadeIn();
         });
     };
-
 
     var context = sessionStorage.getItem('context');
     if (!context) {
@@ -96,13 +99,19 @@ $(function () {
         environment: context.environment
     };
     var paymentDetails = {
-        totalAmount: context.amountInCents,
+        totalAmount: context.totalAmount,
         countryCode: context.countryCode,
         locale: context.locale,
         isRecurring: context.isRecurring,
-        currency: context.currencyCode
+        currency: context.currency
     }
     var grouping = context.grouping;
+    // If you want to use Android Pay in your application, a merchantId is required to set it up.
+    var paymentProductSpecificInputs = {
+        androidPay: {
+            merchantId: "02510116604241796260"
+        }
+    }
     var session = new connect(sessionDetails);
     var paymentRequest = session.getPaymentRequest();
 

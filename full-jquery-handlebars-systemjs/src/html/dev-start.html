@@ -81,19 +81,19 @@
                     <div class="paymentoption par">
                         <form method="POST" name="session-details-form">
                             <div class="form-group">
-                                <label for="clientSessionId" class="hidden-xs hidden-sm">Client Session Id</label>
+                                <label for="clientSessionId" class="">Client Session Id</label>
                                 <div>
                                     <input name="clientSessionId" type="text" id="clientSessionId" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="customerId" class="hidden-xs hidden-sm">Customer Id</label>
+                                <label for="customerId" class="">Customer Id</label>
                                 <div>
                                     <input name="customerId" type="text" id="customerId" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="region" class="hidden-xs hidden-sm">Region</label>
+                                <label for="region" class="">Region</label>
                                 <div>
                                     <select name="region" id="region" class="form-control">
                                                     <option disabled="disabled">Choose a region</option>
@@ -103,7 +103,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="region" class="hidden-xs hidden-sm">Environment</label>
+                                <label for="region" class="">Environment</label>
                                 <div>
                                     <select name="environment" id="environment" class="form-control">
                                                     <option disabled="disabled">Choose an environment</option>
@@ -115,13 +115,13 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="amountInCents" class="hidden-xs hidden-sm">Amount (in cents)</label>
+                                <label for="totalAmount" class="">Amount (in cents)</label>
                                 <div>
-                                    <input name="amountInCents" type="number" step="1" id="amountInCents" class="form-control">
+                                    <input name="totalAmount" type="number" step="1" id="totalAmount" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="countryCode" class="hidden-xs hidden-sm">Country Code</label>
+                                <label for="countryCode" class="">Country Code</label>
                                 <div>
                                     <select name="countryCode" id="countryCode" class="form-control">
                                                     <option value="AF">AF</option>
@@ -377,7 +377,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="currency" class="hidden-xs hidden-sm">Currency Code</label>
+                                <label for="currency" class="">Currency Code</label>
                                 <div>
                                     <select name="currency" id="currency" class="form-control">
                                                     <option value="AFN">Afghan afghani (AFN)</option>
@@ -535,7 +535,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="locale" class="hidden-xs hidden-sm">Locale</label>
+                                <label for="locale" class="">Locale</label>
                                 <div>
                                     <select name="locale" id="locale" class="form-control">
                                                     <!-- These are not all possible locales. You can find them all in the Ingenico ePayments Configuration Center -->
@@ -557,12 +557,12 @@
                                 </div>
                             </div>
                             <div class="checkbox">
-                                <label for="isRecurring" class="hidden-xs hidden-sm">
+                                <label for="isRecurring" class="">
                                                 <input type="checkbox" id="isRecurring"  name="isRecurring">
                                                 <span>Recurring payment</span> </label>
                             </div>
                             <div class="checkbox">
-                                <label for="grouping" class="hidden-xs hidden-sm">
+                                <label for="grouping" class="">
                                                 <input type="checkbox" id="grouping" name="grouping">
                                                 <span>Group products</span> </label>
                             </div>

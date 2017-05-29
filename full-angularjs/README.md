@@ -3,7 +3,7 @@
 ## What is it?
 
 This application is an angularjs implementation of an Ingenico Connect checkout process. You can use this application as a base for your own angularjs intergrated Ingenico Connect powered payment solution.
-It offers all features of the [Ingenico Connect Response Payment Pages (RPP)](https://developer.globalcollect.com/documentation/hosted-payment-pages/), including
+It offers all features of the [Ingenico Connect Responsive Payment Pages (RPP)](https://developer.globalcollect.com/documentation/hosted-payment-pages/), including
 * payment product selection
 * payment product detail pages
 * co-branded cards support
