@@ -1,11 +1,11 @@
 {
   "name": "connect-sdk-client-js-example-requirejs",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "",
   "main": "index.html",
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "connect-sdk-client-js": ">=3.2.0 <4.0.0"
+    "connect-sdk-client-js": ">=3.3.0 <4.0.0"
   }
 }

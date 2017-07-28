@@ -3,7 +3,7 @@ window.forge = require('node-forge');
 var connect = require('connectsdk.session');
 var androidPayId = 320;
 
-var getRequestMethodData = function getRequestMethodData(networks, publicKey, session, context) {
+var getRequestMethodData = function getRequestMethodData(networks, publicKey, context) {
     var androidPayEnvironment = 'TEST';
     if (context.environment === 'PROD') {
         androidPayEnvironment = 'PROD';
@@ -82,7 +82,7 @@ var setupAndroidPayAndExecute = function setupAndroidPayAndExecute(session, cont
                     session.getPaymentProduct(androidPayId, paymentDetails, paymentProductSpecificInputs).then(function (paymentProduct) {
                         paymentRequest.setPaymentProduct(paymentProduct);
                         // setup the data needed for the PRAPI
-                        var methodData = getRequestMethodData(jsonNetworks.networks, jsonPublicKey.publicKey, session, context);
+                        var methodData = getRequestMethodData(jsonNetworks.networks, jsonPublicKey.publicKey, context);
                         var details = getRequestDetails();
                         var options = getOptions();
                         var request = new PaymentRequest(methodData, details, options);
