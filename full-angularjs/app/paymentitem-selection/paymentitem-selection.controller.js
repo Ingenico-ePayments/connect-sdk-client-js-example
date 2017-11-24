@@ -118,8 +118,8 @@ app.controller('paymentitem-selection.controller', ['$scope', '$rootScope', '$lo
         $scope.connect.sessionDetails = {
             clientSessionID: context.clientSessionId,
             customerId: context.customerId,
-            region: context.region,
-            environment: context.environment
+            apiBaseUrl: context.apiBaseUrl,
+            assetsBaseUrl: context.assetsBaseUrl
         };
         $scope.connect.paymentDetails = {
             totalAmount: context.amountInCents,
@@ -128,7 +128,7 @@ app.controller('paymentitem-selection.controller', ['$scope', '$rootScope', '$lo
             isRecurring: context.isRecurring,
             currency: context.currencyCode
         }
-        // If you want to use Android Pay in your application, a merchantId is required to set it up. 
+        // If you want to use Android Pay in your application, a merchantId is required to set it up.
         // getBasicPaymentItems will use it to perform an extra check(canMakePayment) to see if the user can pay with Android Pay.
         $scope.connect.paymentProductSpecificInputs = {
             androidPay: {

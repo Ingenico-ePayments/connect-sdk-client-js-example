@@ -1,6 +1,6 @@
 <div class="demo" ng-controller="sessiondetails.controller">
     <p>
-        To process the payment using the services provided by the GlobalCollect platform, the following information must be provided as a merchant
+        To process the payment using the services provided by the Ingenico ePayments platform, the following information must be provided as a merchant
     </p>
     <p>
         After providing the information requested below, this example can process a payment.
@@ -22,27 +22,15 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="region" class="hidden-xs hidden-sm">Region</label>
+                <label for="apiBaseUrl" class="hidden-xs hidden-sm">apiBaseUrl</label>
                 <div>
-                    <select name="region" id="region" class="form-control" ng-model="input.region">
-                                                    <option disabled="disabled">Choose a region</option>
-                                                    <option value="EU" selected="selected">EU</option>
-                                                    <option value="US">US</option>
-                                                    <option value="AMS">AMS</option>
-                                                    <option value="PAR">PAR</option>
-                                                </select>
+                    <input name="apiBaseUrl" type="text" id="apiBaseUrl" class="form-control" ng-model="input.apiBaseUrl" required>
                 </div>
             </div>
             <div class="form-group">
-                <label for="region" class="hidden-xs hidden-sm">Environment</label>
+                <label for="assetsBaseUrl" class="hidden-xs hidden-sm">assetsBaseUrl</label>
                 <div>
-                    <select name="environment" id="environment" class="form-control" ng-model="input.environment">
-                                                    <option disabled="disabled">Choose an environment</option>
-                                                    <option value="PROD">PROD</option>
-                                                    <option value="PREPROD">PREPROD</option>
-                                                    <option value="SANDBOX" selected="selected">SANDBOX</option>
-                                                    <option value="DEV_ISC">DEV</option>
-                                                </select>
+                    <input name="assetsBaseUrl" type="text" id="assetsBaseUrl" class="form-control" ng-model="input.assetsBaseUrl" required>
                 </div>
             </div>
             <div class="form-group">

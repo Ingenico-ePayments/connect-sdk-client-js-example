@@ -1,6 +1,6 @@
 # Connect Client SDK Examples
 
-This repository contains all SDK examples for the [Ingenico Connect JavaScript Client SDK](https://developer.globalcollect.com/documentation/sdk/mobile/javascript/).
+This repository contains all SDK examples for the [Ingenico Connect JavaScript Client SDK](https://epayments.developer-ingenico.com/documentation/sdk/mobile/javascript/).
 Refer to the README in each folder for more details about that specific example.
 
 ## Full vs. minimal

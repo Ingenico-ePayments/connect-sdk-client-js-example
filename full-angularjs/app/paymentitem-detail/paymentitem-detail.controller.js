@@ -229,8 +229,8 @@ app.controller('paymentitem.controller', ['$rootScope', '$scope', '$location', '
         $scope.connect.sessionDetails = {
             clientSessionID: context.clientSessionId,
             customerId: context.customerId,
-            region: context.region,
-            environment: context.environment
+            apiBaseUrl: context.apiBaseUrl,
+            assetsBaseUrl: context.assetsBaseUrl
         };
         $scope.connect.paymentDetails = {
             totalAmount: context.amountInCents,

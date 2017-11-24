@@ -95,8 +95,8 @@ $(function () {
     var sessionDetails = {
         clientSessionID: context.clientSessionId,
         customerId: context.customerId,
-        region: context.region,
-        environment: context.environment
+        apiBaseUrl: context.apiBaseUrl,
+        assetsBaseUrl: context.assetsBaseUrl
     };
     var paymentDetails = {
         totalAmount: context.totalAmount,

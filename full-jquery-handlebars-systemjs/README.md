@@ -3,15 +3,15 @@
 ## What is it?
 
 This application is a jQuery / Handlebars implementation of an Ingenico Connect checkout process. You can use this application as a base for your own jQuery intergrated Ingenico Connect powered payment solution.
-It offers all features of the [Ingenico Connect Responsives Payment Pages (RPP)](https://developer.globalcollect.com/documentation/hosted-payment-pages/), including
+It offers all features of the [Ingenico Connect Responsives Payment Pages (RPP)](https://epayments.developer-ingenico.com/documentation/hosted-payment-pages/), including
 * payment product selection
 * payment product detail pages
 * co-branded cards support
 * payment product grouping
 * payment product switching based on IIN Lookup
 
-and more.  
-The [Ingenico Connect JavaScript Client SDK](https://github.com/Ingenico-ePayments/connect-sdk-client-js) is used for all communication to the Connect API and crypto. A simple webserver is included to make this application easy to install and run in development environments.See the [Ingenico ePayments Developer Hub](https://developer.globalcollect.com/documentation/sdk/mobile/javascript/) for more information on how to use the Ingenico Connect API.
+and more.
+The [Ingenico Connect JavaScript Client SDK](https://github.com/Ingenico-ePayments/connect-sdk-client-js) is used for all communication to the Connect API and crypto. A simple webserver is included to make this application easy to install and run in development environments.See the [Ingenico ePayments Developer Hub](https://epayments.developer-ingenico.com/documentation/sdk/mobile/javascript/) for more information on how to use the Ingenico Connect API.
 
 ## How to install
 
@@ -21,7 +21,7 @@ Make sure you have installed [Node.js](https://nodejs.org/en/); the LTS version 
 
 ## How to start the application
 
-Run the following command to start a webserver on `localhost` at port `3000` with [browsersync](https://www.browsersync.io/).  
+Run the following command to start a webserver on `localhost` at port `3000` with [browsersync](https://www.browsersync.io/).
 This will also start a watcher for the [sass](http://sass-lang.com/) files that auto compile to CSS; after each change the page is automaticly reloaded for you on all connected devices.
 
     npm run start
@@ -31,8 +31,8 @@ The final page of the payment journey has a `dev-` prefix as well and contains t
 
 ## How to start the payment process
 
-Create a client session identifier and a customer identifier, which the Client API needs for authentication purposes.  
-These can be obtained by your e-commerce server using the [Server SDKs](https://developer.globalcollect.com/documentation/sdk/server/) or directly using the [Server API](https://developer.globalcollect.com/documentation/api/server/). Use this information along with the geographical region of the Client API you want to connect to and the payment details to start the process.  
+Create a client session identifier and a customer identifier, which the Client API needs for authentication purposes.
+These can be obtained by your e-commerce server using the [Server SDKs](https://epayments.developer-ingenico.com/documentation/sdk/server/) or directly using the [Server API](https://epayments-api.developer-ingenico.com/s2sapi/v1/). Use this information along with the apiBaseUrl and assetsBaseUrl of the Client API you want to connect to and the payment details to start the process.
 If you incorporate this into your production process all this information should be used to initialize the payment process.
 
 ## In depth
@@ -43,7 +43,7 @@ This application uses the following key frameworks and libraries which are manag
 * Systemjs
 * Twitter Bootstrap
 * DigitalBazaar Forge
-* Ingenico Connect Client SDK 
+* Ingenico Connect Client SDK
 
 ### Other npm commands
 
@@ -79,7 +79,7 @@ This application uses the following key frameworks and libraries which are manag
 +-- global
 |   +-- images
 |       -- loader.png - loading spinner
-|       -- logo.png - example logo 
+|       -- logo.png - example logo
 +-- node_modules
 |   ... folder containing all node dependencies; run npm install to get the dependencies
 +-- dist
@@ -87,7 +87,7 @@ This application uses the following key frameworks and libraries which are manag
 |       -- icons
 |       ... folder containing the icon fonts used by the app
 |   +-- styles
-|       -- base.css - the compiled css file; use npm run build:sass to compile this file 
+|       -- base.css - the compiled css file; use npm run build:sass to compile this file
 ```
 
 ### Dev-

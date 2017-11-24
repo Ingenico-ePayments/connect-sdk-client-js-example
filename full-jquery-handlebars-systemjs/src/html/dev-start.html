@@ -72,7 +72,7 @@
 
                 <div class="demo">
                     <p>
-                        To process the payment using the services provided by the GlobalCollect platform, the following information must be provided
+                        To process the payment using the services provided by the Ingenico ePayments platform, the following information must be provided
                         as a merchant
                     </p>
                     <p>
@@ -93,27 +93,15 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="region" class="">Region</label>
+                                <label for="apiBaseUrl" class="">apiBaseUrl</label>
                                 <div>
-                                    <select name="region" id="region" class="form-control">
-                                                    <option disabled="disabled">Choose a region</option>
-                                                    <option value="EU" selected="selected">EU</option>
-                                                    <option value="US">US</option>
-                                                    <option value="AMS">AMS</option>
-                                                    <option value="PAR">PAR</option>
-                                                </select>
+                                    <input name="apiBaseUrl" type="text" id="apiBaseUrl" class="form-control" required value="https://ams1.sandbox.api-ingenico.com/client/v1">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="region" class="">Environment</label>
+                                <label for="assetsBaseUrl" class="">assetsBaseUrl</label>
                                 <div>
-                                    <select name="environment" id="environment" class="form-control">
-                                                    <option disabled="disabled">Choose an environment</option>
-                                                    <option value="PROD">PROD</option>
-                                                    <option value="PREPROD">PREPROD</option>
-                                                    <option value="SANDBOX" selected="selected">SANDBOX</option>
-                                                    <option value="DEV_ISC">DEV</option>
-                                                </select>
+                                    <input name="assetsBaseUrl" type="text" id="assetsBaseUrl" class="form-control" required value="https://assets.pay1.sandbox.secured-by-ingenico.com">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -630,7 +618,7 @@
 
     <script src="/node_modules/systemjs/dist/system.src.js"></script>
     <script src="/src/js/systemjs.config.js"></script>
-    <script>        
+    <script>
         System.import('app/dev-start').catch(function(err) {
             console.error(err);
         });
