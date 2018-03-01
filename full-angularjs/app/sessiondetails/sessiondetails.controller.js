@@ -5,8 +5,8 @@ app.controller('sessiondetails.controller', ['$scope', '$rootScope', '$location'
     $scope.input = {
         clientSessionId: (currentContext) ? currentContext.clientSessionId : null,
         customerId: (currentContext) ? currentContext.customerId : null,
-        apiBaseUrl: (currentContext) ? currentContext.apiBaseUrl : 'https://ams1.sandbox.api-ingenico.com/client/v1',
-        assetsBaseUrl: (currentContext) ? currentContext.assetsBaseUrl : 'https://assets.pay1.sandbox.secured-by-ingenico.com',
+        clientApiUrl: (currentContext) ? currentContext.clientApiUrl : 'https://ams1.sandbox.api-ingenico.com/client/v1',
+        assetUrl: (currentContext) ? currentContext.assetUrl : 'https://assets.pay1.sandbox.secured-by-ingenico.com',
         amountInCents: (currentContext) ? currentContext.amountInCents : 12345,
         countryCode: (currentContext) ? currentContext.countryCode : 'NL',
         currencyCode: (currentContext) ? currentContext.currencyCode : 'EUR',

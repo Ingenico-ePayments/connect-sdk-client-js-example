@@ -9,8 +9,8 @@ $(function () {
             var currentContext = JSON.parse(sessionStorage.getItem('context'));
             $("#clientSessionId").val(currentContext.clientSessionId);
             $("#customerId").val(currentContext.customerId);
-            $("#assetsBaseUrl").val(currentContext.assetsBaseUrl);
-            $("#apiBaseUrl").val(currentContext.apiBaseUrl);
+            $("#assetUrl").val(currentContext.assetUrl);
+            $("#clientApiUrl").val(currentContext.clientApiUrl);
             $("#totalAmount").val(currentContext.totalAmount);
             $("#countryCode").val(currentContext.countryCode);
             $("#currency").val(currentContext.currency);
@@ -30,8 +30,8 @@ $(function () {
             var context = {
                 clientSessionId: $("#clientSessionId").val(),
                 customerId: $("#customerId").val(),
-                apiBaseUrl: $("#apiBaseUrl").val(),
-                assetsBaseUrl: $("#assetsBaseUrl").val(),
+                clientApiUrl: $("#clientApiUrl").val(),
+                assetUrl: $("#assetUrl").val(),
                 totalAmount: $("#totalAmount").val(),
                 countryCode: $("#countryCode").val(),
                 currency: $("#currency").val(),

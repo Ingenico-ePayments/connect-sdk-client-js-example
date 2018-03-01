@@ -219,10 +219,10 @@ $(function () {
     }
     context = JSON.parse(context);
     var sessionDetails = {
-        clientSessionID: context.clientSessionId,
+        clientSessionId: context.clientSessionId,
         customerId: context.customerId,
-        apiBaseUrl: context.apiBaseUrl,
-        assetsBaseUrl: context.assetsBaseUrl
+        clientApiUrl: context.clientApiUrl,
+        assetUrl: context.assetUrl
     };
     var paymentDetails = {
         totalAmount: context.totalAmount,

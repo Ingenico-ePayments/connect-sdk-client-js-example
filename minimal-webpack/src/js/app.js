@@ -1,7 +1,7 @@
 var connect = require('connect-sdk-client-js/dist/connectsdk.noEncrypt');
 
 var sessionDetails = {
-    clientSessionID: "",
+    clientSessionId: "",
     customerId: "",
     region: "EU",
     environment: "SANDBOX"

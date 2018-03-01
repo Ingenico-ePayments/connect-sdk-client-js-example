@@ -2,7 +2,7 @@ window.forge = require('node-forge');
 var connect = require('connectsdk.session');
 
 var sessionDetails = {
-    clientSessionID: "",
+    clientSessionId: "",
     customerId: "",
     region: "EU",
     environment: "SANDBOX"

@@ -1,6 +1,6 @@
 define("config", function () {
     return {
-        clientSessionID: "",
+        clientSessionId: "",
         customerId: "",
         region: "EU",
         environment: "SANDBOX"

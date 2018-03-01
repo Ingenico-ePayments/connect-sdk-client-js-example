@@ -32,7 +32,7 @@ The final page of the payment journey has a `dev-` prefix as well and contains t
 ## How to start the payment process
 
 Create a client session identifier and a customer identifier, which the Client API needs for authentication purposes.
-These can be obtained by your e-commerce server using the [Server SDKs](https://epayments.developer-ingenico.com/documentation/sdk/server/) or directly using the [Server API](https://epayments-api.developer-ingenico.com/s2sapi/v1/). Use this information along with the apiBaseUrl and assetsBaseUrl of the Client API you want to connect to and the payment details to start the process.
+These can be obtained by your e-commerce server using the [Server SDKs](https://epayments.developer-ingenico.com/documentation/sdk/server/) or directly using the [Server API](https://epayments-api.developer-ingenico.com/s2sapi/v1/). Use this information along with the clientApiUrl and assetUrl of the Client API you want to connect to and the payment details to start the process.
 If you incorporate this into your production process all this information should be used to initialize the payment process.
 
 ## In depth

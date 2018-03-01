@@ -1,5 +1,5 @@
 var config = {
-    clientSessionID: null,
+    clientSessionId: null,
     customerId: null,
     region: 'EU',
     environment: "SANDBOX"
