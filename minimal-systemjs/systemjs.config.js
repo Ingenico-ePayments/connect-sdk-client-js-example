@@ -14,7 +14,7 @@
         'node-forge': { main: 'js/forge.js', defaultExtension: 'js' }
     };
 
-    // map connect-sdk for usage with systemjs   
+    // map connect-sdk for usage with systemjs 
     packages['connectsdk.session'] = { main: '../node_modules/connect-sdk-client-js/src/session.js', defaultExtension: 'js' };
     packages['connectsdk.core'] = { main: '../node_modules/connect-sdk-client-js/src/core.js', defaultExtension: 'js' };
     packages['connectsdk.C2SCommunicator'] = { main: '../node_modules/connect-sdk-client-js/src/C2SCommunicator.js', defaultExtension: 'js' };
@@ -53,11 +53,12 @@
     packages['connectsdk.ValidationRuleRange'] = { main: '../node_modules/connect-sdk-client-js/src/ValidationRuleRange.js', defaultExtension: 'js' };
     packages['connectsdk.ValidationRuleRegularExpression'] = { main: '../node_modules/connect-sdk-client-js/src/ValidationRuleRegularExpression.js', defaultExtension: 'js' };
     packages['connectsdk.ValidationRuleEmailAddress'] = { main: '../node_modules/connect-sdk-client-js/src/ValidationRuleEmailAddress.js', defaultExtension: 'js' };
+    packages['connectsdk.ValidationRuleIban'] = { main: '../node_modules/connect-sdk-client-js/src/ValidationRuleIban.js', defaultExtension: 'js' };
     packages['connectsdk.ValidationRuleTermsAndConditions'] = { main: '../node_modules/connect-sdk-client-js/src/ValidationRuleTermsAndConditions.js', defaultExtension: 'js' };
     packages['connectsdk.ValidationRuleFactory'] = { main: '../node_modules/connect-sdk-client-js/src/ValidationRuleFactory.js', defaultExtension: 'js' };
     packages['connectsdk.LabelTemplateElement'] = { main: '../node_modules/connect-sdk-client-js/src/LabelTemplateElement.js', defaultExtension: 'js' };
     packages['connectsdk.ValueMappingElement'] = { main: '../node_modules/connect-sdk-client-js/src/ValueMappingElement.js', defaultExtension: 'js' };
-    
+
 
     var meta = {
         'node-forge': { format: 'commonjs' }

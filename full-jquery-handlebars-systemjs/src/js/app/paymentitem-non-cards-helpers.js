@@ -23,6 +23,7 @@ $(function () {
 		// The SDK offers validators per validation type (e.g. Luhn check, range check, etc). These extensions
 		// below only need to call the correct validator with the value that was entered by the user.
 		_addSimpleValidator("regularExpression", paymentItem, "Please enter valid data");
+		_addSimpleValidator("iban", paymentItem, "Please enter valid iban");
 
 		var lParams = null;
 		jQuery.validator.addMethod("length", function (value, element, params) {
