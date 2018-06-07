@@ -90,7 +90,7 @@ app.controller('paymentitem.controller', ['$rootScope', '$scope', '$location', '
 
     $scope.handleAccountOnFile = function () {
         // store account on file in request
-        var accountOnFile = isNaN(aofId) ? null : $scope.paymentitem.accountOnFileById[aofId];
+        var accountOnFile = isNaN($scope.aofId) ? null : $scope.paymentitem.accountOnFileById[$scope.aofId];
         $scope.connect.paymentRequest.setAccountOnFile(accountOnFile);
         // prefill data
         angular.forEach(accountOnFile.attributes, function (attribute) {
