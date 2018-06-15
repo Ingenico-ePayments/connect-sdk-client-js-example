@@ -244,7 +244,7 @@ th {
 
 html {
   font-size: 10px;
-  -webkit-tap-highlight-color: transparent; }
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
 
 body {
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
@@ -3234,8 +3234,8 @@ body {
   /* Set the fixed height of the footer here */
   height: 135px; }
 
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0; }
 
@@ -3307,9 +3307,11 @@ header, #header {
     #main {
       margin: 15px auto; } }
 
-.radio, .checkbox {
+.radio,
+.checkbox {
   padding-left: 20px; }
-  .radio label, .checkbox label {
+  .radio label,
+  .checkbox label {
     line-height: 1.2; }
 
 .cart {

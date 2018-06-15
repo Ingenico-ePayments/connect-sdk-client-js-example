@@ -18,8 +18,9 @@ Handlebars.registerHelper('eq', function(v1, v2, options) {
 });
 
 $(function () {
-    function _showPaymentItem(id) {
+    function _showPaymentItem(id, aofId) {
         $("#loading").show();
+
         if (id === 'cards') {
             session.getPaymentProductGroup(id, paymentDetails).then(function (paymentProductGroup) {
                 _renderPage(paymentProductGroup, $("#detail-template").html(), null, true);
@@ -31,7 +32,9 @@ $(function () {
             });
         } else {
             session.getPaymentProduct(id, paymentDetails).then(function (paymentProductItem) {
-                _renderPage(paymentProductItem, $("#detail-template").html(), null, false);
+                var accountOnFile = !isNaN(aofId) ? paymentProductItem.accountOnFileById[aofId] : null;
+                var templateSource = accountOnFile ? $('#aof-template').html() : $('#detail-template').html();
+                _renderPage(paymentProductItem, templateSource, accountOnFile, false);
                 $("#loading").hide();
             }, function () {
                 $("#loading").hide();
@@ -43,6 +46,13 @@ $(function () {
     function _renderPage(paymentItem, source, accountOnFile, isGroup) {
         var template = Handlebars.compile(source);
         var json = paymentItem.json;
+
+        // when is account on file
+        // set payment product and account on file information
+        if (accountOnFile) {
+            paymentRequest.setPaymentProduct(paymentItem);
+            paymentRequest.setAccountOnFile(accountOnFile);
+        }
 
         // We now add some additional stuff to the JSON object that represents the selected payment product so handlebars
         // can actually fill out all the variables in its template. Some of these values for these variables are not
@@ -107,9 +117,7 @@ $(function () {
         // 2) Add validators to each of the fields in the form
         connect.addValidators(paymentItem);
 
-
         // 3) Add submit handling for when the user finishes filling out the form
-
         // After the customer is done filling out the form he submits it. But instead of sending the form to the server
         // we validate it and if successful we encrypt the result. Your application should send the cypher text to
         // your e-commerce server itself.
@@ -118,6 +126,7 @@ $(function () {
                 // We create an object with key:value pairs consisting on the id of the paymentproductfield
                 // and its value as presented (with or without mask).
                 var blob = {};
+
                 // We only add the form elements that have the "data-includeInEncryptedBlob=true" attribute; which we've added
                 // to each input/select when we created the form.
                 $(".validatedForm [data-includeInEncryptedBlob=true]").each(function () {
@@ -139,11 +148,13 @@ $(function () {
                         blob[$(this).attr("id")] = $(this).val();
                     }
                 });
+
                 // Remember that we need to add all entered values to paymentRequest so they will be included in the
                 // encryption later on.
                 for (var key in blob) {
                     paymentRequest.setValue(key, blob[key]);
                 }
+
                 // encrypt the paymentRequest
                 encrypt();
                 return false;
@@ -181,7 +192,7 @@ $(function () {
             // we only need to analyse the card's first 6 digits
             currentFirst6Digits = $(this).val().substring(0, 7);
             if (currentFirst6Digits !== storedFirst6Digits) {
-                // We ue the SDK to do the IIN lookup, this is an async task that we provide you as a promise
+                // We use the SDK to do the IIN lookup, this is an async task that we provide you as a promise
                 session.getIinDetails($(this).val(), paymentDetails).then(function (response) {
                     // The promise has fulfilled.
                     connect.hideCobranding();
@@ -298,13 +309,12 @@ $(function () {
     var search = document.location.search;
     if (search) {
         search = search.substring(1);
-        search = search.split("&");
-        $.each(search, function (i, part) {
-            part = part.split("=");
-            if (part[0] === "paymentitemId") {
-                _showPaymentItem(part[1]);
-            }
-        })
+        search = search.split("&").reduce(function(obj, str) {
+           var arr = str.split('=');
+           obj[arr[0]] = isNaN(arr[1]) ? arr[1] : parseInt(arr[1]);
+           return obj;
+        }, {});
+        _showPaymentItem.apply(null, [ search.paymentitemId, search.accountOnFileId ]);
     } else {
         _showPaymentItem();
     }

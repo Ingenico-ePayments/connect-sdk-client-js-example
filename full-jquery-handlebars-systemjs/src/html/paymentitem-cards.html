@@ -125,7 +125,7 @@
 
     <script src="/node_modules/systemjs/dist/system.src.js"></script>
     <script src="/src/js/systemjs.config.js"></script>
-    <script>        
+    <script>
         System.import('app/paymentitem-cards').catch(function(err) {
             console.error(err);
         });
@@ -257,12 +257,12 @@
                         </div>
                     </div>
                 {{/each}}
-                <div class="paymentbuttons" id="paymentButtons" data-edit='{"type": "paymentButtons", "name": "PaymentButtons", "blockNode": "Content", "toggleable": false, "editTypes": ["paymentButtons"], "inSidebar": true, "cssToggle": {"oneline": "#paymentButtons > button { display: inline-block; width: 45%; float: right; margin-top: 17px;} #paymentButtons > a {display: inline-block; width: 45%; float: left; margin-top: 17px; padding: 9px 12px;} #paymentButtons > a:hover {text-decoration: none;}", "multiline": "#paymentButtons > button { display: block; width: 100%; float: none; margin-top: 0;} #paymentButtons > a { display: inline-block; float: none; width: auto; margin-top: 20px;}"}}'>
-                    <button class="btn btn-success btn-block btn-primary" type="submit" data-edit='{"type": "primaryButton", "name": "PaymentButton", "selector": "body .btn-primary", "blockNode": "Content", "toggleable": false, "editTypes": ["bgColor", "font", "border"], "hoverTypes": ["bgColorHover", "borderHover", "colorHover"], "inSidebar": false}' id="primaryButton">
-                        <span data-edit='{"type": "text", "name": "PaymentButton text", "blockNode": "Content", "toggleable": false, "editTypes": ["text"], "inSidebar": false, "i18n": "paynow"}' id="paymentbuttontext">Pay now</span>
+                <div class="paymentbuttons" id="paymentButtons">
+                    <button class="btn btn-success btn-block btn-primary" type="submit" id="primaryButton">
+                        <span id="paymentbuttontext">Pay now</span>
                     </button>
                     <a href="#" class="cancel btn-secondary">
-                        <span data-edit='{"type": "text", "name": "CancelButton text", "selector": "body .btn-secondary", "blockNode": "Content", "toggleable": false, "editTypes": ["text"], "inSidebar": false, "i18n": "cancel"}' id="cancelbuttontext">Cancel</span>
+                        <span id="cancelbuttontext">Cancel</span>
                     </a>
                 </div>
             </form>

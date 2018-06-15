@@ -3,6 +3,7 @@ window.forge = require('node-forge');
 var connect = require('connectsdk.session');
 var handlebars = require('handlebars');
 var setupAndroidPayAndExecute = require('./paymentitem-androidpay');
+var cardHelpers = require('./paymentitem-cards-helpers');
 var androidPayId = 320;
 
 $(function () {
@@ -10,27 +11,54 @@ $(function () {
         $("#loading").show();
         session.getBasicPaymentItems(paymentDetails, grouping, paymentProductSpecificInputs).then(function (basicPaymentItems) {
             $("#loading").hide();
+
             // let's build up the page :)
-            // Create view to show both account on file as well as all payment items.
-            var view = {
-                accountsOnFile: [],
-                paymentItems: []
-            };
+
             // get all accountsonfile for all visible paymentitems
             var aof = basicPaymentItems.accountsOnFile;
-
-            // add these to the view object
-            $.each(aof, function () {
-                view.accountsOnFile.push(this.json);
-            });
 
             // get all paymentitems for the paymentDetails
             var items = basicPaymentItems.basicPaymentItems;
 
-            // and add these to the view as well.
-            $.each(items, function () {
-                view.paymentItems.push(this.json);
-            });
+            // Create view to show both account on file as well as all payment items.
+            var view = {
+                accountsOnFile: aof.map(function(accountOnFile) {
+                  var data = accountOnFile.json;
+
+                  // since we separate the payment methods in different views
+                  // for example: `paymentitem-cards.html`, `paymentitem-non-cards.html`
+                  // we need to tell handlebars to open which template, we do this by adding the
+                  // `data-payment-method`
+                  var extendedData = {};
+                  for (var i = 0, j = items.length; i < j; i += 1) {
+                    var paymentItem = items[i];
+                    var paymentItemAccountOnFile = paymentItem.accountsOnFile.length > 0 ? paymentItem.accountsOnFile[0] : null;
+
+                    // we are only interested in the same `id` and `paymentProductId`
+                    if (!paymentItemAccountOnFile) continue;
+                    if (paymentItemAccountOnFile.id !== accountOnFile.id) continue;
+                    if (paymentItemAccountOnFile.paymentProductId !== accountOnFile.paymentProductId) continue;
+
+                    // set extended data
+                    extendedData = {
+                      paymentMethod: paymentItem.id,
+                      type: paymentItem.json.type
+                    }
+                    break;
+                  }
+
+                  // overwrite extendedData properties (`paymentMethod` & `type`)
+                  for (prop in extendedData) {
+                    data[prop] = extendedData[prop];
+                  }
+
+                  return data;
+                }),
+
+                paymentItems: items.map(function(paymentItem) {
+                  return paymentItem.json;
+                })
+            };
 
             // build the handlebars template
             var source = $("#list-template").html();
@@ -62,16 +90,22 @@ $(function () {
                         aofid = $(this).data("aof-id");
                         method = $(this).data("payment-method");
                     }
-                    var search = '?paymentitemId=' + id;
-                    if (aofid) {
-                        search += '&accountOnFileId=' + aofid;
-                    }
-                    search += '&type=' + type;
+
+                    // get search query params
+                    var search = '?' + [
+                      {key: 'paymentitemId', value: id},
+                      {key: 'type', value: type},
+                      {key: 'accountOnFileId', value: aofid}
+                    ].filter(function(obj) {
+                      return typeof obj.value !== 'undefined';
+                    }).map(function(obj) {
+                      return obj.key + '=' + obj.value;
+                    }).join('&');
 
                     // now redirect based on type
-                    if ((id === 'cards' && type === 'group') || method === "card") {
+                    if ((id === 'cards' && type === 'group') || method === "card" || method === 'cards') {
                         // redirect to a specific page for card payments
-                        document.location.href = 'paymentitem-cards.html?paymentitemId=' + id;
+                        document.location.href = 'paymentitem-cards.html' + search;
                     } else if (id === 1503) {
                         document.location.href = 'paymentitem-boleto.html' + search;
                     } else if (id === androidPayId) {
@@ -114,6 +148,8 @@ $(function () {
     }
     var session = new connect(sessionDetails);
     var paymentRequest = session.getPaymentRequest();
+
+    window.connect.addHandleBarsHelpers(session);
 
     _getPaymentItems();
 });

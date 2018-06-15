@@ -1,12 +1,12 @@
 {
   "name": "connect-sdk-client-js-example-jquery",
-  "version": "1.6.1",
+  "version": "1.7.0",
   "description": "",
   "main": "index.html",
   "scripts": {
     "start": "concurrent \"npm run watch\" \"npm run lite\" ",
     "build:sass": "node-sass -o ./dist --include-path node_modules/bootstrap-sass/assets/stylesheets/  src/",
-    "lite": "lite-server",
+    "lite": "lite-server -c .liteserverrc.json",
     "postinstall": "npm run build:sass",
     "watch:sass": "npm run build:sass && node-sass -o ./dist -w src/ --include-path node_modules/bootstrap-sass/assets/stylesheets/",
     "watch": "npm run watch:sass"
@@ -26,6 +26,6 @@
     "browser-sync": "^2.18.13",
     "concurrently": "^2.2.0",
     "lite-server": "^2.3.0",
-    "node-sass": "^3.13.1"
+    "node-sass": "^4.9.0"
   }
 }

@@ -124,7 +124,7 @@
 
     <script src="/node_modules/systemjs/dist/system.src.js"></script>
     <script src="/src/js/systemjs.config.js"></script>
-    <script>        
+    <script>
         System.import('app/paymentitem-selection').catch(function(err) {
             console.error(err);
         });
@@ -138,10 +138,17 @@
                 <ul id="paymentoptionslist">
                     {{#each accountsOnFile}}
                         <li>
-                            <a data-aof-id="{{id}}" data-aof-ppid="{{paymentProductId}}" class="btn-tertiary"  href="#{{paymentProductId}}/{{id}}">
-                                <img src="{{#getImageByProductId}}{{../paymentProductId}}{{/getImageByProductId}}?size=25x17">
-                                {{#showAoFProperties}}{{/showAoFProperties}}
-                            </a>
+                            <button data-aof-id="{{id}}"
+                                    data-aof-ppid="{{paymentProductId}}"
+                                    data-payment-type="{{type}}"
+                                    data-payment-method="{{paymentMethod}}"
+                                    class="btn-tertiary"
+                            >
+                                <div>
+                                    <img src="{{#getImageByProductId}}{{../paymentProductId}}{{/getImageByProductId}}?size=25x17">
+                                    {{#showAoFProperties}}{{/showAoFProperties}}
+                                </div>
+                            </button>
                         </li>
                     {{/each}}
                 </ul>

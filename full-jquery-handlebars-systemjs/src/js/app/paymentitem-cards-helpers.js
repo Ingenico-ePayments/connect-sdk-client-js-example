@@ -12,7 +12,7 @@ $(function () {
 	/**
 	 * Add helpers for usage with handlebars. Use {@link connect@addHandleBarsHelpers} to setup the helpers
 	 */
-	connect.addHandleBarsHelpers = function () {
+	connect.addHandleBarsHelpers = function (session) {
 		// a handlebars helper that shows the needed Account on File properties
 		Handlebars.registerHelper("showAoFProperties", function (items, options) {
 			var that = this;
@@ -35,7 +35,8 @@ $(function () {
 		// we need to do this this way since handlebars is a text based template and the paymentproduct call is async; it is also possible to do this before rendering the AoF data if you want to.
 		Handlebars.registerHelper("getImageByProductId", function (items, options) {
 			var that = this, id = items.fn();
-			session.getPaymentProduct(id, paymentDetails).then(function (paymentProduct) {
+
+			session.getPaymentProduct(id).then(function (paymentProduct) {
 				// The promise has fulfilled.
 				var $target = $("[data-aof-ppid='" + id + "']").find("img");
 				var imgUrl = paymentProduct.displayHints.logo + $target.attr("src");
@@ -134,7 +135,7 @@ $(function () {
 		$("input").each(function () {
 			// We look for the SDK mask that is defined on the payment product field. If it exists we add the formatter
 			// logic to the field so any time the user changes the field's value the formatter nicely formats it.
-			var paymentProductField = paymentItem.paymentProductFieldById[$(this).attr("id")];;
+			var paymentProductField = paymentItem.paymentProductFieldById[$(this).attr("id")];
 
 			if (paymentProductField) {
 				var mask = paymentProductField.displayHints.mask;
