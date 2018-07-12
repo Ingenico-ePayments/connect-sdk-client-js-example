@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Ingenico Connect SDK Client JavaScript jQuery example</title>
+    <link rel="stylesheet" href="/dist/styles/base.css">
+</head>
+
+<body>
+    <div id="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-24">
+                    <div id="logoimage">
+                        &#8203;
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="main" class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <!--- This part contains the cart which shows the purchased products. THis is of
+                        course just an example and should be filled with your own products.
+                        -->
+                <div class="cart">
+                    <div>
+                        <div class="header hidden-md hidden-lg">
+                            <strong>Total</strong> (3 items): <span class="amount pull-right">&euro; 161,95</span>
+                        </div>
+                        <div class="content hidden-xs hidden-sm">
+                            <div>
+                                <h2>Your order:</h2>
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>Amazingly cool product <span class="quantity">(2 x € 4,25)</span></td>
+                                            <td class="amount">&euro; 8,50</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Yet another very long product in your order lines <span class="quantity">(1 x € 153,45)</span></td>
+                                            <td class="amount">&euro; 153,45</td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td><strong>Total</strong> (3 items):</td>
+                                            <td class="amount"><strong>&euro; 161,95</strong></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end cart -->
+            </div>
+            <div class="col-md-12">
+                <div class="paymentoptions" id="paymentoptionswrapper">
+    
+                    <!-- Here we communicate to the user that this payment is secure -->
+                    <div class="par">
+                        <p class="pull-left" id="paymentProductName"></p>
+                        <p class="securePayment pull-right">
+                            <img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAARCAYAAAAG/yacAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NDkxMSwgMjAxMy8xMC8yOS0xMTo0NzoxNiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo3QkIxMkI0QUM2MjUxMUUzODM0MkY2QkExNENCNjYwRiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo3QkIxMkI0QkM2MjUxMUUzODM0MkY2QkExNENCNjYwRiI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjdCQjEyQjQ4QzYyNTExRTM4MzQyRjZCQTE0Q0I2NjBGIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjdCQjEyQjQ5QzYyNTExRTM4MzQyRjZCQTE0Q0I2NjBGIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+JnSZaAAAAPZJREFUeNpi/P//PwMMCK5hTAJS6UAsCsTsQPwdiJ8Bce37kP8HYeoYYZqAGlYAqQCo4j9A/BWIeYGYCYg/AHEFUONMuCagBmsgewcQ8wDxWSCuAuK7QGwOxA1ArArED4BYF6jxCwvUxliohntAbAuU+A4Vvws08AiQPg3E8kDsBMSbmKCS0lD6KZIGMADyH0H9xQjEagxQ9yKD/wzYwU9kDhMDGYBRYDXDASAtAMQsUJveYlGnAPXzYyD+CNL0n1SbcDnvHxCfh9JEayoDhpoRiCZFkzAajREQ2Pz0C4hVoJHNQqxNoFByBuJHpNhEMJ7oowkgwABwvEzlMgCJ/AAAAABJRU5ErkJggg=="
+                                width="7" />
+                            <span>Secure payment</span>
+                        </p>
+                    </div>
+                    <div id="handlebarsDrop">
+                        <div id="error" class="alert alert-danger" style="display: none;">
+                            <h4>An error occured</h4>
+                            Cannot display the page, check your <a class="alert-link" href="dev-start.html">credentials</a> and
+                            try again.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer-wrapper">
+        <div id="footer">
+            <div class="footer-menu">
+                <div class="container merchant">
+                    <div class="row">
+                        <div class="col-xs-24">
+
+                            <ul>
+                                <li>
+                                    <a href="#">Conditions of use</a>
+                                </li>
+                                <li>
+                                    <a href="#">Privacy policy</a>
+                                </li>
+                                <li>
+                                    <a href="#">About us</a>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- privacy policy line -->
+        <div class="container globalcollect" id="globalcollectfooter">
+            <div class="row">
+                <div class="col-xs-24">
+
+                    <img alt="GlobalCollect" id="globalcollectimage" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN8AAAA0CAYAAAAKeu1tAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NDkxMSwgMjAxMy8xMC8yOS0xMTo0NzoxNiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo1RDUxNkVBM0UwREIxMUUzODY0Q0VCQTBBMzZCOEFBNyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo1RDUxNkVBNEUwREIxMUUzODY0Q0VCQTBBMzZCOEFBNyI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjVENTE2RUExRTBEQjExRTM4NjRDRUJBMEEzNkI4QUE3IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjVENTE2RUEyRTBEQjExRTM4NjRDRUJBMEEzNkI4QUE3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+FEU6LAAAHYFJREFUeNrsXQl8FEXW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">
+                    <a href="privacy.php" target="_blank">Privacy policy</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="loading" style="display: none;">
+        <div class="loading-inner"><img src="/global/images/loader.png" width="64">
+            <div class="loading-text">Loading data</div>
+        </div>
+    </div>
+
+    <script src="/node_modules/systemjs/dist/system.src.js"></script>
+    <script src="/src/js/systemjs.config.js"></script>
+    <script>        
+        System.import('app/paymentitem-afterpay').catch(function(err) {
+            console.error(err);
+        });
+    </script>
+
+    <script id="detail-template" type="text/x-handlebars-template">
+        <div class="paymentoption par">
+            <form class="validatedForm">
+                <div class="fields-holder">
+
+                    <!-- first iterate through the fields and only display the installments field, if any-->
+                    {{#each fields}}
+                        {{#if isInstallmentsField }}
+                            <div class="panel">
+                                <div class="form-group" data-wrapper="{{id}}">
+                                    <label for="{{id}}" class="hidden-xs hidden-sm">{{displayHints.label}}</label>
+                                    <select name="{{id}}" id="{{id}}" class="form-control" required data-includeInEncryptedBlob="true">
+                                            <option value="">Select plan</option>
+                                        {{#each displayHints.formElement.valueMapping }}
+                                            <option value="{{value}}">{{displayName}}</option>
+                                        {{/each}}
+                                    </select>
+                                    
+                                    {{#each displayHints.formElement.valueMapping }}
+                                        <table id="installment_details_{{value}}" style="display:none;" class="table installment-plan installmentId-information-table">
+                                            <tbody>
+                                                <tr>
+                                                    <th>{{displayInterestRate.name}}</th>
+                                                    <td class="value">{{displayInterestRate.value}}%</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>{{displayEffectiveInterestRate.name}}</th>
+                                                    <td>{{displayEffectiveInterestRate.value}}%</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>{{displayStartupFee.name}}</th>
+                                                    <td>{{displayStartupFee.value}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>{{displayMonthlyFee.name}}</th>
+                                                    <td>{{displayMonthlyFee.value}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>{{displayTotalAmount.name}}</th>
+                                                    <td>{{displayTotalAmount.value}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2"><a class="btn btn-link secci-url" href="{{displaySecciUrl.value}}">{{displaySecciUrl.name}}</a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>								
+                                    {{/each}}
+                                </div>
+                            </div>
+                        {{/if}}
+                    {{/each}}			
+
+                    {{#if showBillingDetailTitle}}
+                        <div class="has-popover" id="billingDetailTitle">
+                            <h3 id="label-searchConsumer">
+                                <span id="label-searchConsumerText">Your billing details</span>
+                                {{#if showBillingDetailTitlePopover}}
+                                    <span data-content="By filling in the requested information below, we can find the other required information to allow you to finalize the payment process. If you want to, you can also choose to fill in this required information manually." 
+                                        id="lookup-popover" 
+                                        class="info-popover afterpay" 
+                                        data-placement="bottom" 
+                                        data-original-title="">
+                                            <i class="icon-qmark"></i>
+                                    </span>
+                                {{/if}}
+                            </h3>
+                        </div>
+                        <div id="searchCustomerDetailsAlert" class="alert alert-danger" style="display: none"></div>  
+                    {{/if}}
+                    
+                    {{#if hasLookupFields}}
+                        <div id="lookupFields">
+
+                            <!-- iterate through the fields and only display the usedForLookUp field-->
+                            {{#each lookupFields}}
+                                <div class="form-group" data-wrapper="{{id}}">
+                                    <label for="{{id}}" class="hidden-xs hidden-sm">{{displayHints.label}}</label>
+                                    <div class="row">
+                                        <div {{#if @last}} class="col-xs-16" {{else}} class="col-xs-24" {{/if}}>
+                                            <input name="{{id}}" type="{{type}}" placeholder="{{displayHints.placeholderLabel}}" id="{{id}}" class="form-control lookup-field" data-includeInEncryptedBlob="true"
+                                            {{#each validators}}
+                                                data-rule-{{this}}="true"
+                                            {{/each}}
+                                            {{#if dataRestrictions.isRequired}}
+                                                required
+                                            {{/if}}
+                                        >
+                                        </div>
+                                        {{#if @last}}
+                                            <div class="col-xs-8 searchConsumerButtonParent">
+                                                <button id="searchButton" class="btn btn-lookup" type="submit">Search</button>
+                                            </div>
+                                        {{/if}}
+                                    </div>
+                                    <label id="{{id}}-error" class="error" for="{{id}}">Please provide a value</label>
+                                </div>
+                            {{/each}}
+                        
+                            <button id="enterDetailManually" class="btn btn-link enter-information">Enter details manually</button>
+                        </div>   
+                    {{/if}}
+                    
+                    <div id="lookupSummary" class="panel lookup-summary" style="display: none">
+                        <h4 id="label-searchConsumerText">Your billing details</h4>
+                        <p>
+                            <span class="lookup-summary-label" id="lookupSummary_firstName"></span><span id="lookupSummary_surName"></span><br>
+                            <span class="lookup-summary-label" id="lookupSummary_phoneNumber"></span><br>
+                            <span class="lookup-summary-label" id="lookupSummary_fiscalNumber"></span><br>
+                            <span class="lookup-summary-label" id="lookupSummary_emailAddress"></span><br>
+                            <span class="lookup-summary-label" id="lookupSummary_street"></span><br>
+                            <span class="lookup-summary-label" id="lookupSummary_zip"></span><span class="lookup-summary-label" id="lookupSummary_city"></span><br> 
+                        </p>
+                        <div id="searchButtons" class="searchButtons row">
+                            <div class="col-xs-8">
+                                <button id="editInformationButton" class="btn btn-link" type="button">
+                                    Edit details
+                                </button>
+                            </div>
+                            <div class="col-xs-16">
+                                <button id="searchConsumerAgainButton" class="btn btn-link" type="button">
+                                    Search again
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="customer-detail-fields" {{#if hideCustomerDetailFields }} style="display:none;" {{/if}}	>
+                    
+                        <!-- display the the fields marked as isDetailField -->
+                        {{#each fields}}                                
+                            {{#if isDetailField }}	
+                                <div class="form-group" data-wrapper="{{id}}">
+                                    <label for="{{id}}" class="hidden-xs hidden-sm">{{displayHints.label}}</label>
+
+                                    {{#if displayHints.formElement.isListType}}
+                                        <select name="{{id}}" id="{{id}}" class="form-control" required data-includeInEncryptedBlob="true">
+                                            <option value="">{{displayHints.label}}</option>
+                                            {{#each displayHints.formElement.valueMapping }}
+                                                <option value="{{value}}">{{displayName}}</option>
+                                            {{/each}}
+                                        </select>
+                                        
+                                    {{else if displayHints.formElement.isDateType}}
+                                    <div class="date-section clearfix" id="dateOfBirthGroup">
+                                        <div class="col-xs-7 date-input-container form-group">
+                                            <select name="{{id}}_day" id="{{id}}_day" data-date-type="day" class="form-control" required data-includeInEncryptedBlob="true">
+                                                    <option value="">Day</option>
+                                                    {{#each displayHints.formElement.daySelectOptions as |val index| }}
+                                                        <option value="{{val}}">{{val}}</option>
+                                                    {{/each}}
+                                            </select>
+                                        </div>
+                                        <div class="col-xs-1 seperator">-</div>
+                                        <div class="col-xs-7 date-input-container form-group">
+                                            <select name="{{id}}_month" id="{{id}}_month" data-date-type="month" class="form-control" required data-includeInEncryptedBlob="true">
+                                                <option value="">Month</option>
+                                                {{#each displayHints.formElement.monthSelectOptions as |val index| }}
+                                                    <option value="{{val}}">{{val}}</option>
+                                                {{/each}}
+                                            </select>
+                                        </div>
+                                        <div class="col-xs-1 seperator">-</div>
+                                        <div class="col-xs-8 date-input-container form-group">
+                                            <select name="{{id}}_year" id="{{id}}_year" data-date-type="year" class="form-control" required data-includeInEncryptedBlob="true">
+                                                <option value="">Year</option>
+                                                {{#each displayHints.formElement.yearSelectOptions as |val index| }}
+                                                    <option value="{{val}}">{{val}}</option>
+                                                {{/each}}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    {{else}}
+                                        <input name="{{id}}" type="{{type}}" placeholder="{{displayHints.placeholderLabel}}" id="{{id}}" class="form-control" data-includeInEncryptedBlob="true"
+                                            {{#each validators}}
+                                                data-rule-{{this}}="true"
+                                            {{/each}}
+                                            {{#if dataRestrictions.isRequired}}
+                                                required
+                                            {{/if}}										
+                                        >
+                                        <label id="{{id}}-error" class="error" for="{{id}}">Please provide a value</label>
+                                    {{/if}}
+                                    {{#if displayHints.tooltip}}
+                                        <span data-content="{{displayHints.tooltip.label}}<br /><img src='{{displayHints.tooltip.image}}?size=210x140' width='210' height='140'>" class="info-popover" title="" data-html="true" data-placement="left" id="{{id}}-popover">
+                                            ?
+                                        </span>
+                                    {{/if}}								
+                                </div>
+                            {{/if}}
+                        {{/each}}
+
+                    </div>	
+                    
+                    <!-- display the terms and conditions field -->
+                    {{#each fields}}
+                        {{#if isTermAndConditionsField }}
+                            <div class="form-group" data-wrapper="{{id}}">		
+                                <div class="checkbox input-group">
+                                    <input name="{{id}}" type="checkbox" id="{{id}}" data-includeInEncryptedBlob="true"
+                                        {{#each validators}}
+                                            data-rule-{{this}}="true"
+                                        {{/each}}
+                                        {{#if dataRestrictions.isRequired}}
+                                            required
+                                        {{/if}}
+                                    >
+                                    
+                                    <div class="terms-and-conditions-text" id="{{id}}Text">
+                                        {{{displayHints.termsAndConditionsTemplate}}}
+                                    </div>
+                                </div>
+                                <label id="{{id}}-error" class="error" for="{{id}}">Please provide a value</label>
+                            </div>
+                        {{/if}}
+                    {{/each}}
+                    
+                </div>
+
+                <div class="checkbox">
+                    <label>
+                        <input name="remember" type="checkbox" id="rememberme">
+                        <span>Remember my details for future purchases</span>
+                    </label>
+                </div>
+
+                <div class="paymentbuttons" id="paymentButtons">
+                    <button class="btn btn-success btn-block btn-primary" type="submit" id="primaryButton">
+                        <span>Pay now</span>
+                    </button>
+                    <a href="paymentitem-selection.html" class="cancel btn-secondary"> <span>Cancel</span> </a>
+                </div>
+            </form>
+        </div>
+    </script>
+
+</body>
+
+</html>

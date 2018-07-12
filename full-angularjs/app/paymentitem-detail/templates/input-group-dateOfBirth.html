@@ -1,0 +1,40 @@
+<div class="date-section clearfix">
+    <div id="container-dateOfBirth-day" class="col-xs-7 date-input-container">
+        <label id="label-dateOfBirth-day" for="dateOfBirth-day" class="sr-only">
+            Day
+        </label>
+        <select name="dateOfBirth-day" id="dateOfBirth-day" class="form-control" required ng-change="generateDateOfBirth('day', birthday)" ng-model="birthday">
+            <option value="" disabled="" selected="">Day</option>
+            <option value="{{$index+1}}" ng-repeat="n in [].constructor(31) track by $index">
+                {{$index+1}}
+            </option>   
+        </select>
+        <div id="dateOfBirth-day-error" class="error-required">Please provide a value</div>
+    </div>
+    <div class="col-xs-1 seperator">-</div>                                                
+    <div id="container-dateOfBirth-month" class="col-xs-7 date-input-container">
+        <label id="label-dateOfBirth-month" for="dateOfBirth-month" class="sr-only">
+            Month
+        </label>
+        <select name="dateOfBirth-month" id="dateOfBirth-month" class="form-control" required ng-change="generateDateOfBirth('month', birthmonth)" ng-model="birthmonth">
+            <option value="" disabled="" selected="">Month</option>
+            <option value="{{$index+1}}" ng-repeat="n in [].constructor(12) track by $index">
+                {{$index+1}}
+            </option>  
+        </select>
+        <div id="dateOfBirth-month-error" class="error-required">Please provide a value</div>
+    </div>
+    <div class="col-xs-1 seperator">-</div>                                         
+    <div id="container-dateOfBirth-year" class="col-xs-8 date-input-container">
+        <label id="label-dateOfBirth-year" for="dateOfBirth-year" class="sr-only">
+        Year
+        </label>
+        <select name="dateOfBirth-year" id="dateOfBirth-year" class="form-control" required ng-change="generateDateOfBirth('year', birthyear)" ng-model="birthyear">
+            <option value="" disabled="" selected="" >Year</option>
+            <option value="{{year}}" ng-repeat="year in yearRange">
+                {{year}}
+            </option>
+        </select>
+        <div id="dateOfBirth-year-error" class="error-required">Please provide a value</div>
+    </div>
+</div>

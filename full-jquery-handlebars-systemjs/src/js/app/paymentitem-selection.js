@@ -110,6 +110,9 @@ $(function () {
                         document.location.href = 'paymentitem-boleto.html' + search;
                     } else if (id === androidPayId) {
                         setupAndroidPayAndExecute(session, context, paymentDetails, paymentRequest, paymentProductSpecificInputs);
+					} else if(id === 9000 || id === 9001) {
+                        // redirect to a specific page for card payments
+                        document.location.href = 'paymentitem-afterpay.html' + search;
                     } else {
                         // otherwise redirect o the details page
                         document.location.href = 'paymentitem-non-cards.html' + search;

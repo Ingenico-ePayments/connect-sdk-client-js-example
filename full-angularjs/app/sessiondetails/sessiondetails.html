@@ -8,6 +8,18 @@
     <div class="paymentoption par">
         <form ng-submit="startPayment()" method="POST" name="session-details-form">
             <div class="form-group">
+                <label for="assetUrl" class="hidden-xs hidden-sm">Asset URL</label>
+                <div>
+                    <input name="assetUrl" type="text" id="assetUrl" class="form-control" ng-model="input.assetUrl" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="clientApiUrl" class="hidden-xs hidden-sm">Client Api URL</label>
+                <div>
+                    <input name="clientApiUrl" type="text" id="clientApiUrl" class="form-control" ng-model="input.clientApiUrl" required>
+                </div>
+            </div>
+            <div class="form-group">
                 <label for="clientSessionId" class="hidden-xs hidden-sm">Client Session Id</label>
                 <div>
                     <input name="clientSessionId" type="text" id="clientSessionId" class="form-control" ng-model="input.clientSessionId" required>
@@ -19,18 +31,6 @@
                 <div>
                     <input name="customerId" type="text" id="customerId" class="form-control" ng-model="input.customerId" required>
                     <p class="error">This field is required</p>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="clientApiUrl" class="hidden-xs hidden-sm">clientApiUrl</label>
-                <div>
-                    <input name="clientApiUrl" type="text" id="clientApiUrl" class="form-control" ng-model="input.clientApiUrl" required>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="assetUrl" class="hidden-xs hidden-sm">assetUrl</label>
-                <div>
-                    <input name="assetUrl" type="text" id="assetUrl" class="form-control" ng-model="input.assetUrl" required>
                 </div>
             </div>
             <div class="form-group">

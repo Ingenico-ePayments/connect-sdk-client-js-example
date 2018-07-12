@@ -1,0 +1,176 @@
+<div>
+    <p id="paymentProductName">{{paymentitem.displayHints.label}}</p>
+</div>
+<div class="panel" ng-if="installmentOptions">
+    <div class="form-group" id="{{installmentOptions.id}}_box">
+        <label id="label-{{installmentOptions.id}}" for="{{installmentOptions.id}}">
+            {{installmentOptions.displayHints.label}}
+        </label>
+        <select name="{{installmentOptions.id}}"
+            id="{{installmentOptions.id}}"
+            class="form-control"
+            required
+            placeholder="{{installmentOptions.displayHints.placeholderLabel}}"
+            ng-change="doSelectPlan(item[installmentOptions.id])"
+            ng-attr-required="paymentItemfield.dataRestrictions.isRequired"
+            ng-model="item[installmentOptions.id]">
+            <option value="">{{installmentOptions.displayHints.placeholderLabel}}</option>
+            <option value="{{installmentOption.value}}" ng-repeat="installmentOption in installmentOptions.displayHints.formElement.valueMapping">
+                {{connect.paymentDetails.currency}} {{installmentOption.json.displayElements[1].value}} in {{installmentOption.json.displayElements[0].value}} installments
+            </option>
+        </select>
+        <div id="{{paymentItemfield.id}}-error" class="error-required">Please provide a value</div>
+        <table class="table installment-plan installmentId-information-table" id="">
+            <tbody>
+                <tr ng-repeat="planDetail in planDetails">
+                    <th  ng-if="planDetail.id != 'secciUrl' && planDetail.id != 'numberOfInstallments' && planDetail.id != 'installmentAmount'">{{installmentLanguageKeys[planDetail.id]}}</th>
+                    <td class="value" id="{{planDetail.id}}" ng-if="planDetail.id != 'secciUrl' && planDetail.id != 'numberOfInstallments' && planDetail.id != 'installmentAmount'">
+                        {{planDetail.value}}
+                    </td>
+                    <td colspan="2" id="planDetail.id_value" ng-if="planDetail.id == 'secciUrl'">
+                        <a href="{{planDetail.value}}" target="_blank" rel="noopener" class="btn btn-link secci-url">{{installmentLanguageKeys['secciUrl']}}</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="has-popover" ng-if="!showLookupSummary && (showLookupFields || installmentOptions)">
+    <h3 id="label-searchConsumer">
+        <span id="label-searchConsumerText">Your billing details</span>
+        <span
+            uib-popover="{{popoverContent}}"
+            class="info-popover afterpay"
+            title=""
+            popover-placement="bottom"
+            id="lookup-popover"
+            ng-if="showLookupFields"
+        >?</span>
+    </h3>
+</div>
+<div class="alert alert-danger" ng-if="errorCustomerSearch">
+    No information could be found with the information provided. Please try again with different values or provide your information manually.
+</div>
+<div class="lookup-fields" ng-class="{'doValidate': doValidateLookup}" ng-if="showLookupFields && !showLookupSummary">
+    <div ng-switch on="lookupFields.length">
+        <div ng-repeat="lookupField in lookupFields">
+        <div class="form-group">
+                <label id="label-{{lookupField.id}}" for="{{lookupField.id}}" class="hidden-xs">{{lookupField.displayHints.label}}</label>
+                <div class="row">
+                    <div ng-class="$last ? 'col-xs-16': 'col-xs-24'">
+                        <input name="{{lookupField.id}}"
+                            placeholder="{{lookupField.displayHints.placeholderLabel}}"
+                            id="{{lookupField.id}}"
+                            class="form-control lookup-field"
+                            ng-model="lookupModel[lookupField.id]"
+                            ng-attr-ui-mask="{{lookupField.displayHints.uimask}}"
+                            ng-required="lookupField.dataRestrictions.isRequired"
+                            ui-options="maskoptions"
+                            ui-mask-placeholder-char="space"
+                            ui-mask-placeholder
+                            ng-model-options="{ allowInvalid: true }">
+
+                        <div class="error-length">Enter a valid length please</div>
+                        <div class="error-regexp">Please enter valid data</div>
+                        <div class="error-required">This field is required</div>
+                    </div>
+                    <div class="col-xs-8 searchConsumerButtonParent" ng-if="$last">
+                        <button id="searchConsumerButton" class="btn btn-lookup" type="button" name="searchConsumer" ng-click="searchCustomerDetails('noRedirecttoPayment')">
+                            <span id="searchconsumerButtonText">Search</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<button id="enterInformationButton" class="btn btn-link enter-information" type="button" name="editInformation" value="editInformation" ng-show="!showCustomerDetailFields && !showLookupSummary" ng-click="doShowCustomerDetails()">
+    <span id="enterinformationButtonText">
+        Enter details manually
+    </span>
+</button>
+<div id="lookup-summary" class="panel lookup-summary" ng-if="showLookupSummary">
+    <h4 id="label-searchConsumerText">Your billing details</h4>
+        {{customerDetails.firstName}} {{customerDetails.surname}}<br>
+        {{customerDetails.phoneNumber}}<br>
+        {{lookupModel["fiscalNumber"]}}<br>
+        {{customerDetails.emailAddress}}<br>
+        {{customerDetails.street}}<br>
+        {{customerDetails.zip}} {{customerDetails.city}}
+    <div id="searchButtons" class="searchButtons row">
+        <div class="col-xs-8">
+            <button id="editInformationButton" class="btn btn-link" type="button" name="editInformation" ng-click="editCustomerDetails()">
+                <span id="editinformationButtonText">
+                    Edit details
+                </span>
+            </button>
+        </div>
+        <div class="col-xs-16">
+            <button id="searchConsumerAgainButton" class="btn btn-link" type="button" name="searchConsumerAgain" ng-click="searchAgain()">
+                <span id="searchconsumerAgainButtonText">
+                    Search again
+                </span>
+            </button>
+        </div>
+    </div>
+</div>
+<div ng-if="showCustomerDetailFields">
+    <div class="form-group" ng-repeat="paymentItemfield in paymentitem.paymentProductFields">
+        <div ng-class="{'doValidate': doValidateLookupResult}" ng-if="(paymentItemfield.id !== 'installmentId' && paymentItemfield.id !== 'termsAndConditions' && paymentItemfield.id !== 'dateOfBirth' && !paymentItemfield.json.usedForLookup)">
+            <label id="label-{{paymentItemfield.id}}" for="{{paymentItemfield.id}}" class="hidden-xs">{{paymentItemfield.displayHints.label}}</label>
+            <div ng-switch on="paymentItemfield.displayHints.formElement.type" class="paymentitem-input">
+                <div ng-switch-when="list">
+                    <div ng-include="'/app/paymentitem-detail/templates/input-select-afterpay.html'"></div>
+                </div>
+                <div ng-switch-default>
+                    <div ng-include="'/app/paymentitem-detail/templates/input-default.html'"></div>
+                </div>
+                <span ng-include="'/app/paymentitem-detail/templates/tooltip.html'" ng-if="paymentItemfield.displayHints.tooltip"></span>
+            </div>
+        </div>
+        <div ng-if="paymentItemfield.id == 'dateOfBirth'">
+            <label id="label-{{paymentItemfield.id}}" for="{{paymentItemfield.id}}" class="hidden-xs">{{paymentItemfield.displayHints.label}}</label>
+            <div ng-include="'/app/paymentitem-detail/templates/input-group-dateOfBirth.html'"></div>
+            <div class="hidden" ng-include="'/app/paymentitem-detail/templates/input-default.html'"></div>
+        </div>
+        <div ng-if="paymentItemfield.id == 'termsAndConditions'">
+            <div class="checkbox input-group">
+                <label for="{{paymentItemfield.id}}" class="hidden-xs hidden-sm">
+                    <input name="{{paymentItemfield}}"
+                        id="{{paymentItemfield.id}}"
+                        type="checkbox"
+                        ng-required="paymentItemfield.dataRestrictions.isRequired"
+                        ng-model="item[paymentItemfield.id]"
+                        required>
+                    <span>
+                        I accept the
+                        <a href="{{paymentItemfield.json.displayHints.link}}" target="_blank" rel="noopener" class="btn-link">AfterPay</a>
+                        terms and conditions
+                    </span>
+                    <div id="{{paymentItemfield.id}}-error" class="error-required">Please accept the terms and conditions</div>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-if="!showCustomerDetailFields">
+    <div class="checkbox input-group">
+        <label for="{{termsAndConditions.id}}" class="hidden-xs hidden-sm">
+            <input name="{{termsAndConditions}}"
+                id="{{termsAndConditions.id}}"
+                type="checkbox"
+                ng-required="termsAndConditions.dataRestrictions.isRequired"
+                ng-model="item[termsAndConditions.id]"
+                required>
+            <span>
+                I accept the
+                <a href="{{termsAndConditions.json.displayHints.link}}" target="_blank" rel="noopener" class="btn-link">AfterPay</a>
+                terms and conditions
+            </span>
+            <div id="{{termsAndConditions.id}}-error" class="error-required">Please accept the terms and conditions</div>
+        </label>
+    </div>
+</div>
+
+
+

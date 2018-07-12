@@ -37,9 +37,9 @@ angular.module('connect.validation', []).directive('connectValidation', function
                 }, function (n, o) {
                     // recheck requiredness of the other fields
                     if (n) {
-                        scope.paymentform.firstName.$validate();
-                        scope.paymentform.surname.$validate();
-                        scope.paymentform.companyName.$validate();
+                        scope.paymentform.firstName && scope.paymentform.firstName.$validate();
+                        scope.paymentform.surname && scope.paymentform.surname.$validate();
+                        scope.paymentform.companyName && scope.paymentform.companyName.$validate();
                     }
                 });
             }

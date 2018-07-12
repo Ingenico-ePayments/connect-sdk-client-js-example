@@ -336,6 +336,10 @@ header, #header {
       top: 5px;
       margin: 0;
     }
+    .terms-and-conditions-text label, .error {
+      display: inline;
+      padding-left: 0
+    }
   }
 
   .expiration {
@@ -397,11 +401,13 @@ header, #header {
     }
   }
   .info-popover {
-    display: block;
-    position: absolute;
-    margin: 0;
-    right: -28px;
-    top: 11px; /*NAMI-1419; was bottom: 13px;*/
+    &:not(.afterpay){
+      display: block;
+      position: absolute;
+      margin: 0;
+      right: -28px;
+      top: 11px; /*NAMI-1419; was bottom: 13px;*/
+    }
 
     i {
       font-size: 14px;
@@ -414,6 +420,10 @@ header, #header {
       width: auto;
     }
   }
+}
+
+.has-popover{
+  position: relative;
 }
 
 body .btn-primary,
@@ -567,9 +577,9 @@ body .btn-tertiary {
 
     & > div:after {
       content: "";
-      background: url(img/icons/icon-next.png) no-repeat 0 0;
+      background: url(/global/images/icon-next.png) no-repeat 0 0;
       background-size: 100%;
-      @include isaac-ie8-bg-contain('img/icons/icon-next.png');
+      @include isaac-ie8-bg-contain('/global/images/icon-next.png');
       display: block;
       width: 6px;
       height: 10px;
@@ -655,6 +665,38 @@ body .btn-tertiary {
   }
 }
 
+.btn-link{
+  color: #2869ac;
+}
+
+.installment-plan.table {
+  margin: 12px 0px 0px 0px;
+  >tbody>tr>td, >tbody>tr>th {
+    border: 0px;
+    font-weight: normal;
+    font-size: 14px;
+    padding: 2px;
+    display: table-cell
+  }
+  >tbody>tr>th {
+    white-space: nowrap;
+    width: 60%
+  }
+  >tbody>tr>td.uri {
+    padding-top: 8px
+  }
+}
+
+.date-section {
+  .seperator {
+    padding: 10px 0 0 0;
+    text-align: center;
+  }
+  .date-input-container {
+    padding: 0;
+  }
+}
+
 .popover {
   .popover-content {
     color: #000000;
@@ -737,9 +779,9 @@ body[dir=rtl] {
       padding-left: 0;
     }
     li .btn-tertiary > div:after {
-      background: url(img/icons/icon-prev.png) no-repeat 0 0;
+      background: url(/global/images/icon-prev.png) no-repeat 0 0;
       background-size: 100%;
-      @include isaac-ie8-bg-contain('img/icons/icon-prev.png');
+      @include isaac-ie8-bg-contain('/global/images/icon-prev.png');
       right: auto;
       left: 10px;
     }
@@ -945,6 +987,10 @@ body[dir=rtl] {
 
 .form-group.has-error > .error:nth-child(1n+4) {
   display: none !important;
+}
+
+.form-group.date-input-container.has-error > .error {
+  display: block !important;
 }
 
 .transparent {

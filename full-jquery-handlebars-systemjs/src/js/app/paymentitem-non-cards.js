@@ -10,9 +10,14 @@ require('./paymentitem-non-cards-helpers');
 require('./paymentitem-formatter');
 
 $(function () {
+	
     function _showPaymentItem(id) {
         $("#loading").show();
+			
+		console.log("** t8: " + id + " " + JSON.stringify(paymentDetails));
+
         session.getPaymentProduct(id, paymentDetails).then(function (paymentProduct) {
+			console.log("** t9: " + JSON.stringify(paymentProduct));
             $("#loading").hide();
             paymentRequest.setPaymentProduct(paymentProduct);
 
@@ -79,6 +84,12 @@ $(function () {
             if (field.id === "cardNumber") {
                 field.isCardNumberField = true;
             }
+			
+			// F) indicate that we have an installmentId
+			if(field.id === "termsAndConditions") {
+				field.isTermAndConditionsField = true;
+				field.displayHints.label = field.displayHints.label.replace("{link}", json.displayHints.label);
+			}
         });
 
         // E) There's one field that we should add to the form that is not included in the payment product fields list for
@@ -197,6 +208,7 @@ $(function () {
     if (!context) {
         document.location.href = 'dev-start.html';
     }
+
     context = JSON.parse(context);
     var sessionDetails = {
         clientSessionId: context.clientSessionId,
@@ -210,7 +222,7 @@ $(function () {
         locale: context.locale,
         isRecurring: context.isRecurring,
         currency: context.currency
-    }
+    };
     var grouping = context.grouping;
     var session = new connectSDK(sessionDetails);
     var paymentRequest = session.getPaymentRequest();
@@ -220,6 +232,7 @@ $(function () {
         search = search.substring(1);
         search = search.split("&");
         $.each(search, function (i, part) {
+			console.log("** t7: " + i + " " + part);
             part = part.split("=");
             if (part[0] === "paymentitemId") {
                 _showPaymentItem(part[1]);

@@ -13,6 +13,17 @@
   }
   &.btn-link {
     font-size: 15px;
+    color: #2869ac;
+
+    &.secci-url, &.enter-information{
+      padding: 6px 0;
+    }
+
+    &:hover, &:focus{
+      color: #262626;
+      text-decoration: underline;
+      background-color: transparent;
+    }
   }
   &.active, &:active {
     outline: 0;
@@ -38,3 +49,5 @@
   }
 
 }
+
+

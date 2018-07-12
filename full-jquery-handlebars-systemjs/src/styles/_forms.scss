@@ -45,3 +45,11 @@ legend {
 .help-block {
     font-size:13px;
 }
+
+.form-control {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #aaaaaa;
+  border-radius: 2px;
+  box-shadow: rgba(0,0,0,0.15) 2px 3px 5px 0px inset;
+}

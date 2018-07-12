@@ -13,6 +13,10 @@
   }
   &.btn-link {
     font-size: 15px;
+    color: #2869ac;
+    &.secci-url, &.enter-information{
+      padding: 6px 0;
+    }
   }
   &.active, &:active {
     outline: 0;

@@ -68,17 +68,15 @@
                         <span>Secure payment</span>
                     </p>
                 </div>
-                <div class="par">
-                    <h2>Payment has been set up</h2>
-                    <p>The payment has been checked and encrypted to:</p>
-                    <code>
-                        <pre>
+                <h2>Payment has been set up</h2>
+                <p>The payment has been checked and encrypted to:</p>
+                <code>
+                    <pre>
 
-                        </pre>
-                    </code>
-                    <p>You can send this string to Ingenico to process the payment</p>
-                    <a href="dev-start.html" class="cancel btn-secondary"> <span>Start again</span> </a>
-                </div>
+                    </pre>
+                </code>
+                <p>You can send this string to Ingenico to process the payment</p>
+                <a href="dev-start.html" class="cancel btn-secondary"> <span>Start again</span> </a>
             </div>
         </div>
     </div>
@@ -129,7 +127,7 @@
 
     <script src="/node_modules/systemjs/dist/system.src.js"></script>
     <script src="/src/js/systemjs.config.js"></script>
-    <script>        
+    <script>
         System.import('app/dev-success').catch(function(err) {
             console.error(err);
         });

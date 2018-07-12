@@ -156,7 +156,13 @@
             {{/if}}
             <ul id="paymentoptionslist">
                 {{#each paymentItems}}
-                    <li><button data-payment-id="{{id}}" data-payment-type="{{type}}" data-payment-method="{{paymentMethod}}" class="btn-tertiary"><div><img src="{{displayHints.logo}}?size=25x17">{{displayHints.label}}</</div></button></li>
+                    <li>
+                        <button data-payment-id="{{id}}" data-payment-type="{{type}}" data-payment-method="{{paymentMethod}}" class="btn-tertiary">
+                            <div>
+                                <img src="{{displayHints.logo}}?size=25x17">{{displayHints.label}}
+                            </div>
+                        </button>
+                    </li>
                 {{/each}}
             </ul>
         </div>

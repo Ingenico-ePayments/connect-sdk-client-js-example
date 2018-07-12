@@ -1,0 +1,11 @@
+<select name="{{paymentItemfield.id}}"
+        id="{{paymentItemfield.id}}"
+        class="form-control"
+        required
+        placeholder="{{paymentItemfield.displayHints.placeholderLabel}}"
+        ng-options="item.json.displayElements[0].value as item.json.displayElements[0].value for item in paymentItemfield.displayHints.formElement.valueMapping"
+        ng-attr-required="paymentItemfield.dataRestrictions.isRequired"
+        ng-model="item[paymentItemfield.id]">
+        <option value="" selected>{{paymentItemfield.displayHints.placeholderLabel}}</option>
+</select>
+<div id="{{paymentItemfield.id}}-error" class="error-required">Please provide a value</div>

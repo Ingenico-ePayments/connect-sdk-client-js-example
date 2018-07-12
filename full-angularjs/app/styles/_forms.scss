@@ -4,8 +4,8 @@ body input {
   border-width:1px;
   padding: 6px 10px;
   border-color: #aaaaaa;
-  border-radius: 3px;
-  box-shadow: inset 2px 3px 5px 0px rgba(0, 0, 0, 0.15);
+  border-radius: 2px;
+  box-shadow: rgba(0,0,0,0.15) 2px 3px 5px 0px inset;
   @include placeholder($gray-dark);
 }
 
@@ -44,4 +44,12 @@ legend {
 }
 .help-block {
     font-size:13px;
+}
+
+.form-control {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #aaaaaa;
+  border-radius: 2px;
+  box-shadow: rgba(0,0,0,0.15) 2px 3px 5px 0px inset;
 }

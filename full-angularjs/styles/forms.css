@@ -24,7 +24,9 @@
     display: block;
     color: #ff0000;
 }
-.doValidate .ng-invalid-regexp ~ .error-regexp {
+.doValidate .ng-invalid-regexp ~ .error-regexp, 
+.doValidate .ng-invalid-email-address ~ .error-regexp, 
+.doValidate .ng-invalid-regular-expression ~ .error-regexp {
     display: block;
     color: #ff0000;
 }
