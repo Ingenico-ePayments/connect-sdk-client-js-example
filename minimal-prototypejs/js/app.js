@@ -1,8 +1,8 @@
 var sessionDetails = {
     clientSessionId: config.clientSessionId || null,
     customerId: config.customerId || null,
-    region: config.region || null,
-    environment: config.environment || null
+    clientApiUrl: config.clientApiUrl || null,
+    assetUrl: config.assetUrl || null
 };
 
 var paymentDetails = {
@@ -13,9 +13,9 @@ var paymentDetails = {
     isRecurring: false
 };
 // check if the sessionDetails are filled; this is vital for continueing
-if (sessionDetails.clientSessionId === null || sessionDetails.customerId === null || sessionDetails.region === null || sessionDetails.environment === null) {
-    console.error("please provide the clientSessionId, customerId, region and environment in the sessionDetails");
-    document.querySelector('.output').innerText = "please provide the clientSessionId, customerId, region and environment in the sessionDetails";
+if (sessionDetails.clientSessionId === null || sessionDetails.customerId === null || sessionDetails.clientApiUrl === null || sessionDetails.assetUrl === null) {
+    console.error("please provide the clientSessionId, customerId, clientApiUrl and assetUrl in the sessionDetails");
+    document.querySelector('.output').innerText = "please provide the clientSessionId, customerId, clientApiUrl and assetUrl in the sessionDetails";
 }
 var cardNumber = '4567 3500 0042 7977';
 

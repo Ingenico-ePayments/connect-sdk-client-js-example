@@ -1,30 +1,29 @@
 {
   "name": "connect-sdk-client-js-example-angularjs",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "description": "",
   "main": "index.html",
   "scripts": {
-    "start": "concurrent \"npm run watch\" \"npm run lite\" ",
+    "start": "concurrent \"npm run watch\" \"npm run browsersync\" ",
     "build:sass": "node-sass -o ./ --include-path node_modules/bootstrap-sass/assets/stylesheets/  app/",
     "postinstall": "npm run build:sass",
-    "lite": "lite-server -c .liteserverrc.json",
+    "browsersync": "browser-sync --server --port 3000 --watch --files='./**/*.{html,htm,css,js}' --ignore 'node_modules'",
     "watch:sass": "npm run build:sass && node-sass -o ./ -w app/ --include-path node_modules/bootstrap-sass/assets/stylesheets/",
     "watch": "npm run watch:sass"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "angular": "^1.6.6",
-    "angular-route": "^1.6.6",
+    "angular": "^1.7.3",
+    "angular-route": "^1.7.3",
     "angular-ui-bootstrap": "^2.5.0",
     "angular-ui-mask": "^1.8.6",
     "bootstrap-sass": "^3.3.6",
-    "connect-sdk-client-js": ">=3.9.0 <4.0.0"
+    "connect-sdk-client-js": "^3.9.3"
   },
   "devDependencies": {
-    "browser-sync": "^2.18.13",
+    "browser-sync": "^2.24.7",
     "concurrently": "^2.2.0",
-    "lite-server": "^2.3.0",
-    "node-sass": "^4.9.0"
+    "node-sass": "^4.9.3"
   }
 }

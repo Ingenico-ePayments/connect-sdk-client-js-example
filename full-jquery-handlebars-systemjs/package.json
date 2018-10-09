@@ -1,12 +1,12 @@
 {
   "name": "connect-sdk-client-js-example-jquery",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "description": "",
   "main": "index.html",
   "scripts": {
-    "start": "concurrent \"npm run watch\" \"npm run lite\" ",
+    "start": "concurrent \"npm run watch\" \"npm run browsersync\" ",
     "build:sass": "node-sass -o ./dist --include-path node_modules/bootstrap-sass/assets/stylesheets/  src/",
-    "lite": "lite-server -c .liteserverrc.json",
+    "browsersync": "browser-sync --server --port 3001 --watch --files='./**/*.{html,htm,css,js}' --ignore 'node_modules'",
     "postinstall": "npm run build:sass",
     "watch:sass": "npm run build:sass && node-sass -o ./dist -w src/ --include-path node_modules/bootstrap-sass/assets/stylesheets/",
     "watch": "npm run watch:sass"
@@ -15,17 +15,16 @@
   "license": "ISC",
   "dependencies": {
     "bootstrap-sass": "^3.3.6",
-    "connect-sdk-client-js": ">=3.9.0 <4.0.0",
+    "connect-sdk-client-js": "^3.9.3",
     "handlebars": "^4.0.10",
     "jquery": "^3.2.1",
     "jquery-validation": "^1.17.0",
-    "node-forge": "^0.7.1",
+    "node-forge": "^0.7.6",
     "systemjs": "^0.19.47"
   },
   "devDependencies": {
-    "browser-sync": "^2.24.4",
+    "browser-sync": "^2.24.7",
     "concurrently": "^2.2.0",
-    "lite-server": "^2.3.0",
-    "node-sass": "^4.9.0"
+    "node-sass": "^4.9.3"
   }
 }

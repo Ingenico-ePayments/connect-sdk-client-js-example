@@ -1,10 +1,10 @@
 var connect = require('connect-sdk-client-js/dist/connectsdk.noEncrypt');
 
 var sessionDetails = {
+    assetUrl: "",
+    clientApiUrl: "",
     clientSessionId: "",
-    customerId: "",
-    region: "EU",
-    environment: "SANDBOX"
+    customerId: ""
 };
 
 var paymentDetails = {
@@ -20,3 +20,8 @@ var cardNumber = '4567 3500 0042 7977';
 var session = new connect(sessionDetails);
 
 createPayload(session, cardNumber, paymentDetails);
+
+// enable hot module replacement
+if (module.hot && process.env.NODE_ENV === 'development') {
+    module.hot.accept();
+}

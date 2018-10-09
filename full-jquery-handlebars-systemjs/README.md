@@ -48,7 +48,7 @@ This application uses the following key frameworks and libraries which are manag
 ### Other npm commands
 
 * npm run build:sass - builds all css files; once
-* npm run lite - starts the webserver with browser-sync
+* npm run browsersync - starts the webserver with browser-sync
 * npm run postinstall - automaticly run after install (clean&build:sass)
 * npm run watch:sass - watch sass changes
 

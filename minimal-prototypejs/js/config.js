@@ -1,6 +1,6 @@
 var config = {
     clientSessionId: null,
     customerId: null,
-    region: 'EU',
-    environment: "SANDBOX"
+    clientApiUrl: null,
+    assetUrl: null
 }

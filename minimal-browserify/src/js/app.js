@@ -3,8 +3,8 @@ var connect = require('connect-sdk-client-js/dist/connectsdk.noEncrypt').connect
 var sessionDetails = {
     clientSessionId: "",
     customerId: "",
-    region: "EU",
-    environment: "SANDBOX"
+    clientApiUrl: "",
+    assetUrl: ""
 };
 
 var paymentDetails = {

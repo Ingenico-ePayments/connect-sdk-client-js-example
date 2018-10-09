@@ -4,8 +4,8 @@ var connect = require('connectsdk.session');
 var sessionDetails = {
     clientSessionId: "",
     customerId: "",
-    region: "EU",
-    environment: "SANDBOX"
+    clientApiUrl: "",
+    assetUrl: ""
 };
 
 var paymentDetails = {

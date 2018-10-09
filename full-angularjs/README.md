@@ -10,7 +10,7 @@ It offers all features of the [Ingenico Connect Responsive Payment Pages (RPP)](
 * payment product grouping
 * payment product switching based on IIN Lookup
 
-and more.  
+and more.
 The [Ingenico Connect JavaScript Client SDK](https://github.com/Ingenico-ePayments/connect-sdk-client-js) is used for all communication to the Connect API and crypto. A simple webserver is included to make this application easy to install and run in development environments. See the [Ingenico ePayments Developer Hub](https://epayments.developer-ingenico.com/documentation/sdk/mobile/javascript/) for more information on how to use the Ingenico Connect API.
 
 ## How to install
@@ -21,7 +21,7 @@ Make sure you have installed [Node.js](https://nodejs.org/en/); the LTS version 
 
 ## How to start the application
 
-Run the following command to start a webserver on `localhost` at port `3000` with [browsersync](https://www.browsersync.io/).  
+Run the following command to start a webserver on `localhost` at port `3000` with [browsersync](https://www.browsersync.io/).
 This will also start a watcher for the [sass](http://sass-lang.com/) files that auto compile to CSS; after each change the page is automaticly reloaded for you on all connected devices.
 
     npm run start
@@ -31,8 +31,8 @@ The final page of the payment journey has a `dev-` prefix as well and contains t
 
 ## How to start the payment process
 
-Create a client session identifier and a customer identifier, which the Client API needs for authentication purposes.  
-These can be obtained by your e-commerce server using the [Server SDKs](https://epayments.developer-ingenico.com/documentation/sdk/server/) or directly using the [Server API](https://epayments-api.developer-ingenico.com/s2sapi/v1/). Use this information along with the geographical region of the Client API you want to connect to and the payment details to start the process.  
+Create a client session identifier and a customer identifier, which the Client API needs for authentication purposes.
+These can be obtained by your e-commerce server using the [Server SDKs](https://epayments.developer-ingenico.com/documentation/sdk/server/) or directly using the [Server API](https://epayments-api.developer-ingenico.com/s2sapi/v1/). Use this information along with the geographical region of the Client API you want to connect to and the payment details to start the process.
 If you incorporate this into your production process all this information should be used to initialize the payment process.
 
 ## In depth
@@ -41,12 +41,12 @@ This application uses the following key frameworks and libraries which are manag
 * Angularjs
 * Twitter Bootstrap
 * DigitalBazaar Forge
-* Ingenico Connect Client SDK 
+* Ingenico Connect Client SDK
 
 ### Other npm commands
 
 * npm run build:sass - builds all css files; once
-* npm run lite - starts the webserver with browser-sync
+* npm run browsersync - starts the webserver with browser-sync
 * npm run postinstall - automaticly run after install (clean&build:sass)
 * npm run watch:sass - watch sass changes
 
@@ -60,7 +60,7 @@ This application uses the following key frameworks and libraries which are manag
 |       +-- directives
 |           +-- connect
 |                -- cardnumber.directive.js - directive which has all logic for cardnumber switchinh
-|                -- validation.directive.js - directive that binds Connect-sdk validation methods to angular.js 
+|                -- validation.directive.js - directive that binds Connect-sdk validation methods to angular.js
 |       +-- templates
 |           -- cards.html - specific template for card payments; since card payments have a lot of extra features compared to the other paymentmethods.
 |           -- input-currency.html - template for currency based input fields
@@ -83,21 +83,21 @@ This application uses the following key frameworks and libraries which are manag
 |       -- contains all sass files needed to compile the css file used with this demo
 +-- fonts
 |    +-- icons
-|        -- icons.eot/icons.svg/icons.ttf/icons.woff - icons that are used in the cards form 
+|        -- icons.eot/icons.svg/icons.ttf/icons.woff - icons that are used in the cards form
 +-- global
 |   +-- images
 |       -- loader.png - loading spinner
-|       -- logo.png - example logo 
+|       -- logo.png - example logo
 +-- node_modules
 |   ... folder containing all node dependencies; run npm install to get the dependencies
 +-- styles
 |   +-- img
 |       ... folder containing all images used by the CSS
 |   -- base.css - the compiled css file; use npm run build:sass to compile this file
-|   -- forms.css - overrides for forms; this is purely used in this example; production code should use a better method to handle the displaying of validation errors. 
+|   -- forms.css - overrides for forms; this is purely used in this example; production code should use a better method to handle the displaying of validation errors.
 ```
 
 ### Module loading
 
-This example focusses on displaying how to intergrate the Ingenico Connect JavaScript Client SDK with angularjs. Module loading is out of scope of this example. 
+This example focusses on displaying how to intergrate the Ingenico Connect JavaScript Client SDK with angularjs. Module loading is out of scope of this example.
 Refer to the various minimal examples on how to use module loading.
