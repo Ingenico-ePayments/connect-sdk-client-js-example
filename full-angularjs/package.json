@@ -1,6 +1,6 @@
 {
   "name": "connect-sdk-client-js-example-angularjs",
-  "version": "1.8.1",
+  "version": "1.8.2",
   "description": "",
   "main": "index.html",
   "scripts": {
@@ -19,10 +19,10 @@
     "angular-ui-bootstrap": "^2.5.0",
     "angular-ui-mask": "^1.8.6",
     "bootstrap-sass": "^3.3.6",
-    "connect-sdk-client-js": "^3.9.3"
+    "connect-sdk-client-js": "^3.11.0"
   },
   "devDependencies": {
-    "browser-sync": "^2.24.7",
+    "browser-sync": "^2.26.3",
     "concurrently": "^2.2.0",
     "node-sass": "^4.9.3"
   }
