@@ -38,6 +38,9 @@
     packages['connectsdk.BasicPaymentProducts'] = { main: '../../../node_modules/connect-sdk-client-js/src/BasicPaymentProducts.js', defaultExtension: 'js' };
     packages['connectsdk.BasicPaymentProductGroups'] = { main: '../../../node_modules/connect-sdk-client-js/src/BasicPaymentProductGroups.js', defaultExtension: 'js' };
     packages['connectsdk.PaymentProduct'] = { main: '../../../node_modules/connect-sdk-client-js/src/PaymentProduct.js', defaultExtension: 'js' };
+    packages['connectsdk.PaymentProduct302SpecificData'] = { main: '../../../node_modules/connect-sdk-client-js/src/PaymentProduct302SpecificData.js', defaultExtension: 'js' };
+    packages['connectsdk.PaymentProduct320SpecificData'] = { main: '../../../node_modules/connect-sdk-client-js/src/PaymentProduct320SpecificData.js', defaultExtension: 'js' };
+    packages['connectsdk.PaymentProduct863SpecificData'] = { main: '../../../node_modules/connect-sdk-client-js/src/PaymentProduct863SpecificData.js', defaultExtension: 'js' };
     packages['connectsdk.PaymentProductGroup'] = { main: '../../../node_modules/connect-sdk-client-js/src/PaymentProductGroup.js', defaultExtension: 'js' };
     packages['connectsdk.BasicPaymentItems'] = { main: '../../../node_modules/connect-sdk-client-js/src/BasicPaymentItems.js', defaultExtension: 'js' };
     packages['connectsdk.PaymentRequest'] = { main: '../../../node_modules/connect-sdk-client-js/src/PaymentRequest.js', defaultExtension: 'js' };
@@ -45,9 +48,8 @@
     packages['connectsdk.JOSEEncryptor'] = { main: '../../../node_modules/connect-sdk-client-js/src/JOSEEncryptor.js', defaultExtension: 'js' };
     packages['connectsdk.net'] = { main: '../../../node_modules/connect-sdk-client-js/src/net.js', defaultExtension: 'js' };
     packages['connectsdk.Util'] = { main: '../../../node_modules/connect-sdk-client-js/src/Util.js', defaultExtension: 'js' };
-    packages['connectsdk.AndroidPay'] = { main: '../../../node_modules/connect-sdk-client-js/src/AndroidPay.js', defaultExtension: 'js' };
+    packages['connectsdk.GooglePay'] = { main: '../../../node_modules/connect-sdk-client-js/src/GooglePay.js', defaultExtension: 'js' };
     packages['connectsdk.PublicKeyResponse'] = { main: '../../../node_modules/connect-sdk-client-js/src/PublicKeyResponse.js', defaultExtension: 'js' };
-    packages['connectsdk.PaymentProductPublicKeyResponse'] = { main: '../../../node_modules/connect-sdk-client-js/src/PaymentProductPublicKeyResponse.js', defaultExtension: 'js' };
     packages['connectsdk.BasicPaymentProductGroup'] = { main: '../../../node_modules/connect-sdk-client-js/src/BasicPaymentProductGroup.js', defaultExtension: 'js' };
     packages['connectsdk.PaymentProductField'] = { main: '../../../node_modules/connect-sdk-client-js/src/PaymentProductField.js', defaultExtension: 'js' };
     packages['connectsdk.AccountOnFile'] = { main: '../../../node_modules/connect-sdk-client-js/src/AccountOnFile.js', defaultExtension: 'js' };

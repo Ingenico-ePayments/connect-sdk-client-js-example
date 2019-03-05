@@ -12,7 +12,10 @@ app.controller('sessiondetails.controller', ['$scope', '$rootScope', '$location'
         currencyCode: (currentContext) ? currentContext.currencyCode : 'EUR',
         locale: (currentContext) ? currentContext.locale : 'en_GB',
         isRecurring: (currentContext) ? currentContext.isRecurring : false,
-        grouping: (currentContext) ? currentContext.grouping : true
+        grouping: (currentContext) ? currentContext.grouping : true,
+        gatewayMerchantId: (currentContext) ? currentContext.gatewayMerchantId : null,
+        merchantId: (currentContext) ? currentContext.merchantId : null,
+        merchantName: (currentContext && currentContext.merchantName) ? currentContext.merchantName : '',
     };
 
     var firstInput = document.querySelector('form input:first-child');

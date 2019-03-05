@@ -485,6 +485,26 @@
                                                 <input type="checkbox" id="grouping"  ng-model="input.grouping">
                                                 <span>Group products</span> </label>
             </div>
+            <br /><br />
+            <strong>Google Pay additional input fields:</strong>
+            <div class="form-group">
+                <label for="gatewayMerchantId" class="">Connect Merchant ID (required for Google Pay)</label>
+                <div>
+                    <input name="gatewayMerchantId" type="text" id="gatewayMerchantId" ng-model="input.gatewayMerchantId" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="merchantId" class="">Google Pay Merchant ID (required for Google Pay)</label>
+                <div>
+                    <input name="merchantId" type="text" id="merchantId" ng-model="input.merchantId" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="merchantName" class="">Merchant Name (optional for prefetching)</label>
+                <div>
+                    <input name="merchantName" type="text" id="merchantName" ng-model="input.merchantName" class="form-control">
+                </div>
+            </div>
             <div class="paymentbuttons" id="paymentButtons">
                 <button class="btn btn-success btn-block btn-primary" type="submit" id="startPayment">
                                                 <span>Start secure payment</span>

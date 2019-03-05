@@ -1,8 +1,26 @@
-app.controller('paymentitem-selection.controller', ['$scope', '$rootScope', '$location', '$log', 'connectAndroidPay', function ($scope, $rootScope, $location, $log, connectAndroidPay) {
+app.controller('paymentitem-selection.controller', ['$scope', '$rootScope', '$location', '$log', 'connectGooglePay', function ($scope, $rootScope, $location, $log, connectGooglePay) {
     "use strict";
     $scope.hasError = false;
+    var googlePayId = 320;
 
     var context = JSON.parse(sessionStorage.getItem('context'));
+
+    var isPaymentProductIdInList = function(paymentProductId, list) {
+        return list.filter(function (paymentItem) {
+            return paymentItem.id === paymentProductId;
+        }).length > 0;
+    }
+
+    var getPaymentProductNetworks = function() {
+        $scope.connect.session.getPaymentProduct(googlePayId, $scope.connect.paymentDetails, $scope.connect.paymentProductSpecificInputs).then(function(paymentProduct) {
+            // We extract some data from the Google Pay payment product response that is required to initialize Google Pay API
+            // As we can retrieve them here, we didn't add this as input fields on dev-start
+            // We add it to the paymentProductSpecificInputs for ease of use of one single object with Google Pay data we need to use in multiple places.
+            // Yes it is now also send to the SDK in getBasicPaymentItems but it is not needed but it also won't interfere.
+            $scope.connect.paymentProductSpecificInputs.googlePay.networks = paymentProduct.paymentProduct320SpecificData.networks;
+            $scope.connect.paymentProductSpecificInputs.googlePay.gateway = paymentProduct.paymentProduct320SpecificData.gateway;
+        });
+    }
 
     $scope.getPaymentItems = function () {
         $scope.hasError = false;
@@ -29,6 +47,11 @@ app.controller('paymentitem-selection.controller', ['$scope', '$rootScope', '$lo
                 if ($scope.accountsOnFile) {
                     addLogosToAoF();
                 }
+
+                // Need to retrieve networks for Google Pay when Google Pay exists in paymentItems
+                if (isPaymentProductIdInList(googlePayId, basicPaymentItems.basicPaymentItems)) {
+                    getPaymentProductNetworks()
+                }
             });
         }, function () {
             $scope.$apply(function () {
@@ -49,8 +72,6 @@ app.controller('paymentitem-selection.controller', ['$scope', '$rootScope', '$lo
                 $rootScope.loading = false;
                 $scope.$apply(function () {
                     $rootScope.encryptedString = encryptedString;
-                    // makes sure the android pay native ui is closed
-                    paymentResponse.complete();
                     $location.path('/dev-success');
                 });
             }, function error(e) {
@@ -72,8 +93,8 @@ app.controller('paymentitem-selection.controller', ['$scope', '$rootScope', '$lo
     };
 
     $scope.choosePaymentItem = function (paymentItem) {
-        if (paymentItem.id === 320) {
-            var promise = connectAndroidPay.setupAndroidPay($scope);
+        if (paymentItem.id === googlePayId) {
+            var promise = connectGooglePay.setupGooglePayAndExecute($scope);
             promise.then(function (paymentResponse) {
                 encryptPayment(paymentResponse);
             }, function (reason) {
@@ -128,13 +149,16 @@ app.controller('paymentitem-selection.controller', ['$scope', '$rootScope', '$lo
             isRecurring: context.isRecurring,
             currency: context.currencyCode
         }
-        // If you want to use Android Pay in your application, a merchantId is required to set it up.
-        // getBasicPaymentItems will use it to perform an extra check(canMakePayment) to see if the user can pay with Android Pay.
+        // If you want to use Google Pay in your application, a merchantId is required to set it up.
+        // getBasicPaymentItems will use it to perform an extra check(canMakePayment) to see if the user can pay with Google Pay.
         $scope.connect.paymentProductSpecificInputs = {
-            androidPay: {
-                merchantId: "02510116604241796260"
+            googlePay: {
+                merchantId: context.merchantId,
+                gatewayMerchantId: context.gatewayMerchantId,
+                merchantName: context.merchantName
             }
         }
+
         $scope.grouping = context.grouping;
 
         // use the sessionDetails to create a new session
@@ -145,6 +169,7 @@ app.controller('paymentitem-selection.controller', ['$scope', '$rootScope', '$lo
         // all this information to the encryption function so that it can create the encrypted string
         // that contains all this info.
         $scope.connect.paymentRequest = $scope.connect.session.getPaymentRequest();
+
         // now render the page
         $scope.getPaymentItems();
     } else {

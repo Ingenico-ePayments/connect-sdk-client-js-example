@@ -17,11 +17,17 @@ $(function () {
             $("#locale").val(currentContext.locale);
             $("#isRecurring").val(currentContext.isRecurring);
             $("#grouping").prop('checked', currentContext.grouping);
+
+            // Google Pay specific additional fields, merchantId is required
+            $("#merchantId").val(currentContext.merchantId);
+            // merchantName and gatewayMerchantId are optional and will enable prefetching for the Google Pay API.
+            $("#merchantName").val(currentContext.merchantName);
+            $("#gatewayMerchantId").val(currentContext.gatewayMerchantId);
         } else {
             $("#totalAmount").val('16195');
             $("#grouping").prop('checked', true);
         }
-    };
+    }
 
     _setcurrentValues();
 
@@ -37,8 +43,12 @@ $(function () {
                 currency: $("#currency").val(),
                 locale: $("#locale").val(),
                 isRecurring: $("#isRecurring").is(":checked"),
-                grouping: $("#grouping").is(":checked")
-            }
+                grouping: $("#grouping").is(":checked"),
+                // Google Pay specific:
+                merchantId: $("#merchantId").val(),
+                merchantName: $("#merchantName").val(),
+                gatewayMerchantId: $("#gatewayMerchantId").val()
+            };
             sessionStorage.setItem('context', JSON.stringify(context));
             document.location.href = 'paymentitem-selection.html';
         }
