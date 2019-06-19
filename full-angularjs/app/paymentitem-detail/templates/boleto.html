@@ -1,7 +1,7 @@
 <div 
     class="form-group" 
-    ng-repeat="paymentItemfield in paymentitem.paymentProductFields" 
-    ng-show="paymentItemfield.id === 'city' || paymentItemfield.id === 'fiscalNumber' || (paymentItemfield.id === 'firstName' && !isBuissiness) || (paymentItemfield.id === 'surname' && !isBuissiness) || (paymentItemfield.id === 'companyName' && isBuissiness)"
+    ng-repeat="paymentItemfield in paymentitem.paymentProductFields"
+    ng-hide="(isBusiness && (paymentItemfield.id === 'firstName' || paymentItemfield.id === 'surname')) || (!isBusiness && paymentItemfield.id === 'companyName')"
 >
     <label for="{{paymentItemfield.id}}" class="hidden-xs hidden-sm">{{paymentItemfield.displayHints.label}}</label>
     <div ng-include="'/app/paymentitem-detail/templates/input-boleto.html'"></div>

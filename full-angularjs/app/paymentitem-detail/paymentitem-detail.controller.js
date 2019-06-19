@@ -138,9 +138,9 @@ app.controller('paymentitem.controller', ['$rootScope', '$scope', '$location', '
             return $scope.item && $scope.item['fiscalNumber']
         }, function (n, o) {
             if (n && n.length >= 14) {
-                $scope.isBuissiness = true;
+                $scope.isBusiness = true;
             } else {
-                $scope.isBuissiness = false;
+                $scope.isBusiness = false;
             }
         });
     }

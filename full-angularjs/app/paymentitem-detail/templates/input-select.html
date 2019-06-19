@@ -6,4 +6,5 @@
         ng-options="item.value as item.displayName for item in paymentItemfield.displayHints.formElement.valueMapping"
         ng-attr-required="paymentItemfield.dataRestrictions.isRequired"
         ng-model="item[paymentItemfield.id]">
+        <option value="" selected>{{paymentItemfield.displayHints.placeholderLabel}}</option>
 </select>
