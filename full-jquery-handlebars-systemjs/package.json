@@ -16,7 +16,7 @@
   "dependencies": {
     "bootstrap-sass": "^3.4.1",
     "connect-sdk-client-js": "^3.11.1",
-    "handlebars": "^4.1.1",
+    "handlebars": "^4.3.0",
     "jquery": "^3.2.1",
     "jquery-validation": "^1.19.0",
     "node-forge": "^0.7.6",
