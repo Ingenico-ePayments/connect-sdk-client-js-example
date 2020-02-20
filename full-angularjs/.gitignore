@@ -5,3 +5,4 @@ node_modules/
 jspm_packages/
 bower_components/
 npm-debug*
+package-lock.json

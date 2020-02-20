@@ -1,6 +1,6 @@
 {
   "name": "connect-sdk-client-js-example-webpack",
-  "version": "1.9.2",
+  "version": "1.9.3",
   "description": "",
   "main": "index.html",
   "scripts": {
