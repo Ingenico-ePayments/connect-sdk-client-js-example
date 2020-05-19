@@ -14,7 +14,7 @@ angular.module('connect.cardnumber', []).directive('connectCardNumber', function
                         return controller.$$rawModelValue;
                     }, function (value) {
                         if (checkBINLength(value)) {
-                            var newBIN = value.substring(0, 6);
+                            var newBIN = extractBin(value);
                             getIinDetails(newBIN);
                         }
                     });
@@ -22,20 +22,26 @@ angular.module('connect.cardnumber', []).directive('connectCardNumber', function
             };
 
             function checkBINLength(value) {
-                var ret = false
-                if (!value) {
-                    ret = false;
-                } else {
-                    var newBIN = value.substring(0, 6);
+                var ret = false;
+                if (value) {
+                    var newBIN = extractBin(value);
                     if (newBIN !== $scope.currentBIN) {
                         $scope.currentBIN = newBIN;
                         ret = true;
-                    } else {
-                        ret = false;
                     }
                 }
                 return ret;
-            };
+            }
+
+            function extractBin(value) {
+                var newBIN;
+                if (value.length() >= 8) {
+                    newBIN = value.substring(0, 8);
+                } else {
+                    newBIN = value.substring(0, 6);
+                }
+                return newBIN;
+            }
 
             function getIinDetails(value) {
                 $scope.connect.session.getIinDetails(value, $scope.connect.paymentDetails).then(function (response) {
@@ -51,7 +57,7 @@ angular.module('connect.cardnumber', []).directive('connectCardNumber', function
                         $scope.ccstate = "ERROR";
                     });
                 });
-            };
+            }
 
             function handleSupportedResponse(response) {
                 // this card is supported; switch to the card

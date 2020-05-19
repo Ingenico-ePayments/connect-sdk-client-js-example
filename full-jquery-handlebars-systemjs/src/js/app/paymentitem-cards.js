@@ -182,16 +182,14 @@ $(function () {
         // D) The creditcard field has an IIN lookup that determines the issuer of the card. It could be the case that the customer chose
         //    payment product VISA but entered a mastercard creditcard number. In that case the selected payment product should switch.
         $("#cardNumber").parent().find(".cc-image").html('<img src="' + paymentItem.displayHints.logo + '">');
-        var currentFirst6Digits = '',
-            storedFirst6Digits = '';
+        var storedFirstDigits = '';
         $("#cardNumber").on("keyup", function (e) {
             if (e.keyCode === 17 || e.keyCode === 91) {
                 // don't handle ctrl events (copy paste otherwise will send double iin details calls)
                 return true;
             }
-            // we only need to analyse the card's first 6 digits
-            currentFirst6Digits = $(this).val().substring(0, 7);
-            if (currentFirst6Digits !== storedFirst6Digits) {
+            var currentFirstDigits = extractBin();
+            if (currentFirstDigits !== storedFirstDigits) {
                 // We use the SDK to do the IIN lookup, this is an async task that we provide you as a promise
                 session.getIinDetails($(this).val(), paymentDetails).then(function (response) {
                     // The promise has fulfilled.
@@ -200,7 +198,7 @@ $(function () {
                     if (response.status === "SUPPORTED") {
                         //Remove notAllowedInContext class so validator succeeds if there was a SUPPORTED_BUT_NOT_ALLOWED response before
                         setAllowedInContextStatus(true);
-                        storedFirst6Digits = currentFirst6Digits;
+                        storedFirstDigits = currentFirstDigits;
                         // Fetch the paymentproduct that belongs to the id the IIN returned, this is an async task that we provide you as a promise
                         session.getPaymentProduct(response.paymentProductId, paymentDetails).then(function (paymentProduct) {
                             // The promise has fulfilled.
@@ -234,6 +232,15 @@ $(function () {
                 });
             }
         });
+
+        function extractBin() {
+            const currentValue = $(this).val().replace(' ', '');
+            // we only need to analyse the card's first 6 or 8 digits.
+            return currentValue.length >= 8
+                ? currentValue.substring(0, 8)
+                : currentValue.substring(0, 6);
+        }
+
         function encrypt() {
             $("#loading").show();
             // Create an SDK encryptor object
