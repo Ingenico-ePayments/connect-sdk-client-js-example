@@ -7,8 +7,9 @@
             <div ng-include="'/app/paymentitem-detail/templates/cards.html'" ng-if="(type === 'group' && id === 'cards') || paymentitem.paymentMethod === 'card'"></div>
             <div ng-include="'/app/paymentitem-detail/templates/boleto.html'" ng-if="(id === '1503')"></div>
             <div ng-include="'/app/paymentitem-detail/templates/afterpay.html'" ng-if="(id === '9000') || (id === '9001')"></div>
+            
 
-            <div class="form-group" ng-repeat="paymentItemfield in paymentitem.paymentProductFields" ng-if="!((type === 'group' && id === 'cards') || paymentitem.paymentMethod === 'card') && id !== '1503'"  ng-init="paymentItemFieldId=paymentItemfield.id">
+            <div class="form-group" ng-repeat="paymentItemfield in paymentitem.paymentProductFields" ng-if="!((type === 'group' && id === 'cards') || paymentitem.paymentMethod === 'card') && id !== '1503' && id !== '302'"  ng-init="paymentItemFieldId=paymentItemfield.id">
                 <label for="{{paymentItemfield.id}}" class="hidden-xs hidden-sm">{{paymentItemfield.displayHints.label}}</label>
                 <div ng-switch on="paymentItemfield.displayHints.formElement.type" class="paymentitem-input">
                     <div ng-switch-when="list">
@@ -31,7 +32,8 @@
                 <div ng-include="'/app/paymentitem-detail/templates/remember-me.html'"></div>
             </div>
             <div class="paymentbuttons" id="paymentButtons">
-                <button class="btn btn-success btn-block btn-primary" type="submit" id="primaryButton"><span>Pay now</span></button>
+                <div ng-include="'/app/paymentitem-detail/templates/applepay.html'" ng-if="(id === '302')"></div>
+                <button ng-if="(id !== '302')" class="btn btn-success btn-block btn-primary" type="submit" id="primaryButton"><span>Pay now</span></button>
                 <a href="#/paymentitem-selection/" class="cancel btn-secondary"> <span>Cancel</span> </a>
             </div>
         </div>

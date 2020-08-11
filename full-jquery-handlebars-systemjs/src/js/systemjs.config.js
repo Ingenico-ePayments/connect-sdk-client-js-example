@@ -49,6 +49,7 @@
     packages['connectsdk.net'] = { main: '../../../node_modules/connect-sdk-client-js/src/net.js', defaultExtension: 'js' };
     packages['connectsdk.Util'] = { main: '../../../node_modules/connect-sdk-client-js/src/Util.js', defaultExtension: 'js' };
     packages['connectsdk.GooglePay'] = { main: '../../../node_modules/connect-sdk-client-js/src/GooglePay.js', defaultExtension: 'js' };
+    packages['connectsdk.ApplePay'] = { main: '../../../node_modules/connect-sdk-client-js/src/ApplePay.js', defaultExtension: 'js' };
     packages['connectsdk.PublicKeyResponse'] = { main: '../../../node_modules/connect-sdk-client-js/src/PublicKeyResponse.js', defaultExtension: 'js' };
     packages['connectsdk.BasicPaymentProductGroup'] = { main: '../../../node_modules/connect-sdk-client-js/src/BasicPaymentProductGroup.js', defaultExtension: 'js' };
     packages['connectsdk.PaymentProductField'] = { main: '../../../node_modules/connect-sdk-client-js/src/PaymentProductField.js', defaultExtension: 'js' };
@@ -68,6 +69,7 @@
     packages['connectsdk.ValidationRuleLuhn'] = { main: '../../../node_modules/connect-sdk-client-js/src/ValidationRuleLuhn.js', defaultExtension: 'js' };
     packages['connectsdk.ValidationRuleRange'] = { main: '../../../node_modules/connect-sdk-client-js/src/ValidationRuleRange.js', defaultExtension: 'js' };
     packages['connectsdk.ValidationRuleRegularExpression'] = { main: '../../../node_modules/connect-sdk-client-js/src/ValidationRuleRegularExpression.js', defaultExtension: 'js' };
+    packages['connectsdk.ValidationRuleResidentIdNumber'] = { main: '../../../node_modules/connect-sdk-client-js/src/ValidationRuleResidentIdNumber.js', defaultExtension: 'js' };
     packages['connectsdk.ValidationRuleEmailAddress'] = { main: '../../../node_modules/connect-sdk-client-js/src/ValidationRuleEmailAddress.js', defaultExtension: 'js' };
     packages['connectsdk.ValidationRuleBoletoBancarioRequiredness'] = { main: '../../../node_modules/connect-sdk-client-js/src/ValidationRuleBoletoBancarioRequiredness.js', defaultExtension: 'js' };
     packages['connectsdk.ValidationRuleTermsAndConditions'] = { main: '../../../node_modules/connect-sdk-client-js/src/ValidationRuleTermsAndConditions.js', defaultExtension: 'js' };
@@ -75,6 +77,7 @@
     packages['connectsdk.ValidationRuleFactory'] = { main: '../../../node_modules/connect-sdk-client-js/src/ValidationRuleFactory.js', defaultExtension: 'js' };
     packages['connectsdk.LabelTemplateElement'] = { main: '../../../node_modules/connect-sdk-client-js/src/LabelTemplateElement.js', defaultExtension: 'js' };
     packages['connectsdk.ValueMappingElement'] = { main: '../../../node_modules/connect-sdk-client-js/src/ValueMappingElement.js', defaultExtension: 'js' };
+
 
 
     var meta = {

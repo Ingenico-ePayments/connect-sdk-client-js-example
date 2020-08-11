@@ -1,11 +1,11 @@
 @charset "utf-8";
 
-@import "variables";
+@import 'variables';
 
 //ISAAC mixins
-@import "mixins/isaac-responsive";
-@import "mixins/isaac-caret";
-@import "mixins/isaac-ie8fixes";
+@import 'mixins/isaac-responsive';
+@import 'mixins/isaac-caret';
+@import 'mixins/isaac-ie8fixes';
 
 //Compass mixins
 //@import "compass/css3/box-shadow";
@@ -15,28 +15,28 @@
 //@import "compass/typography/text/replacement";
 
 //combine all stylesheets and generate output
-@import "bootstrap";
-@import "grid";
-@import "header";
-@import "footer";
+@import 'bootstrap';
+@import 'grid';
+@import 'header';
+@import 'footer';
 //@import "breadcrumb";
 //@import "type";
 //@import "labels";
-@import "tables";
+@import 'tables';
 //@import "navs";
 //@import "dropdowns";
-@import "modals";
-@import "panels";
-@import "icons";
-@import "buttons"; // please note that we have edited the default bootstrap button scss!
+@import 'modals';
+@import 'panels';
+@import 'icons';
+@import 'buttons'; // please note that we have edited the default bootstrap button scss!
 //@import "button-groups";
-@import "lookup";
-@import "forms";
+@import 'lookup';
+@import 'forms';
 //@import "input-groups";
-@import "popovers";
-@import "alerts";
+@import 'popovers';
+@import 'alerts';
 //@import "jumbotron";
 
-@import "sticky-footer";
-@import "hpp";
-@import "cobrand";
+@import 'sticky-footer';
+@import 'hpp';
+@import 'cobrand';

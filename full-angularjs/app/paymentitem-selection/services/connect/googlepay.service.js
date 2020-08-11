@@ -1,4 +1,5 @@
 angular.module('connect.GooglePay', []).factory('connectGooglePay', ['$q', function ($q) {
+    
 
     var $scope = null;
     var googlePayId = 320;

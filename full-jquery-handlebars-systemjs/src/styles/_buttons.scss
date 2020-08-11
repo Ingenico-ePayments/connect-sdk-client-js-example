@@ -1,24 +1,32 @@
- // please note that we have edited the default bootstrap button scss!
+// please note that we have edited the default bootstrap button scss!
 
 //specify button padding
 .btn {
-  @include button-size($padding-base-vertical, $padding-base-horizontal, $font-size-base, $line-height-base, 0);
-  font-family:Arial,"Helvetica Neue",Helvetica,sans-serif;
-  font-size:18px;
+  @include button-size(
+    $padding-base-vertical,
+    $padding-base-horizontal,
+    $font-size-base,
+    $line-height-base,
+    0
+  );
+  font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  font-size: 18px;
 
   &.disabled,
   &[disabled],
   fieldset[disabled] & {
-    @include opacity(.5);
+    @include opacity(0.5);
   }
   &.btn-link {
     font-size: 15px;
     color: #2869ac;
-    &.secci-url, &.enter-information{
+    &.secci-url,
+    &.enter-information {
       padding: 6px 0;
     }
   }
-  &.active, &:active {
+  &.active,
+  &:active {
     outline: 0;
     background-image: none;
     box-shadow: 0 !important;
@@ -26,19 +34,60 @@
 }
 
 .btn-sm {
-  font-size:15px;
+  font-size: 15px;
   padding: 4px 9px 5px 9px;
 }
 
 .btn-lg {
-  font-size:18px;
+  font-size: 18px;
   padding: 9px 20px 12px 20px;
 }
 
 .btn-primary {
   &.disabled,
   &[disabled] {
-    color:rgba(255,255,255,0.5);
+    color: rgba(255, 255, 255, 0.5);
   }
+}
 
+@supports (-webkit-appearance: -apple-pay-button) {
+  .apple-pay-button {
+    display: inline-block;
+    -webkit-appearance: -apple-pay-button;
+  }
+  .apple-pay-button-black {
+    -apple-pay-button-style: black;
+  }
+  .apple-pay-button-white {
+    -apple-pay-button-style: white;
+  }
+  .apple-pay-button-white-with-line {
+    -apple-pay-button-style: white-outline;
+  }
+}
+
+@supports not (-webkit-appearance: -apple-pay-button) {
+  .apple-pay-button {
+    display: inline-block;
+    background-size: 100% 60%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    padding: 0px;
+    box-sizing: border-box;
+    min-height: 32px;
+    max-height: 64px;
+  }
+  .apple-pay-button-black {
+    background-image: -webkit-named-image(apple-pay-logo-white);
+    background-color: black;
+  }
+  .apple-pay-button-white {
+    background-image: -webkit-named-image(apple-pay-logo-black);
+    background-color: white;
+  }
+  .apple-pay-button-white-with-line {
+    background-image: -webkit-named-image(apple-pay-logo-black);
+    background-color: white;
+    border: 0.5px solid black;
+  }
 }

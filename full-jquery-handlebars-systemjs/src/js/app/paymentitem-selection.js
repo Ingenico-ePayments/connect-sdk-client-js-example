@@ -40,8 +40,8 @@ $(function () {
 
     window.connect.addHandleBarsHelpers(session);
 
-    function getPaymentProductNetworks() {
-        session.getPaymentProduct(googlePayId, paymentDetails, paymentProductSpecificInputs).then(function(paymentProduct) {
+    function getPaymentProductNetworks () {
+        session.getPaymentProduct(googlePayId, paymentDetails, paymentProductSpecificInputs).then(function (paymentProduct) {
             // We extract some data from the Google Pay payment product response that is required to initialize Google Pay API
             // As we can retrieve them here, we didn't add this as input fields on dev-start
             // We add it to the paymentProductSpecificInputs for ease of use of one single object with Google Pay data we need to use in multiple places.
@@ -51,13 +51,13 @@ $(function () {
         });
     }
 
-    function isPaymentProductIdInList(paymentProductId, list) {
+    function isPaymentProductIdInList (paymentProductId, list) {
         return list.filter(function (paymentItem) {
             return paymentItem.id === paymentProductId;
         }).length > 0;
     }
 
-    function _getPaymentItems() {
+    function _getPaymentItems () {
         $("#loading").show();
         session.getBasicPaymentItems(paymentDetails, grouping, paymentProductSpecificInputs).then(function (basicPaymentItems) {
             $("#loading").hide();
@@ -148,9 +148,9 @@ $(function () {
 
                     // get search query params
                     var search = '?' + [
-                        {key: 'paymentitemId', value: id},
-                        {key: 'type', value: type},
-                        {key: 'accountOnFileId', value: aofid}
+                        { key: 'paymentitemId', value: id },
+                        { key: 'type', value: type },
+                        { key: 'accountOnFileId', value: aofid }
                     ].filter(function (obj) {
                         return typeof obj.value !== 'undefined';
                     }).map(function (obj) {

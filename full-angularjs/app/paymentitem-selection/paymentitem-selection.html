@@ -1,30 +1,46 @@
-<form ng-controller="paymentitem-selection.controller" class="page" method="POST">
-    <div class="alert alert-danger" ng-if="hasError">
-        There was a problem while getting the payment items; please check your credentials and payment context <a href="#/dev-sessiondetails">here</a>
-    </div>
-    <div ng-if="!hasError">
-        <h3 class="par" id="selectmethod">Choose a payment product</h3>
-        <div class="paymentoption">
-            <div ng-if="accountsOnFile && accountsOnFile.length > 0">
-                <p class="par">Previously used accounts:</p>
-                <ul id="paymentoptionslist">
-                    <li ng-repeat="accountOnFile in accountsOnFile">
-                        <a class="btn-tertiary" ng-click="chooseAccountOnFile(accountOnFile)">
-                            <img ng-src="{{::accountOnFile.displayHints.logo}}?size=37x37"> {{showAccountOnFileData(accountOnFile)}}
-                            {{getLogoByPaymentProductId(accountOnFile.paymentProductId)() }}
-                        </a>
-                    </li>
-                </ul>
+<form
+  ng-controller="paymentitem-selection.controller"
+  class="page"
+  method="POST"
+>
+  <div class="alert alert-danger" ng-if="hasError">
+    There was a problem while getting the payment items; please check your
+    credentials and payment context <a href="#/dev-sessiondetails">here</a>
+  </div>
+  <div ng-if="!hasError">
+    <h3 class="par" id="selectmethod">Choose a payment product</h3>
+    <div class="paymentoption">
+      <div ng-if="accountsOnFile && accountsOnFile.length > 0">
+        <p class="par">Previously used accounts:</p>
+        <ul id="paymentoptionslist">
+          <li ng-repeat="accountOnFile in accountsOnFile">
+            <a
+              class="btn-tertiary"
+              ng-click="chooseAccountOnFile(accountOnFile)"
+            >
+              <img ng-src="{{::accountOnFile.displayHints.logo}}?size=37x37" />
+              {{showAccountOnFileData(accountOnFile)}}
+              {{getLogoByPaymentProductId(accountOnFile.paymentProductId)() }}
+            </a>
+          </li>
+        </ul>
+      </div>
+      <ul id="paymentoptionslist">
+        <li
+          ng-attr-id="{{paymentItem.id}}"
+          ng-repeat="paymentItem in basicPaymentItems"
+        >
+          <button
+            class="btn-tertiary"
+            ng-click="choosePaymentItem(paymentItem)"
+          >
+            <div>
+              <img ng-src="{{::paymentItem.displayHints.logo}}?size=37x37" />
+              {{::paymentItem.displayHints.label}}
             </div>
-            <ul id="paymentoptionslist">
-                <li ng-repeat="paymentItem in basicPaymentItems">
-                    <button class="btn-tertiary" ng-click="choosePaymentItem(paymentItem)">
-                        <div>
-                            <img ng-src="{{::paymentItem.displayHints.logo}}?size=37x37"> {{::paymentItem.displayHints.label}}
-                        </div>
-                    </button>
-                </li>
-            </ul>
-        </div>
+          </button>
+        </li>
+      </ul>
     </div>
+  </div>
 </form>

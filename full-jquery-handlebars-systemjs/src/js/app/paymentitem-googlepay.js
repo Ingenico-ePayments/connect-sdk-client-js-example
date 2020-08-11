@@ -59,18 +59,18 @@ var _getGooglePaymentDataRequest = function (paymentProductSpecificInputs, netwo
     };
 };
 
-function _getGooglePaymentsClient(environment) {
+function _getGooglePaymentsClient (environment) {
     if (paymentsClient === null) {
         var googlePayEnvironment = 'TEST';
         if (environment === 'PROD') {
             googlePayEnvironment = 'PROD';
         }
-        paymentsClient = new google.payments.api.PaymentsClient({environment: googlePayEnvironment});
+        paymentsClient = new google.payments.api.PaymentsClient({ environment: googlePayEnvironment });
     }
     return paymentsClient;
 }
 
-var encryptGooglePayPayment = function encryptGooglePayPayment(session, paymentRequest) {
+var encryptGooglePayPayment = function encryptGooglePayPayment (session, paymentRequest) {
     $("#loading").show();
     // Create an SDK encryptor object
     var encryptor = session.getEncryptor(forge);
@@ -87,7 +87,7 @@ var encryptGooglePayPayment = function encryptGooglePayPayment(session, paymentR
     });
 };
 
-var setupGooglePayAndExecute = function setupGooglePayAndExecute(session, context, paymentDetails, paymentRequest, paymentProductSpecificInputs) {
+var setupGooglePayAndExecute = function setupGooglePayAndExecute (session, context, paymentDetails, paymentRequest, paymentProductSpecificInputs) {
     if (context) {
         var _networks = paymentProductSpecificInputs.googlePay.networks;
         if (_networks && _networks.length > 0) {

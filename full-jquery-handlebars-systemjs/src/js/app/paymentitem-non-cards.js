@@ -2,6 +2,7 @@ var $ = require('jQuery');
 window.forge = require('node-forge');
 var connectSDK = require('connectsdk.session');
 var Handlebars = require('handlebars');
+var applePayId = 302;
 require('jquery-validation');
 require('bootstrap');
 
@@ -9,12 +10,12 @@ require('./validate-defaults');
 require('./paymentitem-non-cards-helpers');
 require('./paymentitem-formatter');
 
-$(function() {
-  function _showPaymentItem(id) {
+$(function () {
+  function _showPaymentItem (id) {
     $('#loading').show();
 
     session.getPaymentProduct(id, paymentDetails).then(
-      function(paymentProduct) {
+      function (paymentProduct) {
         $('#loading').hide();
         paymentRequest.setPaymentProduct(paymentProduct);
 
@@ -26,24 +27,45 @@ $(function() {
         if (paymentProduct.paymentProductFields.length === 0) {
           encrypt();
         } else {
-          _renderPage(paymentProduct, $('#detail-template').html(), accountOnFile, false);
+          if (paymentProduct.id === applePayId) {
+            _renderPage(paymentProduct, $('#applepay-template').html(), accountOnFile, false);
+          } else {
+            _renderPage(paymentProduct, $('#detail-template').html(), accountOnFile, false);
+
+          }
         }
       },
-      function() {
+      function () {
         $('#loading').hide();
         $('#error').fadeIn();
       }
     );
   }
 
-  function _renderPage(paymentItem, source, accountOnFile, isGroup) {
+  function _renderPage (paymentItem, source, accountOnFile, isGroup) {
     var template = Handlebars.compile(source);
     var json = paymentItem.json;
+
+    // Render Apple pay template
+    if (paymentItem.id === applePayId) {
+      $('#handlebarsDrop').html(template(json));
+      $("#apple-pay-button").click(function () {
+        session.createApplePayPayment(paymentDetails, paymentProductSpecificInputs.applePay, paymentItem.paymentProduct302SpecificData.networks).then(function (res) {
+          var request = session.getPaymentRequest();
+          request.setValue('encryptedPaymentData', res.data.paymentData.data)
+          encrypt()
+        }, function (res) {
+          $('#loading').hide();
+          console.error(res.message);
+        })
+      })
+      return;
+    }
 
     // We now add some additional stuff to the JSON object that represents the selected payment product so handlebars
     // can actually fill out all the variables in its template. Some of these values for these variables are not
     // available in the core payment product info so we add them.
-    $.each(json.fields, function(index, field) {
+    $.each(json.fields, function (index, field) {
       // A) a isCurrency field because the #if Handlebars clause it too limited (it cannot do the === 'currency' check itself)
       if (field.displayHints.formElement.type === 'currency') {
         field.displayHints.formElement.isCurrency = true;
@@ -122,14 +144,14 @@ $(function() {
     // we validate it and if successful we encrypt the result. Your application should send the cypher text to
     // your e-commerce server itself.
     $('.validatedForm').validate({
-      submitHandler: function(e) {
+      submitHandler: function (e) {
         // We create an object with key:value pairs consisting on the id of the paymentproductfield
         // and its value as presented (with or without mask).
         var blob = {};
 
         // We only add the form elements that have the "data-includeInEncryptedBlob=true" attribute; which we've added
         // to each input/select when we created the form.
-        $('.validatedForm [data-includeInEncryptedBlob=true]').each(function() {
+        $('.validatedForm [data-includeInEncryptedBlob=true]').each(function () {
           if (
             $(this)
               .attr('id')
@@ -187,7 +209,7 @@ $(function() {
 
     // A) Sometimes we show the "tokenize payment" checkbox (See above). Because of this special way of including the
     //    field we also need a separate handling of it. That is done here.
-    $('#rememberme').on('change', function() {
+    $('#rememberme').on('change', function () {
       paymentRequest.setTokenize($(this).is(':checked'));
     });
 
@@ -201,7 +223,9 @@ $(function() {
     connect.updateFieldMask(paymentItem);
   }
 
-  function encrypt() {
+
+
+  function encrypt () {
     $('#loading').show();
 
     // Create an SDK encryptor object
@@ -209,12 +233,12 @@ $(function() {
 
     // Encrypting is an async task that we provide you as a promise.
     encryptor.encrypt(paymentRequest).then(
-      function(encryptedString) {
+      function (encryptedString) {
         // The promise has fulfilled.
         sessionStorage.setItem('encryptedString', encryptedString);
         document.location.href = 'dev-success.html';
       },
-      function(errors) {
+      function (errors) {
         // The promise failed, inform the user what happened.
 
         $('#loading').hide();
@@ -242,6 +266,11 @@ $(function() {
     isRecurring: context.isRecurring,
     currency: context.currency
   };
+  var paymentProductSpecificInputs = {
+    applePay: {
+      merchantName: context.merchantName
+    },
+  }
   var grouping = context.grouping;
   var session = new connectSDK(sessionDetails);
   var paymentRequest = session.getPaymentRequest();
@@ -250,7 +279,7 @@ $(function() {
   if (search) {
     search = search.substring(1);
     search = search.split('&');
-    $.each(search, function(i, part) {
+    $.each(search, function (i, part) {
       part = part.split('=');
       if (part[0] === 'paymentitemId') {
         _showPaymentItem(part[1]);

@@ -5,14 +5,14 @@ app.controller('paymentitem-selection.controller', ['$scope', '$rootScope', '$lo
 
     var context = JSON.parse(sessionStorage.getItem('context'));
 
-    var isPaymentProductIdInList = function(paymentProductId, list) {
+    var isPaymentProductIdInList = function (paymentProductId, list) {
         return list.filter(function (paymentItem) {
             return paymentItem.id === paymentProductId;
         }).length > 0;
     }
 
-    var getPaymentProductNetworks = function() {
-        $scope.connect.session.getPaymentProduct(googlePayId, $scope.connect.paymentDetails, $scope.connect.paymentProductSpecificInputs).then(function(paymentProduct) {
+    var getPaymentProductNetworks = function () {
+        $scope.connect.session.getPaymentProduct(googlePayId, $scope.connect.paymentDetails, $scope.connect.paymentProductSpecificInputs).then(function (paymentProduct) {
             // We extract some data from the Google Pay payment product response that is required to initialize Google Pay API
             // As we can retrieve them here, we didn't add this as input fields on dev-start
             // We add it to the paymentProductSpecificInputs for ease of use of one single object with Google Pay data we need to use in multiple places.
@@ -74,7 +74,7 @@ app.controller('paymentitem-selection.controller', ['$scope', '$rootScope', '$lo
                     $rootScope.encryptedString = encryptedString;
                     $location.path('/dev-success');
                 });
-            }, function error(e) {
+            }, function error (e) {
                 $rootScope.loading = false;
                 console.error('encryption failed', e);
                 $scope.$apply(function () {
@@ -152,6 +152,9 @@ app.controller('paymentitem-selection.controller', ['$scope', '$rootScope', '$lo
         // If you want to use Google Pay in your application, a merchantId is required to set it up.
         // getBasicPaymentItems will use it to perform an extra check(canMakePayment) to see if the user can pay with Google Pay.
         $scope.connect.paymentProductSpecificInputs = {
+            applePay: {
+                merchantName: context.merchantName
+            },
             googlePay: {
                 merchantId: context.merchantId,
                 gatewayMerchantId: context.gatewayMerchantId,
