@@ -53,7 +53,7 @@
             </div>
             <ul id="paymentoptionslist">
                 <li ng-repeat="cobrand in iinDetails.coBrands">
-                    <a class="btn-tertiary" ng-click="setCobrand(cobrand.paymentProductId)" ng-class="{'active-cobrand': cobrand.paymentProductId === paymentitem.id}">
+                    <a class="btn-tertiary" ng-click="setCobrand(cobrand.paymentProductId)" ng-class="{'active-cobrand': cobrand.paymentProductId === paymentitem.id}" ng-if="cobrand.isAllowedInContext">
                         <div><img ng-src="{{cobrand.displayHints.logo}}?size=25x17">{{cobrand.displayHints.label}}</div>
                     </a>
                 </li>

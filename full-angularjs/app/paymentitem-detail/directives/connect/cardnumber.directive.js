@@ -35,7 +35,7 @@ angular.module('connect.cardnumber', []).directive('connectCardNumber', function
 
             function extractBin(value) {
                 var newBIN;
-                if (value.length() >= 8) {
+                if (value.length >= 8) {
                     newBIN = value.substring(0, 8);
                 } else {
                     newBIN = value.substring(0, 6);

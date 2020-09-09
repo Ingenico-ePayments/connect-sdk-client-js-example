@@ -188,7 +188,7 @@ $(function () {
                 // don't handle ctrl events (copy paste otherwise will send double iin details calls)
                 return true;
             }
-            var currentFirstDigits = extractBin();
+            var currentFirstDigits = extractBin(this);
             if (currentFirstDigits !== storedFirstDigits) {
                 // We use the SDK to do the IIN lookup, this is an async task that we provide you as a promise
                 session.getIinDetails($(this).val(), paymentDetails).then(function (response) {
@@ -233,8 +233,8 @@ $(function () {
             }
         });
 
-        function extractBin() {
-            const currentValue = $(this).val().replace(' ', '');
+        function extractBin(field) {
+            const currentValue = $(field).val().replace(' ', '');
             // we only need to analyse the card's first 6 or 8 digits.
             return currentValue.length >= 8
                 ? currentValue.substring(0, 8)
