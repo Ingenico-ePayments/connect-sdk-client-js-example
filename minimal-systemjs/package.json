@@ -12,7 +12,7 @@
   "dependencies": {
     "connect-sdk-client-js": "^3.18.0",
     "systemjs": "^0.19.36",
-    "node-forge": "^0.6.42"
+    "node-forge": "^0.10.0"
   },
   "devDependencies": {
     "lite-server": "^2.2.2"
