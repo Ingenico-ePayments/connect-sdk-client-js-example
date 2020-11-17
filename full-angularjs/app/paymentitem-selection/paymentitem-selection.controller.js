@@ -19,6 +19,9 @@ app.controller('paymentitem-selection.controller', ['$scope', '$rootScope', '$lo
             // Yes it is now also send to the SDK in getBasicPaymentItems but it is not needed but it also won't interfere.
             $scope.connect.paymentProductSpecificInputs.googlePay.networks = paymentProduct.paymentProduct320SpecificData.networks;
             $scope.connect.paymentProductSpecificInputs.googlePay.gateway = paymentProduct.paymentProduct320SpecificData.gateway;
+            if (paymentProduct.acquirerCountry) {
+                $scope.connect.paymentProductSpecificInputs.googlePay.acquirerCountry = paymentProduct.acquirerCountry;
+            }
         });
     }
 

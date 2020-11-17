@@ -16,13 +16,20 @@ angular.module('connect.GooglePay', []).factory('connectGooglePay', ['$q', funct
         }
     };
 
-    var _getTransactionInfo = function (currency) {
+    var _getTransactionInfo = function (paymentDetails, acquirerCountry) {
         return {
-            'totalPriceStatus': 'NOT_CURRENTLY_KNOWN',
-            'currencyCode': currency
+            'totalPriceStatus': 'FINAL',
+            'totalPrice': amountFormatted(paymentDetails.totalAmount),
+            'countryCode': acquirerCountry,
+            'currencyCode': paymentDetails.currency
         };
     };
     
+    function amountFormatted(amount) {
+        var output = '00'.concat(amount);
+        return [output.slice(0, output.length - 2), '.', output.slice(output.length - 2)].join('');
+    }
+
     var _getMerchantInfo = function (paymentProductSpecificInputs) {
         return {
             'merchantName': paymentProductSpecificInputs.googlePay.merchantName
@@ -39,12 +46,19 @@ angular.module('connect.GooglePay', []).factory('connectGooglePay', ['$q', funct
         }
     };
 
-    var _getGooglePaymentDataRequest = function (paymentProductSpecificInputs, networks, currency) {
+    var _getGooglePaymentDataRequest = function (paymentProductSpecificInputs, networks, paymentDetails) {
+        var acquirerCountry;
+        if (paymentProductSpecificInputs.acquirerCountry) {
+            acquirerCountry = paymentProductSpecificInputs.acquirerCountry;
+        } else {
+            acquirerCountry = paymentDetails.countryCode;
+        }
+
         return {
             apiVersion: 2,
             apiVersionMinor: 0,
             allowedPaymentMethods: [_getCardPaymentMethod(paymentProductSpecificInputs, networks)],
-            transactionInfo: _getTransactionInfo(currency),
+            transactionInfo: _getTransactionInfo(paymentDetails, acquirerCountry),
             merchantInfo: _getMerchantInfo(paymentProductSpecificInputs)
         };
     };
@@ -80,7 +94,7 @@ angular.module('connect.GooglePay', []).factory('connectGooglePay', ['$q', funct
                     var _networks = paymentProductSpecificInputs.googlePay.networks;
                     if (_networks && _networks.length > 0) {
                         var paymentsClient = _getGooglePaymentsClient($scope.environment);
-                        paymentsClient.loadPaymentData(_getGooglePaymentDataRequest(paymentProductSpecificInputs, _networks, $scope.connect.paymentDetails.currency))
+                        paymentsClient.loadPaymentData(_getGooglePaymentDataRequest(paymentProductSpecificInputs, _networks, $scope.connect.paymentDetails))
                             .then(function (paymentData) {
                                 // Get the payment product so the paymentRequest can be completed
                                 // We do this here because Google does not allow async calls to be done between clicking and opening the payment sheet with 'loadPaymentData'.

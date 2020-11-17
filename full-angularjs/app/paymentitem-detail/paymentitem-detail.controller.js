@@ -156,6 +156,10 @@ app.controller('paymentitem.controller', ['$rootScope', '$scope', '$location', '
 
     $scope.startApplePay = function () {
         var networks = $scope.paymentitem.paymentProduct302SpecificData.networks;
+
+        if ($scope.paymentitem.acquirerCountry) {
+            $scope.connect.paymentProductSpecificInputs.applePay.acquirerCountry = $scope.paymentitem.acquirerCountry;
+        }
         $scope.connect.session.createApplePayPayment($scope.connect.paymentDetails, $scope.connect.paymentProductSpecificInputs.applePay, networks).then(function (res) {
             var request = $scope.connect.session.getPaymentRequest();
             request.setValue('encryptedPaymentData', res.data.paymentData.data)
@@ -292,7 +296,6 @@ app.controller('paymentitem.controller', ['$rootScope', '$scope', '$location', '
     var context = JSON.parse(sessionStorage.getItem('context'));
     if (context) {
         $scope.connect = {}; // store all connectSDK variables in this namespace
-
 
 
         // split the context up in the session- and paymentDetails

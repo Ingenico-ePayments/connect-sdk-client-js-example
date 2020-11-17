@@ -1,11 +1,11 @@
 {
   "name": "connect-sdk-client-js-example-prototypejs",
-  "version": "1.10.2",
+  "version": "1.11.0",
   "description": "",
   "main": "index.html",
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "connect-sdk-client-js": "^3.18.0"
+    "connect-sdk-client-js": "^3.19.0"
   }
 }

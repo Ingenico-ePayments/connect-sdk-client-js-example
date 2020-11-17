@@ -50,6 +50,11 @@ $(function () {
     if (paymentItem.id === applePayId) {
       $('#handlebarsDrop').html(template(json));
       $("#apple-pay-button").click(function () {
+        
+        if (paymentItem.acquirerCountry) {
+          paymentProductSpecificInputs.applePay.acquirerCountry = paymentItem.acquirerCountry;
+        }
+        
         session.createApplePayPayment(paymentDetails, paymentProductSpecificInputs.applePay, paymentItem.paymentProduct302SpecificData.networks).then(function (res) {
           var request = session.getPaymentRequest();
           request.setValue('encryptedPaymentData', res.data.paymentData.data)
