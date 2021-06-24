@@ -1,6 +1,6 @@
 {
   "name": "connect-sdk-client-js-example-jquery",
-  "version": "1.11.0",
+  "version": "1.11.1",
   "description": "",
   "main": "index.html",
   "scripts": {
@@ -15,8 +15,8 @@
   "license": "ISC",
   "dependencies": {
     "bootstrap-sass": "^3.4.1",
-    "connect-sdk-client-js": "^3.19.0",
-    "handlebars": "^4.1.1",
+    "connect-sdk-client-js": "^3.20.1",
+    "handlebars": "^4.7.7",
     "jquery": "^3.2.1",
     "jquery-validation": "^1.19.0",
     "node-forge": "^0.10.0",
