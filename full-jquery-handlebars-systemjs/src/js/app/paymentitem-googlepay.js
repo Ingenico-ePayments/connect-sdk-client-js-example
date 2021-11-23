@@ -77,7 +77,7 @@ function _getGooglePaymentsClient (environment) {
     if (paymentsClient === null) {
         var googlePayEnvironment = 'TEST';
         if (environment === 'PROD') {
-            googlePayEnvironment = 'PROD';
+            googlePayEnvironment = 'PRODUCTION';
         }
         paymentsClient = new google.payments.api.PaymentsClient({ environment: googlePayEnvironment });
     }
@@ -87,7 +87,7 @@ function _getGooglePaymentsClient (environment) {
 var encryptGooglePayPayment = function encryptGooglePayPayment (session, paymentRequest) {
     $("#loading").show();
     // Create an SDK encryptor object
-    var encryptor = session.getEncryptor(forge);
+    var encryptor = session.getEncryptor();
     // Encrypting is an async task that we provide you as a promise.
     encryptor.encrypt(paymentRequest).then(function (encryptedString) {
         // The promise has fulfilled.

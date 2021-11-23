@@ -414,7 +414,7 @@ $(function () {
         $("#loading").show();
 
         // Create an SDK encryptor object
-        var encryptor = session.getEncryptor(forge);
+        var encryptor = session.getEncryptor();
 
         // Encrypting is an async task that we provide you as a promise.
         encryptor.encrypt(paymentRequest).then(function (encryptedString) {

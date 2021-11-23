@@ -67,7 +67,7 @@ angular.module('connect.GooglePay', []).factory('connectGooglePay', ['$q', funct
         if (paymentsClient === null) {
             var googlePayEnvironment = 'TEST';
             if (environment === 'PROD') {
-                googlePayEnvironment = 'PROD';
+                googlePayEnvironment = 'PRODUCTION';
             }
             paymentsClient = new google.payments.api.PaymentsClient({environment: googlePayEnvironment});
         }

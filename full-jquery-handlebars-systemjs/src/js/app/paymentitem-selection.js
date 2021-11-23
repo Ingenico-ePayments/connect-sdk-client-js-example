@@ -49,7 +49,7 @@ $(function () {
             paymentProductSpecificInputs.googlePay.networks = paymentProduct.paymentProduct320SpecificData.networks;
             paymentProductSpecificInputs.googlePay.gateway = paymentProduct.paymentProduct320SpecificData.gateway;
             if (paymentProduct.acquirerCountry) {
-                $scope.connect.paymentProductSpecificInputs.googlePay.acquirerCountry = paymentProduct.acquirerCountry;
+                paymentProductSpecificInputs.googlePay.acquirerCountry = paymentProduct.acquirerCountry;
             }
         });
     }
@@ -101,7 +101,7 @@ $(function () {
                     }
 
                     // overwrite extendedData properties (`paymentMethod` & `type`)
-                    for (prop in extendedData) {
+                    for (var prop in extendedData) {
                         data[prop] = extendedData[prop];
                     }
 
