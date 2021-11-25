@@ -162,7 +162,7 @@ app.controller('paymentitem.controller', ['$rootScope', '$scope', '$location', '
         }
         $scope.connect.session.createApplePayPayment($scope.connect.paymentDetails, $scope.connect.paymentProductSpecificInputs.applePay, networks).then(function (res) {
             var request = $scope.connect.session.getPaymentRequest();
-            request.setValue('encryptedPaymentData', res.data.paymentData.data)
+            request.setValue('encryptedPaymentData', res.data.paymentData)
             encrypt()
         }, function (res) {
             $rootScope.loading = false;
