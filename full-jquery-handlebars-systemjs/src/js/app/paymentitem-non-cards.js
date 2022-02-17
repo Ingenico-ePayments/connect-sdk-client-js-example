@@ -1,6 +1,5 @@
 var $ = require('jQuery');
-window.forge = require('node-forge');
-var connectSDK = require('connectsdk.session');
+var connectSDK = require('connectsdk.Session');
 var Handlebars = require('handlebars');
 var applePayId = 302;
 require('jquery-validation');

@@ -5,7 +5,6 @@
 This example shows you how to load the [Ingenico Connect JavaScript Client SDK](https://github.com/Ingenico-ePayments/connect-sdk-client-js) with the systemjs module loader.
 
 The Connect SDK is used for all communication to the Connect API and crypto. See the [Ingenico ePayments Developer Hub](https://epayments.developer-ingenico.com/documentation/sdk/mobile/javascript/) for more information on how to use the Ingenico Connect API.
-A complete copy of forge is included. which is used to do the actual crypto.
 
 ## How to install
 
@@ -29,5 +28,6 @@ In `app.js` you include the sessiondetails, this is the only file that is system
 |   -- create-payload.js - generic code which provides an example on how the SDK works, this is common for all minimal examples.
 +-- node_modules
 |   ... folder containing all node dependencies; run npm install to get the dependencies
-|   -- index.html - html page as start page
+|-- index.html - html page as start page
+|-- systemjs.config.js - config file for the systemjs module loader
 ```

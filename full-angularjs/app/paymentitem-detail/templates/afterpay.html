@@ -63,7 +63,7 @@
                             id="{{lookupField.id}}"
                             class="form-control lookup-field"
                             ng-model="lookupModel[lookupField.id]"
-                            ng-attr-ui-mask="{{lookupField.displayHints.uimask}}"
+                            ng-attr-ui-mask="{{uimask(lookupField)}}"
                             ng-required="lookupField.dataRestrictions.isRequired"
                             ui-options="maskoptions"
                             ui-mask-placeholder-char="space"

@@ -1,4 +1,4 @@
-var connect = require('connect-sdk-client-js/dist/connectsdk.noEncrypt');
+var connect = require('connect-sdk-client-js/dist/index');
 
 var sessionDetails = {
     assetUrl: "",
@@ -17,7 +17,7 @@ var paymentDetails = {
 
 var cardNumber = '4567 3500 0042 7977';
 
-var session = new connect(sessionDetails);
+var session = new connect.Session(sessionDetails);
 
 createPayload(session, cardNumber, paymentDetails);
 

@@ -78,15 +78,15 @@ angular.module('connect.cardnumber', []).directive('connectCardNumber', function
                 angular.forEach(response.coBrands, function (cobrand) {
                     var paymentProductId = cobrand.paymentProductId;
                     if (cobrand.isAllowedInContext) {
+                        $scope.paymentProductDisplayHints = $scope.paymentProductDisplayHints || {};
                         cobrandCount++;
-                        $scope.getPaymentProduct(paymentProductId).then(function (paymentProduct) {
-                            $scope.$apply(function () {
-                                // add logo and label to he cobrand displayHints
-                                cobrand.displayHints = cobrand.displayHints || {};
-                                cobrand.displayHints.logo = paymentProduct.displayHints.logo;
-                                cobrand.displayHints.label = paymentProduct.displayHints.label;
+                        if (!$scope.paymentProductDisplayHints[paymentProductId]) {
+                            $scope.getPaymentProduct(paymentProductId).then(function (paymentProduct) {
+                                $scope.$apply(function () {
+                                    $scope.paymentProductDisplayHints[paymentProductId] = paymentProduct.displayHints;
+                                });
                             });
-                        });
+                        }
                     }
                 });
                 if (cobrandCount > 1) {

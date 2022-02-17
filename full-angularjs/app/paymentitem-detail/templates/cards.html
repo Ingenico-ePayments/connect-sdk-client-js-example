@@ -2,10 +2,10 @@
     <label for="cardholderName" class="hidden-xs hidden-sm">{{paymentitem.paymentProductFieldById['cardholderName'].displayHints.label}}</label>
     <div class="hasIcon">
         <input name="cardholderName" id="cardholderName" placeholder="{{paymentitem.paymentProductFieldById['cardholderName'].displayHints.placeholderLabel}}"
-            class="form-control" ng-model="item['cardholderName']" ng-attr-ui-mask="{{paymentitem.paymentProductFieldById['cardholderName'].displayHints.uimask}}"
+            class="form-control" ng-model="item['cardholderName']" ng-attr-ui-mask="{{uimask(paymentitem.paymentProductFieldById['cardholderName'])}}"
             ng-attr-connect-validation="paymentitem" ui-options="maskoptions" ng-attr-required="paymentitem.paymentProductFieldById['cardholderName'].dataRestrictions.isRequired"
-            ui-mask-placeholder-char="space" ui-mask-placeholder ng-model-options="{ allowInvalid: true }" ng-if="!paymentitem.paymentProductFieldById['cardholderName'].aofField">
-        <input name="cardholderName" id="cardholderName" class="form-control" ng-if="paymentitem.paymentProductFieldById['cardholderName'].aofField"
+            ui-mask-placeholder-char="space" ui-mask-placeholder ng-model-options="{ allowInvalid: true }" ng-if="!aofField(paymentitem.paymentProductFieldById['cardholderName'])">
+        <input name="cardholderName" id="cardholderName" class="form-control" ng-if="aofField(paymentitem.paymentProductFieldById['cardholderName'])"
             ng-model="item['cardholderName']" disabled>
         <i class="icon-user"></i>
     </div>
@@ -18,11 +18,11 @@
     <label for="cardNumber" class="hidden-xs hidden-sm">{{paymentitem.paymentProductFieldById['cardNumber'].displayHints.label}}</label>
     <div class="hasIcon">
         <input name="cardNumber" id="cardNumber" placeholder="{{paymentitem.paymentProductFieldById['cardNumber'].displayHints.placeholderLabel}}"
-            class="form-control" ng-model="item['cardNumber']" ng-attr-ui-mask="{{paymentitem.paymentProductFieldById['cardNumber'].displayHints.uimask}}"
+            class="form-control" ng-model="item['cardNumber']" ng-attr-ui-mask="{{uimask(paymentitem.paymentProductFieldById['cardNumber'])}}"
             ng-attr-connect-card-number="cardNumber" ng-attr-connect-validation="paymentitem" ui-options="maskoptions"
             ng-attr-required="paymentitem.paymentProductFieldById['cardNumber'].dataRestrictions.isRequired" ui-mask-placeholder-char="space" ui-mask-placeholder
-            ng-model-options="{ allowInvalid: true }" ng-if="!paymentitem.paymentProductFieldById['cardNumber'].aofField">
-        <input name="cardNumber" id="cardNumber" class="form-control" ng-if="paymentitem.paymentProductFieldById['cardNumber'].aofField"
+            ng-model-options="{ allowInvalid: true }" ng-if="!aofField(paymentitem.paymentProductFieldById['cardNumber'])">
+        <input name="cardNumber" id="cardNumber" class="form-control" ng-if="aofField(paymentitem.paymentProductFieldById['cardNumber'])"
             ng-model="item['cardNumber']" disabled>
         <span class="cc-image" ng-if="(!ccstate || ccstate === 'SUPPORTED') && paymentitem.id !== 'cards'">
             <img ng-src="{{paymentitem.displayHints.logo}}">
@@ -54,7 +54,7 @@
             <ul id="paymentoptionslist">
                 <li ng-repeat="cobrand in iinDetails.coBrands">
                     <a class="btn-tertiary" ng-click="setCobrand(cobrand.paymentProductId)" ng-class="{'active-cobrand': cobrand.paymentProductId === paymentitem.id}" ng-if="cobrand.isAllowedInContext">
-                        <div><img ng-src="{{cobrand.displayHints.logo}}?size=25x17">{{cobrand.displayHints.label}}</div>
+                        <div><img ng-src="{{paymentProductDisplayHints[cobrand.paymentProductId].logo}}?size=25x17">{{paymentProductDisplayHints[cobrand.paymentProductId].label}}</div>
                     </a>
                 </li>
             </ul>
@@ -66,10 +66,10 @@
     <label for="expiryDate" class="hidden-xs hidden-sm">{{paymentitem.paymentProductFieldById['expiryDate'].displayHints.label}}</label>
     <div class="hasIcon">
         <input name="expiryDate" id="expiryDate" placeholder="{{paymentitem.paymentProductFieldById['expiryDate'].displayHints.placeholderLabel}}"
-            class="form-control" ng-model="item['expiryDate']" ng-attr-ui-mask="{{paymentitem.paymentProductFieldById['expiryDate'].displayHints.uimask}}"
+            class="form-control" ng-model="item['expiryDate']" ng-attr-ui-mask="{{uimask(paymentitem.paymentProductFieldById['expiryDate'])}}"
             ng-attr-connect-validation="paymentitem" ui-options="maskoptions" ng-attr-required="paymentitem.paymentProductFieldById['expiryDate'].dataRestrictions.isRequired"
-            ui-mask-placeholder-char="space" ui-mask-placeholder ng-model-options="{ allowInvalid: true }" ng-if="!paymentitem.paymentProductFieldById['expiryDate'].aofField">
-        <input name="expiryDate" id="expiryDate" class="form-control" ng-if="paymentitem.paymentProductFieldById['expiryDate'].aofField"
+            ui-mask-placeholder-char="space" ui-mask-placeholder ng-model-options="{ allowInvalid: true }" ng-if="!aofField(paymentitem.paymentProductFieldById['expiryDate'])">
+        <input name="expiryDate" id="expiryDate" class="form-control" ng-if="aofField(paymentitem.paymentProductFieldById['expiryDate'])"
             ng-model="item['expiryDate']" disabled>
         <i class="icon-date"></i>
 
@@ -83,10 +83,10 @@
     <label for="cvv" class="hidden-xs hidden-sm">{{paymentitem.paymentProductFieldById['cvv'].displayHints.label}}</label>
     <div class="hasIcon">
         <input name="cvv" id="cvv" placeholder="{{paymentitem.paymentProductFieldById['cvv'].displayHints.placeholderLabel}}"
-            class="form-control" ng-model="item['cvv']" ng-attr-ui-mask="{{paymentitem.paymentProductFieldById['cvv'].displayHints.uimask}}"
+            class="form-control" ng-model="item['cvv']" ng-attr-ui-mask="{{uimask(paymentitem.paymentProductFieldById['cvv'])}}"
             ng-attr-connect-validation="paymentitem" ui-options="maskoptions" ng-attr-required="paymentitem.paymentProductFieldById['cvv'].dataRestrictions.isRequired"
-            ui-mask-placeholder-char="space" ui-mask-placeholder ng-model-options="{ allowInvalid: true }" ng-if="!paymentitem.paymentProductFieldById['cvv'].aofField">
-        <input name="cvv" id="cvv" class="form-control" ng-if="paymentitem.paymentProductFieldById['cvv'].aofField"
+            ui-mask-placeholder-char="space" ui-mask-placeholder ng-model-options="{ allowInvalid: true }" ng-if="!aofField(paymentitem.paymentProductFieldById['cvv'])">
+        <input name="cvv" id="cvv" class="form-control" ng-if="aofField(paymentitem.paymentProductFieldById['cvv'])"
             ng-model="item['cvv']" disabled>
         <span ng-include="'/app/paymentitem-detail/templates/tooltip.html'"></span>
         <i class="icon-lock"></i>

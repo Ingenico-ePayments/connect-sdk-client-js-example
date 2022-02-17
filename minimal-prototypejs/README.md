@@ -5,16 +5,12 @@
 This example shows you how to load the [Ingenico Connect JavaScript Client SDK](https://github.com/Ingenico-ePayments/connect-sdk-client-js) while also using prototypejs (still used in Magento).
 
 The Connect SDK is used for all communication to the Connect API and crypto. See the [Ingenico ePayments Developer Hub](https://epayments.developer-ingenico.com/documentation/sdk/mobile/javascript/) for more information on how to use the Ingenico Connect API.
-A complete copy of forge is included. which is used to do the actual crypto.
 
 ## How to install
 
 Make sure you have installed [Node.js](https://nodejs.org/en/); the LTS version is recommended. Run
 
     npm install
-
-Get a copy of [forge](https://github.com/digitalbazaar/forge/) and build it following the guide on GitHub. You have to use this build since forge is incompatible with module loaders at the moment.
-Place the minified version in `dist/js`. A forge package is included in this example but you should update it to the latest version.
 
 ## How to start the payment process
 
@@ -29,11 +25,11 @@ In `app.js` you include the sessiondetails, this is the only file that is requir
 ```
 +-- src
 |   +-- js
-|       -- forge.min.js - the encryption library used by Ingenico Connect JavaScript Client SDK
+|       -- prototype.js - bundled version of prototypejs
 |       -- config.js - file containing the session config variables; you need to update these settings first
-|       -- create-payload.js - generic code which provides an example on how the SDK works, this is common for all minimal examples.
+|       -- create-payload.js - generic code which provides an example on how the SDK works, this is common for all minimal examples
 |       -- app.js - the example app itself
 +-- node_modules
 |   ... folder containing all node dependencies; run npm install to get the dependencies
-|   -- index.html - html page as start page
+|-- index.html - html page as start page
 ```

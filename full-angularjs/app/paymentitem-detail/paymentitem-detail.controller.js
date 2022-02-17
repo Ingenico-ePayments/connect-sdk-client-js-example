@@ -54,8 +54,6 @@ app.controller('paymentitem.controller', ['$rootScope', '$scope', '$location', '
             $scope.$apply(function () {
                 $rootScope.loading = false;
                 $scope.paymentitem = paymentProductGroup;
-                $scope.fixMask();
-                $scope.createHtmlTooltips();
             });
         }, function () {
             $scope.$apply(function () {
@@ -74,8 +72,6 @@ app.controller('paymentitem.controller', ['$rootScope', '$scope', '$location', '
                 $rootScope.loading = false;
                 $scope.$apply(function () {
                     $scope.paymentitem = paymentProduct;
-                    $scope.fixMask();
-                    $scope.createHtmlTooltips();
 
                     $scope.connect.paymentRequest.setPaymentProduct(paymentProduct);
                     $scope.encryptIfNofields();
@@ -110,6 +106,15 @@ app.controller('paymentitem.controller', ['$rootScope', '$scope', '$location', '
         };
     }
 
+    $scope.aofField = function (field) {
+        var accountOnFile = isNaN(Number($scope.aofId)) ? undefined : $scope.paymentitem.accountOnFileById[Number($scope.aofId)];
+        if (accountOnFile) {
+            var attribute = accountOnFile.attributeByKey[field.id];
+            return attribute && attribute.status !== "MUST_WRITE" && attribute.status !== "CAN_WRITE";
+        }
+        return false;
+    };
+
     $scope.handleAccountOnFile = function () {
         // store account on file in request
         var accountOnFile = isNaN($scope.aofId) ? null : $scope.paymentitem.accountOnFileById[$scope.aofId];
@@ -117,20 +122,21 @@ app.controller('paymentitem.controller', ['$rootScope', '$scope', '$location', '
         // prefill data
         angular.forEach(accountOnFile.attributes, function (attribute) {
             if ($scope.paymentitem.paymentProductFieldById[attribute.key]) {
-                var masked = $scope.paymentitem.paymentProductFieldById[attribute.key].applyWildcardMask(attribute.value).formattedValue;
-                $scope.item[attribute.key] = masked;
-                $scope.paymentitem.paymentProductFieldById[attribute.key].aofField = true;
+                if (attribute.status === "MUST_WRITE" || attribute.status === "CAN_WRITE") {
+                    $scope.item[attribute.key] = attribute.value;
+                } else {
+                    var masked = $scope.paymentitem.paymentProductFieldById[attribute.key].applyWildcardMask(attribute.value).formattedValue;
+                    $scope.item[attribute.key] = masked;
+                }
             }
         });
     };
 
-    $scope.fixMask = function () {
+    $scope.uimask = function (field) {
         // we fix the mask for use with angular.ui.mask; if you use some other masking util refer to the docs of the directive.
-        angular.forEach($scope.paymentitem.paymentProductFields, function (field) {
-            if (field.displayHints.mask) {
-                field.displayHints.uimask = field.displayHints.mask.replace(/{{/g, '').replace(/}}/g, '').replace(/9/g, '?9');
-            }
-        });
+        if (field.displayHints.mask) {
+            return field.displayHints.mask.replace(/{{/g, '').replace(/}}/g, '').replace(/9/g, '?9');
+        }
     }
 
     $scope.boletoHelper = function (paymentProduct) {
@@ -145,13 +151,17 @@ app.controller('paymentitem.controller', ['$rootScope', '$scope', '$location', '
         });
     }
 
-    $scope.createHtmlTooltips = function () {
-        angular.forEach($scope.paymentitem.paymentProductFields, function (field) {
-            if (field.displayHints.tooltip) {
-                var tooltip = field.displayHints.tooltip;
-                field.displayHints.htmltooltip = $sce.trustAsHtml(tooltip.label + " <br /><img src='" + tooltip.image + "?size=240x160' width='240' height='160'>");
+    // Cache results of $sce.trustAsHtml to prevent infinite $digest loops
+    var trustedContent = {};
+    $scope.htmltooltip = function (field) {
+        if (field.displayHints.tooltip) {
+            var tooltip = field.displayHints.tooltip;
+            var key = tooltip.label + "_" + tooltip.image;
+            if (!trustedContent[key]) {
+                trustedContent[key] = $sce.trustAsHtml(tooltip.label + " <br /><img src='" + tooltip.image + "?size=240x160' width='240' height='160'>");
             }
-        });
+            return trustedContent[key];
+        }
     }
 
     $scope.startApplePay = function () {
@@ -230,7 +240,7 @@ app.controller('paymentitem.controller', ['$rootScope', '$scope', '$location', '
                     var masked = $scope.item[key] + '';
                 }
 
-                if (!field.aofField) {
+                if (!$scope.aofField(field)) {
                     request.setValue(key, masked);
                 }
             } else {
@@ -239,11 +249,15 @@ app.controller('paymentitem.controller', ['$rootScope', '$scope', '$location', '
                 }
             }
         }
-        if (request.getPaymentProduct() && request.isValid()) {
-            encrypt();
+        if (request.getPaymentProduct()) {
+            var errors = request.validate();
+            if (errors.length === 0) {
+                encrypt();
+            } else {
+                console.log(errors);
+            }
         } else {
-            console.log(request.getErrorMessageIds());
-            // validation errors
+            console.log("no paymentProduct set");
         }
     };
 
@@ -267,27 +281,34 @@ app.controller('paymentitem.controller', ['$rootScope', '$scope', '$location', '
         var encryptor = $scope.connect.session.getEncryptor();
         var paymentRequest = $scope.connect.session.getPaymentRequest();
         $rootScope.encryptedString = null;
-        if (paymentRequest.isValid()) {
-            $rootScope.loading = true;
-            encryptor.encrypt(paymentRequest).then(function (encryptedString) {
-                $rootScope.loading = false;
-                $scope.$apply(function () {
-                    $rootScope.encryptedString = encryptedString;
-                    $location.path('/dev-success');
+        if (paymentRequest.getPaymentProduct()) {
+            var errors = paymentRequest.validate();
+            if (errors.length === 0) {
+                $rootScope.loading = true;
+                encryptor.encrypt(paymentRequest).then(function (encryptedString) {
+                    $rootScope.loading = false;
+                    $scope.$apply(function () {
+                        $rootScope.encryptedString = encryptedString;
+                        $location.path('/dev-success');
+                    });
+                }, function error (e) {
+                    $rootScope.loading = false;
+                    console.error('encryption failed', e);
+                    $scope.$apply(function () {
+                        $location.path('/dev-failure');
+                    });
                 });
-            }, function error (e) {
-                $rootScope.loading = false;
-                console.error('encryption failed', e);
+            } else {
+                // something is wrong according to the paymentRequest;
+                console.error(errors, paymentRequest.getValues(), paymentRequest.getPaymentProduct());
                 $scope.$apply(function () {
-                    $rootScope.encryptedString = encryptedString;
                     $location.path('/dev-failure');
                 });
-            });
+            }
         } else {
-            // something is wrong according to the paymentRequest;
-            console.error(paymentRequest.getErrorMessageIds(), paymentRequest.getValues(), paymentRequest.getPaymentProduct());
+            // the paymentRequest does not have a paymentProduct;
+            console.error("no paymentProduct set", paymentRequest.getValues());
             $scope.$apply(function () {
-                $rootScope.encryptedString = encryptedString;
                 $location.path('/dev-failure');
             });
         }

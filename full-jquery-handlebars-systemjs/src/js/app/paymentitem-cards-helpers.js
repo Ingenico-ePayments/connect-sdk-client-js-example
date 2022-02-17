@@ -1,4 +1,5 @@
 var $ = require('jQuery');
+var AccountOnFile = require('connectsdk.AccountOnFile');
 var Handlebars = require('handlebars');
 
 /**
@@ -17,7 +18,7 @@ $(function () {
 		Handlebars.registerHelper("showAoFProperties", function (items, options) {
 			var that = this;
 			var output = "";
-			var accountOnFile = new connectsdk.AccountOnFile(that);
+			var accountOnFile = new AccountOnFile(that);
 			var displayHints = accountOnFile.displayHints;
 
 			for (var j = 0, jl = displayHints.labelTemplate.length; j < jl; j++) {

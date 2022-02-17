@@ -4,20 +4,20 @@
         placeholder="{{paymentItemfield.displayHints.placeholderLabel}}"
         class="form-control"
         ng-model="item[paymentItemfield.id]"
-        ng-attr-ui-mask="{{paymentItemfield.displayHints.uimask}}"
+        ng-attr-ui-mask="{{uimask(paymentItemfield)}}"
         ng-attr-connect-validation="paymentItemfield.id"
         ng-required="paymentItemfield.dataRestrictions.isRequired"
         ui-options="maskoptions"
         ui-mask-placeholder-char="space"
         ui-mask-placeholder
         ng-model-options="{ allowInvalid: true }"
-        ng-if="!paymentItemfield.aofField"
+        ng-if="!aofField(paymentItemfield)"
         >
 <input
         name="{{paymentItemfield.id}}"
         id="{{paymentItemfield.id}}"
         class="form-control"
-        ng-if="paymentItemfield.aofField"
+        ng-if="aofField(paymentItemfield)"
         ng-model="item[paymentItemfield.id]"
         disabled
 >

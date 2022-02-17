@@ -4,7 +4,7 @@
         placeholder="{{paymentItemfield.displayHints.placeholderLabel}}"
         class="form-control"
         ng-model="item[paymentItemfield.id]"
-        ng-attr-ui-mask="{{paymentItemfield.displayHints.uimask}}"
+        ng-attr-ui-mask="{{uimask(paymentItemfield)}}"
         ng-attr-connect-validation="paymentItemfield.id"
         ng-required="paymentItemfield.dataRestrictions.isRequired"
         ui-options="maskoptions"

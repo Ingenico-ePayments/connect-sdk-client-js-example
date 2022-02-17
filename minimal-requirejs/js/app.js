@@ -1,9 +1,9 @@
 requirejs(["connectsdk.Session", "config"], function (sdksession, config) {
     var sessionDetails = {
-        clientSessionId: config.clientSessionId || null,
-        customerId: config.customerId || null,
-        clientApiUrl: config.clientApiUrl || null,
-        assetUrl: config.assetUrl || null
+        clientSessionId: config.clientSessionId || "",
+        customerId: config.customerId || "",
+        clientApiUrl: config.clientApiUrl || "",
+        assetUrl: config.assetUrl || ""
     };
 
     var paymentDetails = {
@@ -14,7 +14,7 @@ requirejs(["connectsdk.Session", "config"], function (sdksession, config) {
         isRecurring: false
     };
     // check if the sessionDetails are filled; this is vital for continueing
-    if (sessionDetails.clientSessionId === null || sessionDetails.customerId === null || sessionDetails.clientApiUrl === null || sessionDetails.assetUrl === null) {
+    if (!sessionDetails.clientSessionId || !sessionDetails.customerId || !sessionDetails.clientApiUrl || !sessionDetails.assetUrl) {
         console.error("please provide the clientSessionId, customerId, clientApiUrl and assetUrl in the sessionDetails");
         document.querySelector('.output').innerText = "please provide the clientSessionId, customerId, clientApiUrl and assetUrl in the sessionDetails";
     }

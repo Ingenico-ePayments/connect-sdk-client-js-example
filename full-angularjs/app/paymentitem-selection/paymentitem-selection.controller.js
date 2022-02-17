@@ -46,11 +46,6 @@ app.controller('paymentitem-selection.controller', ['$scope', '$rootScope', '$lo
                 // add accounts on file
                 $scope.accountsOnFile = basicPaymentItems.accountsOnFile;
 
-                // enrich the accounts on file with images; not all UIs require the logo that's why it's not a default part of the response.
-                if ($scope.accountsOnFile) {
-                    addLogosToAoF();
-                }
-
                 // Need to retrieve networks for Google Pay when Google Pay exists in paymentItems
                 if (isPaymentProductIdInList(googlePayId, basicPaymentItems.basicPaymentItems)) {
                     getPaymentProductNetworks()
@@ -69,27 +64,34 @@ app.controller('paymentitem-selection.controller', ['$scope', '$rootScope', '$lo
         var encryptor = $scope.connect.session.getEncryptor();
         var paymentRequest = $scope.connect.session.getPaymentRequest();
         $rootScope.encryptedString = null;
-        if (paymentRequest.isValid()) {
-            $rootScope.loading = true;
-            encryptor.encrypt(paymentRequest).then(function (encryptedString) {
-                $rootScope.loading = false;
-                $scope.$apply(function () {
-                    $rootScope.encryptedString = encryptedString;
-                    $location.path('/dev-success');
+        if (paymentRequest.getPaymentProduct()) {
+            var errors = paymentRequest.validate();
+            if (errors.length === 0) {
+                $rootScope.loading = true;
+                encryptor.encrypt(paymentRequest).then(function (encryptedString) {
+                    $rootScope.loading = false;
+                    $scope.$apply(function () {
+                        $rootScope.encryptedString = encryptedString;
+                        $location.path('/dev-success');
+                    });
+                }, function error (e) {
+                    $rootScope.loading = false;
+                    console.error('encryption failed', e);
+                    $scope.$apply(function () {
+                        $location.path('/dev-failure');
+                    });
                 });
-            }, function error (e) {
-                $rootScope.loading = false;
-                console.error('encryption failed', e);
+            } else {
+                // something is wrong according to the paymentRequest;
+                console.error(errors, paymentRequest.getValues(), paymentRequest.getPaymentProduct());
                 $scope.$apply(function () {
-                    $rootScope.encryptedString = encryptedString;
                     $location.path('/dev-failure');
                 });
-            });
+            }
         } else {
-            // something is wrong according to the paymentRequest;
-            console.error(paymentRequest.getErrorMessageIds(), paymentRequest.getValues(), paymentRequest.getPaymentProduct());
+            // the paymentRequest does not have a paymentProduct;
+            console.error("no paymentProduct set", paymentRequest.getValues());
             $scope.$apply(function () {
-                $rootScope.encryptedString = encryptedString;
                 $location.path('/dev-failure');
             });
         }
@@ -121,18 +123,6 @@ app.controller('paymentitem-selection.controller', ['$scope', '$rootScope', '$lo
             output = output + accountOnFileObject.getMaskedValueByAttributeKey(keyToShow).formattedValue + " ";
         }
         return output;
-    };
-
-    var addLogosToAoF = function () {
-        angular.forEach($scope.accountsOnFile, function (aof) {
-            var paymentProductId = aof.paymentProductId;
-            $scope.connect.session.getPaymentProduct(paymentProductId, $scope.connect.paymentDetails).then(function (paymentProduct) {
-                $scope.$apply(function () {
-                    aof.displayHints = aof.displayHints || {};
-                    aof.displayHints.logo = paymentProduct.displayHints.logo;
-                });
-            });
-        });
     };
 
     if (context) {

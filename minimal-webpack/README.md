@@ -5,16 +5,12 @@
 This example shows you how to load the [Ingenico Connect JavaScript Client SDK](https://github.com/Ingenico-ePayments/connect-sdk-client-js) with the webpack module loader.
 
 The Connect SDK is used for all communication to the Connect API and crypto. See the [Ingenico ePayments Developer Hub](https://epayments.developer-ingenico.com/documentation/sdk/mobile/javascript/) for more information on how to use the Ingenico Connect API.
-A complete copy of forge is included. which is used to do the actual crypto.
 
 ## How to install
 
 Make sure you have installed [Node.js](https://nodejs.org/en/); the LTS version is recommended. Run
 
     npm install
-
-Get a copy of [forge](https://github.com/digitalbazaar/forge/) and build it following the guide on GitHub. You have to use this build since forge is incompatible with module loaders at the moment.
-Place the minified version in `dist/js`. A forge package is included in this example but you should update it to the latest version.
 
 ## How to start the payment process
 Create a client session identifier and a customer identifier, which the Client API needs for authentication purposes.
@@ -32,8 +28,7 @@ You can test if you have done it right by running:
 +-- dist
 |   +-- js
 |       -- app.bundle.js - the example app bundled with webpack
-|       -- create-payload.js - generic code which provides an example on how the SDK works, this is common for all minimal examples.
-|       -- forge.min.js - the encryption library; self packed since it's incompatible with webpack. Please update this file to the latest version.
+|       -- create-payload.js - generic code which provides an example on how the SDK works, this is common for all minimal examples
 +-- node_modules
 |   ... folder containing all node dependencies; run npm install to get the dependencies
 +-- src

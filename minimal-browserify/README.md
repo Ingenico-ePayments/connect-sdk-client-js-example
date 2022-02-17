@@ -30,12 +30,12 @@ In `app.js` you include the sessiondetails, this is the only file that is browse
 +-- dist
 |   +-- js
 |       -- app.bundle.js - the example app bundled with browserify
-|       -- create-payload.js - generic code which provides an example on how the SDK works, this is common for all minimal examples.
+|       -- create-payload.js - generic code which provides an example on how the SDK works, this is common for all minimal examples
 |       -- forge.min.js - the encryption library; self packed since it's incompatible with webpack
 +-- node_modules
 |   ... folder containing all node dependencies; run npm install to get the dependencies
 +-- src
 |   +-- js
-|       +-- app.js - the example app itself.
+|       +-- app.js - the example app itself
 |-- index.html - html page as start page
 ```

@@ -1,6 +1,5 @@
 var $ = require('jQuery');
-window.forge = require('node-forge');
-var connect = require('connectsdk.session');
+var connect = require('connectsdk.Session');
 var googlePayId = 320;
 var paymentsClient = null;
 

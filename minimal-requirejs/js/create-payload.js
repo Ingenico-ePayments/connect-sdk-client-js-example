@@ -10,12 +10,12 @@ var createPayload = function (session, cardNumber, paymentDetails) {
             paymentRequest.setPaymentProduct(paymentProduct);
             paymentRequest.setValue("cardNumber", cardNumber);
             paymentRequest.setValue("cvv", "123");
-            paymentRequest.setValue("expiryDate", "04/17");
+            paymentRequest.setValue("expiryDate", "04/25");
+            paymentRequest.setValue("cardholderName", "John Doe");
 
-            if (!paymentRequest.isValid()) {
-                for (var error in paymentRequest.getErrorMessageIds()) {
-                    console.error('error', error);
-                }
+            var errors = paymentRequest.validate();
+            for (var error of errors) {
+                console.log(`${error.fieldId}: ${error.errorMessageId}`);
             }
             session.getEncryptor().encrypt(paymentRequest).then(function (paymentHash) {
                 document.querySelector('.output').innerText = 'Encrypted to: ' + paymentHash;

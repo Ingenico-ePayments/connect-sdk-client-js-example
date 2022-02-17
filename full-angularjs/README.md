@@ -62,14 +62,14 @@ This application uses the following key frameworks and libraries which are manag
 |                -- cardnumber.directive.js - directive which has all logic for cardnumber switchinh
 |                -- validation.directive.js - directive that binds Connect-sdk validation methods to angular.js
 |       +-- templates
-|           -- cards.html - specific template for card payments; since card payments have a lot of extra features compared to the other paymentmethods.
+|           -- cards.html - specific template for card payments; since card payments have a lot of extra features compared to the other paymentmethods
 |           -- input-currency.html - template for currency based input fields
 |           -- input-default.html - template for input based fields
 |           -- input-select.html - template for dropdown based fields
 |           -- remember-me.html - template holding the account on file checkbox
 |           -- tooltip.html - template with the specific tooltip for a field (if present)
 |       -- paymentitem-detail.html - template for the payment form; this will load subtemplates on demand from the templates folder
-|       -- paymentitem-detail.controller.js - control logic for the payment form.
+|       -- paymentitem-detail.controller.js - control logic for the payment form
 |   +-- payment-selection
 |       -- payment-selection.html - template for the payment selection form
 |       -- payment-selection.controller.js - control logic for the payment selection form
@@ -78,7 +78,7 @@ This application uses the following key frameworks and libraries which are manag
 |       -- success.html - result page; success; this page prints the encrypted blob you can send to ingenico ePayments.
 |   +-- sessiondetails
 |       -- sessiondetails.html - this page provides the payment- and sessiondetails.
-|       -- sessiondetails.controller.js - control logic for the sessiondetails page.
+|       -- sessiondetails.controller.js - control logic for the sessiondetails page
 |   +-- styles
 |       -- contains all sass files needed to compile the css file used with this demo
 +-- fonts
@@ -94,7 +94,7 @@ This application uses the following key frameworks and libraries which are manag
 |   +-- img
 |       ... folder containing all images used by the CSS
 |   -- base.css - the compiled css file; use npm run build:sass to compile this file
-|   -- forms.css - overrides for forms; this is purely used in this example; production code should use a better method to handle the displaying of validation errors.
+|   -- forms.css - overrides for forms; this is purely used in this example; production code should use a better method to handle the displaying of validation errors
 ```
 
 ### Module loading

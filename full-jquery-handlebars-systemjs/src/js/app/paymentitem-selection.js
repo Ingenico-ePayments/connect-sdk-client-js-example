@@ -1,6 +1,5 @@
 var $ = require('jQuery');
-window.forge = require('node-forge');
-var connect = require('connectsdk.session');
+var connect = require('connectsdk.Session');
 var handlebars = require('handlebars');
 var setupGooglePayAndExecute = require('./paymentitem-googlepay');
 var cardHelpers = require('./paymentitem-cards-helpers');

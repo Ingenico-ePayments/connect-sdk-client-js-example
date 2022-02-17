@@ -82,10 +82,10 @@ This application uses the following key frameworks and libraries which are manag
 |       -- logo.png - example logo
 +-- node_modules
 |   ... folder containing all node dependencies; run npm install to get the dependencies
-+-- dist
-|   +-- fonts
-|       -- icons
++-- fonts
+    -- icons
 |       ... folder containing the icon fonts used by the app
++-- dist
 |   +-- styles
 |       -- base.css - the compiled css file; use npm run build:sass to compile this file
 ```
