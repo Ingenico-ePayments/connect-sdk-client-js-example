@@ -1,6 +1,6 @@
 {
   "name": "connect-sdk-client-js-example-systemjs",
-  "version": "1.13.0",
+  "version": "1.13.1",
   "description": "",
   "main": "index.html",
   "scripts": {
@@ -10,9 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "connect-sdk-client-js": "^4.0.0",
+    "connect-sdk-client-js": "^4.0.1",
     "systemjs": "^0.19.36",
-    "node-forge": "^1.2.1"
+    "node-forge": "^1.3.1"
   },
   "devDependencies": {
     "lite-server": "^2.2.2"
