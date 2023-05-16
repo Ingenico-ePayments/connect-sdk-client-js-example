@@ -56,8 +56,8 @@ $(function () {
         
         session.createApplePayPayment(paymentDetails, paymentProductSpecificInputs.applePay, paymentItem.paymentProduct302SpecificData.networks).then(function (res) {
           var request = session.getPaymentRequest();
-          request.setValue('encryptedPaymentData', res.data.paymentData)
-          encrypt()
+          request.setValue('encryptedPaymentData', JSON.stringify(res.data.paymentData));
+          encrypt();
         }, function (res) {
           $('#loading').hide();
           console.error(res.message);
