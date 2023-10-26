@@ -33,11 +33,6 @@ app.controller('paymentitem.controller', ['$rootScope', '$scope', '$location', '
         "secciUrl": "SECCI"
     }
 
-    // This keys will be deprecated once the feature that allows the user uses language packages is released
-    $scope.afterpayLookupPopoverContent = "By filling in the requested information below, we can find the other required information to allow you to finalize the payment process. If you want to, you can also choose to fill in this required information manually."
-
-    $scope.showLookupSummary = false;
-
     $scope.getPaymentItem = function () {
         $scope.hasError = false;
         $rootScope.loading = true;
@@ -82,12 +77,6 @@ app.controller('paymentitem.controller', ['$rootScope', '$scope', '$location', '
 
                     if (id === '1503') {
                         $scope.boletoHelper(paymentProduct);
-                    }
-
-                    if (id === '9000' || id === '9001') {
-                        $scope.setSpecificInputs();
-                        $scope.setLookupSection();
-                        $scope.setLookupPopoverContent();
                     }
                 });
             }, function () {
@@ -219,16 +208,7 @@ app.controller('paymentitem.controller', ['$rootScope', '$scope', '$location', '
         // check if all mandatory fields are present
         var request = $scope.connect.session.getPaymentRequest();
 
-        if ($scope.showLookupFields && !$scope.lookupModel) {
-            return;
-        }
-
-        if ($scope.showLookupFields && !$scope.isLookupSearchDone && !$scope.showLookupSummary) {
-            $scope.searchCustomerDetails("redirectToPayment");
-        }
-
         $scope.errorCustomerSearch = false;
-        $scope.combineFields();
 
         for (var key in $scope.item) {
             // we need to supply masked values; so let's mask them here
@@ -355,163 +335,4 @@ app.controller('paymentitem.controller', ['$rootScope', '$scope', '$location', '
     } else {
         $location.path('/start');
     }
-
-    //AfterPay
-    $scope.setSpecificInputs = function () {
-        angular.forEach($scope.paymentitem.paymentProductFields, function (field) {
-            if (field.id == "installmentId") {
-                $scope.installmentOptions = field;
-            }
-            if (field.id == "dateOfBirth") {
-                $scope.setBirthYearList();
-            }
-            if (field.id == "termsAndConditions") {
-                $scope.termsAndConditions = field;
-            }
-        });
-    }
-
-    $scope.setLookupSection = function () {
-        $scope.lookupFields = [];
-        $scope.showCustomerDetailFields = false;
-
-        angular.forEach($scope.paymentitem.paymentProductFields, function (field) {
-            if (field.json["usedForLookup"]) {
-                $scope.lookupFields.push(field);
-            }
-        });
-
-        if ($scope.lookupFields.length > 0) {
-            $scope.showLookupFields = true;
-            $scope.showCustomerDetailFields = false;
-        } else {
-            $scope.showCustomerDetailFields = true;
-        }
-
-    }
-
-    $scope.setLookupSummary = function (customerDetails) {
-        $scope.customerDetails = customerDetails;
-        $scope.showLookupSummary = true;
-        $scope.showCustomerDetailFields = false;
-
-        angular.forEach($scope.paymentitem.paymentProductFields, function (field) {
-            if (field.id !== "installmentId" && field.id !== "termsAndConditions" && field.dataRestrictions.isRequired && !$scope.lookupModel[field.id]) {
-                if (!$scope.customerDetails[field.id]) {
-                    $scope.showLookupSummary = false;
-                    $scope.showCustomerDetailFields = true;
-                    $scope.doValidateLookupResult = true;
-                }
-            }
-        });
-    }
-
-    $scope.editCustomerDetails = function () {
-        $scope.showLookupSummary = false;
-        $scope.showCustomerDetailFields = true;
-        $scope.showLookupFields = true;
-    }
-
-    $scope.searchAgain = function () {
-        $scope.showLookupSummary = false;
-        $scope.showCustomerDetailFields = false;
-        $scope.showLookupFields = true;
-    }
-
-    $scope.setLookupPopoverContent = function () {
-        $scope.popoverContent = $scope.afterpayLookupPopoverContent;
-    }
-
-    $scope.setBirthYearList = function () {
-        var startYear = 1900;
-        var endYear = 2018;
-
-        $scope.yearRange = [];
-
-        for (var year = startYear; year < endYear; year++) {
-            $scope.yearRange.push(year);
-        }
-    }
-
-    $scope.doSelectPlan = function (selectedPlanId) {
-        angular.forEach($scope.installmentOptions.displayHints.formElement.valueMapping, function (plan) {
-            if (plan.value == selectedPlanId) {
-                $scope.planDetails = plan.json.displayElements;
-            }
-        });
-    }
-
-    $scope.doShowCustomerDetails = function () {
-        $scope.showCustomerDetailFields = true;
-    }
-
-    $scope.lookupModel = {};
-
-    $scope.searchCustomerDetails = function (isRedirect) {
-
-        $scope.doValidateLookup = true;
-        $scope.errorCustomerSearch = false;
-
-        $rootScope.loading = true;
-
-        var isEmptyLookupInput = false;
-
-        var searchParameters = {
-            "countryCode": $scope.connect.paymentDetails.countryCode,
-            "values": []
-        };
-
-        if (Object.keys($scope.lookupModel).length == $scope.lookupFields.length) {
-
-            angular.forEach($scope.lookupModel, function (value, key) {
-                if (value) {
-                    searchParameters.values.push({
-                        "key": key,
-                        "value": value
-                    });
-                    $scope.isCustomerDetailsSearched = true;
-                } else {
-                    isEmptyLookupInput = true;
-                    return false;
-                }
-            });
-
-            if (!isEmptyLookupInput) {
-                $scope.connect.session.getCustomerDetails($scope.paymentitem.id, searchParameters).then(function (paymentProductCustomerDetails) {
-                    $scope.$apply(function () {
-                        $rootScope.loading = false;
-                        $scope.item = Object.assign($scope.item, paymentProductCustomerDetails);
-                        if (isRedirect == "redirectToPayment") {
-                            $scope.isLookupSearchDone = true;
-                            $scope.doPayment();
-                        }
-                        $scope.setLookupSummary(paymentProductCustomerDetails);
-                    });
-                }, function () {
-                    $scope.$apply(function () {
-                        $rootScope.loading = false;
-                        $scope.errorCustomerSearch = true;
-                        $scope.isCustomerDetailsSearched = false;
-                        $log.error('error while getting customer details');
-                    });
-                });
-            } else {
-                $rootScope.loading = false;
-                return;
-            }
-
-        } else {
-            $rootScope.loading = false;
-            return;
-        }
-
-    }
-
-    $scope.combineFields = function () {
-        if ($scope.lookupModel) {
-            angular.forEach($scope.lookupModel, function (value, key) {
-                $scope.item[key] = value;
-            });
-        }
-    };
 }]);

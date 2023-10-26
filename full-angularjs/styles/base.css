@@ -3199,48 +3199,6 @@ article .panel {
     background-color: white;
     border: 0.5px solid black; } }
 
-.lookup-summary {
-  margin-top: 12px; }
-  .lookup-summary h4 {
-    margin: 4px 0px; }
-  .lookup-summary p {
-    margin: 2px 0; }
-  .lookup-summary .btn-link {
-    padding: 6px 0; }
-
-.searchConsumerButtonParent {
-  padding: 0px 3px;
-  margin-left: -8px; }
-
-.btn-lookup {
-  background-color: #f2f2f2;
-  color: inherit;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #bfbdc8;
-  border-radius: 1px;
-  font-family: Arial,"Helvetica Neue",Helvetica,sans-serif;
-  font-size: 18px;
-  margin-top: 0;
-  margin-right: 0;
-  margin-bottom: 0;
-  margin-left: 0;
-  width: 100%;
-  padding: 7px 0px; }
-  .btn-lookup:hover, .btn-lookup:focus {
-    background-color: #e6e6e6;
-    color: #000000;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #bfbdc8;
-    border-radius: 1px; }
-  .btn-lookup span {
-    font-weight: normal;
-    font-style: normal;
-    text-decoration: none;
-    font-size: 15px;
-    color: #2b2b2b; }
-
 body input {
   font-size: 16px;
   border-width: 1px;
@@ -3644,7 +3602,7 @@ header, #header {
       overflow: hidden; }
       .paymentoption .hasIcon .cc-image img {
         height: 100%; }
-  .paymentoption .info-popover:not(.afterpay) {
+  .paymentoption .info-popover {
     display: block;
     position: absolute;
     margin: 0;
@@ -3975,7 +3933,7 @@ body[dir=rtl] .paymentoption div.checkbox .info-popover {
   right: auto;
   left: 4px; }
 
-body[dir=rtl] .paymentoption .has-popover {
+body[dir=rtl] .paymentoption {
   position: relative; }
 
 body[dir=rtl] .radio, body[dir=rtl] .checkbox {

@@ -6,7 +6,6 @@
         <div class="paymentoption par">
             <div ng-include="'/app/paymentitem-detail/templates/cards.html'" ng-if="(type === 'group' && id === 'cards') || paymentitem.paymentMethod === 'card'"></div>
             <div ng-include="'/app/paymentitem-detail/templates/boleto.html'" ng-if="(id === '1503')"></div>
-            <div ng-include="'/app/paymentitem-detail/templates/afterpay.html'" ng-if="(id === '9000') || (id === '9001')"></div>
             
 
             <div class="form-group" ng-repeat="paymentItemfield in paymentitem.paymentProductFields" ng-if="!((type === 'group' && id === 'cards') || paymentitem.paymentMethod === 'card') && id !== '1503' && id !== '302'"  ng-init="paymentItemFieldId=paymentItemfield.id">

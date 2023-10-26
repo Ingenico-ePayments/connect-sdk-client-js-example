@@ -401,13 +401,11 @@ header, #header {
     }
   }
   .info-popover {
-    &:not(.afterpay){
-      display: block;
-      position: absolute;
-      margin: 0;
-      right: -28px;
-      top: 11px; /*NAMI-1419; was bottom: 13px;*/
-    }
+    display: block;
+    position: absolute;
+    margin: 0;
+    right: -28px;
+    top: 11px; /*NAMI-1419; was bottom: 13px;*/
 
     i {
       font-size: 14px;
@@ -420,10 +418,6 @@ header, #header {
       width: auto;
     }
   }
-}
-
-.has-popover{
-  position: relative;
 }
 
 body .btn-primary,

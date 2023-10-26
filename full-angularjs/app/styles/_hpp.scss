@@ -396,13 +396,11 @@ header, #header {
     }
   }
   .info-popover {
-    &:not(.afterpay){
-      display: block;
-      position: absolute;
-      margin: 0;
-      right: -28px;
-      top: 11px; /*NAMI-1419; was bottom: 13px;*/
-    }
+    display: block;
+    position: absolute;
+    margin: 0;
+    right: -28px;
+    top: 11px; /*NAMI-1419; was bottom: 13px;*/
     
     i {
       font-size: 14px;
@@ -829,10 +827,6 @@ body[dir=rtl] {
     div.checkbox .info-popover {
       right: auto;
       left: 4px;
-    }
-
-    .has-popover {
-      position: relative;
     }
   }
   .radio, .checkbox {
