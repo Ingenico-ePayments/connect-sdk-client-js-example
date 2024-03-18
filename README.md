@@ -1,5 +1,9 @@
 # Connect Client SDK Examples
 
+**These examples have been rebranded to Worldline. As part of the rebranding the examples have moved to https://github.com/Worldline-Global-Collect/connect-sdk-client-js-example.**
+
+---
+
 This repository contains all SDK examples for the [Ingenico Connect JavaScript Client SDK](https://epayments.developer-ingenico.com/documentation/sdk/mobile/javascript/).
 Refer to the README in each folder for more details about that specific example.
 
